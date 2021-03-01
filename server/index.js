@@ -18,7 +18,7 @@ const start = async = () => {
         app.listen( PORT, () => console.log(`start on ${PORT}`))
     }
     catch (e) {
-        console.log(e)
+
     }
 }
 
