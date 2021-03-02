@@ -1,8 +1,13 @@
 import React from 'react';
+import classes from './DevicePage.module.scss';
 
-const DevicePage = () => {
+type DevicePropsType = {
+
+}
+
+const DevicePage:React.FC<DevicePropsType> = () => {
     return (
-        <div>
+        <div className={classes.device}>
             Device
         </div>
     );
