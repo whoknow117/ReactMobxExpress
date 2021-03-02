@@ -6,9 +6,9 @@ import CreateDevice from "../../components/modals/CreateDevice";
 
 const Admin = () => {
 
-    const [brandVisible, setBrandVisible] = useState(true);
-    const [typeVisible, setTypeVisible] = useState(true);
-    const [deviceDevice, setDeviceVisible] = useState(true);
+    const [brandVisible, setBrandVisible] = useState(false);
+    const [typeVisible, setTypeVisible] = useState(false);
+    const [deviceDevice, setDeviceVisible] = useState(false);
 
     const onHideType = () => {setTypeVisible(false)}
     const onHideBrand = () => {setBrandVisible(false)}
