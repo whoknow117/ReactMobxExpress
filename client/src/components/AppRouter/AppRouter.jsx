@@ -11,12 +11,12 @@ import {SHOP_ROUTE} from "../../utils/consts";
 const AppRouter = () => {
 
     const {user} = useContext(Context)
-    const isAuth = false
+
     console.log(user)
     return (
         <div className={classes.wrapper}>
             <Switch>
-                {isAuth && authRoutes.map( (el) => {
+                {user.isAuth && authRoutes.map( (el) => {
                     return <Route key={el.path} path={el.path} component={el.Component} exact/>
                 })}
                 {publicRoutes.map( (el) => {

@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
 import {Context} from "../../index";
 import {Button, Container, Form, FormControl, Nav, Navbar, NavLink} from "react-bootstrap";
-import {SHOP_ROUTE} from "../../utils/consts";
+import {ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../../utils/consts";
 import {observer} from "mobx-react-lite";
+import {useHistory} from 'react-router-dom'
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
+    const history = useHistory()
 
     return (
 
@@ -14,8 +16,8 @@ const NavBar = observer(() => {
                 <NavLink style={{color: '#fff'}} to={SHOP_ROUTE}>КупиДевайс</NavLink>
                 {user.isAuth ?
                     <Nav className="ml-auto">
-                        <Button style={{marginRight: '10px'}}>Админ панель</Button>
-                        <Button>Выйти</Button>
+                        <Button onClick={()=>history.push(ADMIN_ROUTE) }  style={{marginRight: '10px'}}>Админ панель</Button>
+                        <Button onClick={()=>history.push(LOGIN_ROUTE) } >Выйти</Button>
 
                     </Nav>
                     :
