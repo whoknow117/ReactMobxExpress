@@ -12,29 +12,31 @@ import {Spinner} from "react-bootstrap";
 const App = observer(()  =>{
 
     const {user} = useContext(Context)
-    const [loading,setLoading] = useState(true)
+    // const [loading,setLoading] = useState(true)
+
+
+    useEffect(()=> {
+
+           check().then(data => {
+               user.setIsAuth(true)
+               user.setUser (true)
+           }).finally(() => console.log('help'))
 
 
 
 
-     useEffect(() => {
-        setTimeout(() => {
-            check().then(data => {
-                user.setUser(true)
-                user.setIsAuth(true)
-            }).finally(() => setLoading(false))
-        },1000)
-     },[])
+    },[])
 
-    if (loading) {
-        return <Spinner animation={'grow'} />
-    }
+
+
+
+
     return (
         <BrowserRouter>
-            <div className="App">
+
                 <NavBar/>
                 <AppRouter/>
-            </div>
+
         </BrowserRouter>
     );
 })

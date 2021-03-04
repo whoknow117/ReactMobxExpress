@@ -9,14 +9,20 @@ const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
 
-    const unAuthMode = () => {
-        user.setIsAuth(false)
-        history.push(LOGIN_ROUTE)
-    }
+    // const unAuthMode = () => {
+    //     user.setIsAuth(false)
+    //     history.push(LOGIN_ROUTE)
+    // }
+    //
+    // const authMode = () => {
+    //     user.setIsAuth(true)
+    //     history.push(LOGIN_ROUTE)
+    // }
 
-    const authMode = () => {
-        user.setIsAuth(true)
-        history.push(LOGIN_ROUTE)
+    const logOut = () => {
+        user.setUser(false)
+        user.setIsAuth(false)
+
     }
     return (
 
@@ -26,12 +32,12 @@ const NavBar = observer(() => {
                 {user.isAuth ?
                     <Nav className="ml-auto">
                         <Button onClick={()=>history.push(ADMIN_ROUTE) }  style={{marginRight: '10px'}}>Админ панель</Button>
-                        <Button onClick={unAuthMode} >Выйти</Button>
+                        <Button onClick={() => logOut()} >Выйти</Button>
 
                     </Nav>
                     :
                     <Nav className="ml-auto">
-                        <Button onClick={authMode}>Авторизация</Button>
+                        <Button onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</Button>
 
 
                     </Nav>
