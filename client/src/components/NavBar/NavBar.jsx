@@ -9,29 +9,29 @@ const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
 
-    // const unAuthMode = () => {
-    //     user.setIsAuth(false)
-    //     history.push(LOGIN_ROUTE)
-    // }
-    //
-    // const authMode = () => {
-    //     user.setIsAuth(true)
-    //     history.push(LOGIN_ROUTE)
-    // }
 
     const logOut = () => {
+        localStorage.removeItem('token')
         user.setUser(false)
         user.setIsAuth(false)
+        history.push(SHOP_ROUTE)
 
     }
+
+    const admineRoute = () => {
+        history.push(ADMIN_ROUTE)
+        console.log(user)
+    }
+
+
     return (
 
         <Navbar bg="dark" variant="dark">
             <Container>
                 <NavLink style={{color: '#fff'}} to={SHOP_ROUTE}>КупиДевайс</NavLink>
-                {user.isAuth ?
+                {user.isAuth === true ?
                     <Nav className="ml-auto">
-                        <Button onClick={()=>history.push(ADMIN_ROUTE) }  style={{marginRight: '10px'}}>Админ панель</Button>
+                        <Button onClick={admineRoute}  style={{marginRight: '10px'}}>Админ панель</Button>
                         <Button onClick={() => logOut()} >Выйти</Button>
 
                     </Nav>
