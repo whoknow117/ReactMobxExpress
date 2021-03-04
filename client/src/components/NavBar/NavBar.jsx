@@ -23,12 +23,13 @@ const NavBar = observer(() => {
         console.log(user)
     }
 
+    const shopRoute = () => {history.push(SHOP_ROUTE)}
 
     return (
 
         <Navbar bg="dark" variant="dark">
             <Container>
-                <NavLink style={{color: '#fff'}} to={SHOP_ROUTE}>КупиДевайс</NavLink>
+                <div style={{color: '#fff'}}onClick={shopRoute}>КупиДевайс</div>
                 {user.isAuth === true ?
                     <Nav className="ml-auto">
                         <Button onClick={admineRoute}  style={{marginRight: '10px'}}>Админ панель</Button>
