@@ -5,8 +5,11 @@ import {Context} from "../../index";
 
 const Pages = observer(() => {
 
+
     const {device} = useContext(Context)
-    const pageCount = Math.ceil(device.totalCount / device.limit)
+    console.log(device.limit)
+    const pageCount =  Math.ceil(device.totalCount / device.limit)
+
     const pages = []
 
     for (let i = 0; i < pageCount; i++) {
@@ -17,6 +20,7 @@ const Pages = observer(() => {
         <Pagination className='mt-5'>
             {pages.map(page =>
                 <Pagination.Item key={page}
+                                 onClick={() => device.setPage(page)}
                 >{page}</Pagination.Item>
             )}
         </Pagination>
