@@ -13,6 +13,14 @@ export const fetchTypes = async ( ) => {
     const {data} = await $host.get('api/type')
     return data
 }
+export const fetchCategories = async () => {
+    const {data} = await $host.get('api/category')
+    return data
+}
+export const createCategories = async (category) => {
+    const {data} = await $authHost.post('api/category', category)
+    return data
+}
 
 
 export const createBrand = async (brand) => {

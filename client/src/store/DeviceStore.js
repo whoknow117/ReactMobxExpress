@@ -6,8 +6,10 @@ export default class DeviceStore {
         this._types = []
         this._brands = []
         this._devices = []
+        this._categories = []
         this._selectedType = {}
         this._selectedBrand = {}
+        this._selectedCategory = {}
         this._page = 1
         this._totalCount = 0
         this._limit = 2
@@ -38,12 +40,27 @@ export default class DeviceStore {
         this._devices = devices
     }
 
+    setSelectedCategory(category) {
+        this._selectedCategory = category
+    }
+
     setSelectedType(type) {
         this._selectedType = type
     }
 
     setSelectedBrand(brand) {
         this._selectedBrand = brand
+    }
+
+    setCategories(categories) {
+        this._categories = categories
+    }
+
+    get selectedCategory () {
+        return this._selectedCategory
+    }
+    get categories () {
+        return this._categories
     }
 
     get selectedBrand() {
