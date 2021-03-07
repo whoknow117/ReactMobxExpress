@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {Context} from "../../index";
-import {Col, Container, ListGroup, Row} from "react-bootstrap";
+import {Card, Col, Container, ListGroup, Row} from "react-bootstrap";
 import TypeBar from "../../components/TypeBar/TypeBar";
 import {observer} from "mobx-react-lite";
 import BrandBar from "../../components/BrandBar/BrandBar";
@@ -36,15 +36,16 @@ const Shop = observer(() => {
 
         <Container>
             <Row>
-                <Col className="mt-2" md={3}>
+                <Col className="mt-2" md={2}>
                     <TypeBar/>
                 </Col>
-                <Col className="mt-2" md={8}>
+                <Col className="mt-2" md={10}>
                     <BrandBar/>
 
                     <DeviceList/>
                     <Pages/>
                 </Col>
+
             </Row>
         </Container>
 

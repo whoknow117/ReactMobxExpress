@@ -20,6 +20,11 @@ const BasketDevice = sequelize.define('basket_device', {
 
 })
 
+const Category = sequelize.define('category', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type:DataTypes.STRING, allowNull: false}
+})
+
 const Device = sequelize.define('device', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: {type: DataTypes.STRING, unique: true,allowNull: false },
@@ -55,6 +60,7 @@ const TypeBrand = sequelize.define('type_brand', {
 
 
 
+
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
@@ -71,8 +77,13 @@ Brand.hasMany(Device)
 Device.belongsTo(Brand)
 
 
+Category.hasMany(Device)
+Device.belongsTo(Category)
+
 Device.hasMany(Rating)
 Rating.belongsTo(Device)
+
+
 
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
@@ -80,8 +91,12 @@ BasketDevice.belongsTo(Device)
 Device.hasMany(DeviceInfo, {as: 'info'});
 DeviceInfo.belongsTo(Device)
 
+
 Type.belongsToMany(Brand,{through: TypeBrand})
 Brand.belongsToMany(Type,{through: TypeBrand})
+
+Category.hasMany(Type)
+Type.belongsTo(Category)
 
 
 
@@ -94,5 +109,6 @@ module.exports = {
     Basket,
     Brand,
     Rating,
-    User
+    User,
+    Category
 }
