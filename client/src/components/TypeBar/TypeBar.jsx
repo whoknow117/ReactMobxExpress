@@ -15,7 +15,7 @@ const TypeBar = observer(() => {
     return (
         <div>
             <ListGroup>
-                {device.types.map(type =>
+                {device.categories.map(type =>
                     <ListGroup.Item
                         active={type.id === device.selectedType.id}
                         onClick={() => device.setSelectedType(type)}

@@ -80,6 +80,7 @@ Device.belongsTo(Brand)
 Category.hasMany(Device)
 Device.belongsTo(Category)
 
+
 Device.hasMany(Rating)
 Rating.belongsTo(Device)
 
