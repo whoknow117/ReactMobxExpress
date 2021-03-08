@@ -27,7 +27,8 @@ class DeviceController {
                     DeviceInfo.create({
                         title: i.title,
                         description: i.description,
-                        deviceId: device.id
+                        typeId: device.typeId,
+                        deviceId: device.id,
                     })
                 )
             }

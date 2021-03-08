@@ -3,6 +3,8 @@ import classes from './SubCategoryPage.module.scss'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
+import {Col, Container, Row} from "react-bootstrap";
+import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
 
 const SubCategoryPage = observer(() => {
 
@@ -21,15 +23,23 @@ const SubCategoryPage = observer(() => {
 
 
     return (
-        <div className={classes.sub}>
-            {device.devices.map(dev => {
-                return <div className={classes.item}>
-                    <div>{dev.name} </div>
-                    <div></div>
+         <Container>
+             <Row className={classes.itemBar}>
+                 <Col md={9} className={classes.devices}>
+                     {device.devices.map(dev =>
+                         <DeviceItem
+                             key={dev.id}
+                             dev={dev}
 
-                </div>
-            })}
-        </div>
+                         />
+
+                     )}
+                 </Col>
+                <Col className={classes.filter} md={3}>
+
+                </Col>
+             </Row>
+         </Container>
     );
 });
 
