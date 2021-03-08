@@ -58,3 +58,7 @@ export const fetchDevice = async (id ) => {
     const {data} = await $host.get('api/device/' + id)
     return data
 }
+// export const fetchSubDevice = async (typeId ) => {
+//     const {data} = await $host.get('api/device/' + id)
+//     return data
+// }

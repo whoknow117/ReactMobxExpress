@@ -32,7 +32,7 @@ export const publicRoutes = [
         Component: Shop
     },
     {
-        path: SUBCATEGORY_ROUTE,
+        path: SUBCATEGORY_ROUTE + '/:subcategory',
         Component: SubCategoryPage
     },
     {
