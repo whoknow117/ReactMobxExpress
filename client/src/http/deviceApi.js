@@ -22,6 +22,10 @@ export const createCategories = async (category) => {
     return data
 }
 
+export const fetchInfos = async () => {
+    const {data} = await $host.get('api/info')
+    return data
+}
 
 export const createBrand = async (brand) => {
     const {data} = await $authHost.post('api/brand', brand)

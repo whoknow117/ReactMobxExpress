@@ -4,8 +4,8 @@ const ApiError = require('../error/ApiError')
 class InfoController {
 
     async getAll( req, res) {
-
-        const info = await DeviceInfo.findAll()
+        const {typeId} = req.body
+        const info = await DeviceInfo.findAll({where:{typeId}})
         return res.json(info)
     }
 
