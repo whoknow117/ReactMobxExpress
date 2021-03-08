@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
-import {createDevice, fetchBrands, fetchDevices, fetchTypes} from "../../http/deviceApi";
+import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
 
 const CreateDevice = observer(({show, onHide}) => {
@@ -16,6 +16,7 @@ const CreateDevice = observer(({show, onHide}) => {
     useEffect(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchBrands().then(data => device.setBrands(data))
+        fetchCategories().then(data => device.setCategories(data))
         fetchDevices().then(data => device.setDevices(data.rows))
     }, [])
 
@@ -42,9 +43,10 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
+        formData.append('categoryId', device.selectedCategory.id)
         formData.append('info', JSON.stringify(info))
 
-        createDevice(formData).then(data => onHide())
+        createDevice(formData).then(data => data)
 
     }
     return (
@@ -84,6 +86,19 @@ const CreateDevice = observer(({show, onHide}) => {
                                         onClick={() => device.setSelectedBrand(brand)}
                                     >
                                         {brand.name}
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Dropdown className="mt-3">
+                            <Dropdown.Toggle> {device.selectedCategory.name || "Выберете категорию"} </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {device.categories.map(category =>
+                                    <Dropdown.Item
+                                        key={category.id}
+                                        onClick={() => device.setSelectedCategory(category)}
+                                    >
+                                        {category.name}
                                     </Dropdown.Item>
                                 )}
                             </Dropdown.Menu>

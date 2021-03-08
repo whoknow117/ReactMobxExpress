@@ -3,3 +3,14 @@
 .active {
   background: #000;
 }
+
+.dropdown {
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  top: 60px;
+  left: 450px;
+  z-index: 1001;
+
+  background: silver;
+}

@@ -10,12 +10,16 @@ export default class DeviceStore {
         this._selectedType = {}
         this._selectedBrand = {}
         this._selectedCategory = {}
+        this._selectedMenuItem = {}
         this._page = 1
         this._totalCount = 0
         this._limit = 2
         makeAutoObservable(this)
     }
 
+    setSelectedMenuItem (menuItem) {
+        this._selectedMenuItem = menuItem
+    }
     setPage(page) {
         this._page = page
     }
@@ -55,6 +59,12 @@ export default class DeviceStore {
     setCategories(categories) {
         this._categories = categories
     }
+
+
+    get selectedMenuItem () {
+        return this._selectedMenuItem
+    }
+
 
     get selectedCategory () {
         return this._selectedCategory
