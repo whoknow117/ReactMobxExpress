@@ -24,6 +24,7 @@ export const createCategories = async (category) => {
 
 export const fetchInfos = async () => {
     const {data} = await $host.get('api/info')
+
     return data
 }
 

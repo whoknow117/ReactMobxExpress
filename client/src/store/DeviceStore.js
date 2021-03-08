@@ -7,19 +7,21 @@ export default class DeviceStore {
         this._brands = []
         this._devices = []
         this._categories = []
+        this._info = []
         this._selectedType = {}
         this._selectedBrand = {}
         this._selectedCategory = {}
-        this._selectedMenuItem = {}
+
         this._page = 1
         this._totalCount = 0
         this._limit = 2
         makeAutoObservable(this)
     }
 
-    setSelectedMenuItem (menuItem) {
-        this._selectedMenuItem = menuItem
+    setInfo(info) {
+        this._info = JSON.stringify(info)
     }
+
     setPage(page) {
         this._page = page
     }
@@ -61,15 +63,15 @@ export default class DeviceStore {
     }
 
 
-    get selectedMenuItem () {
-        return this._selectedMenuItem
+    get info() {
+        return this._info
     }
 
-
-    get selectedCategory () {
+    get selectedCategory() {
         return this._selectedCategory
     }
-    get categories () {
+
+    get categories() {
         return this._categories
     }
 
