@@ -7,7 +7,7 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId, info} = req.body
+            let {name, price, brandId, typeId,categoryId, info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -16,6 +16,7 @@ class DeviceController {
                 price,
                 brandId,
                 typeId,
+                categoryId,
                 img: fileName,
                 info
 
@@ -40,27 +41,37 @@ class DeviceController {
 
     async getAll(req, res, next) {
 
-        let {brandId, typeId, limit, page} = req.query
-        page = page || 1
-        limit = limit || 2
+        let {brandId, typeId,categoryId, limit, page} = req.query
         let offset = page * limit - limit
-
-
         let devices;
+
         if (!brandId && !typeId) {
-            devices = await Device.findAndCountAll({limit, offset})
+            devices = await Device.findAndCountAll({ limit, offset})
         }
 
-        if (brandId && !typeId) {
+        if (brandId && !typeId & !categoryId) {
             devices = await Device.findAndCountAll({where: {brandId}, limit, offset})
 
         }
-        if (!brandId && typeId) {
+        if (!brandId && typeId && !categoryId) {
             devices = await Device.findAndCountAll({where: {typeId}, limit, offset})
         }
-        if (brandId && typeId) {
+        if (brandId && typeId && !categoryId) {
             devices = await Device.findAndCountAll({where: {brandId, typeId}, limit, offset})
         }
+        if (!brandId && !typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {categoryId}, limit, offset})
+        }
+        if (!brandId && typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {typeId,categoryId}, limit, offset})
+        }
+        if (brandId && !typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {brandId,categoryId}, limit, offset})
+        }
+        if (brandId && typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId}, limit, offset})
+        }
+
         return res.json(devices)
     }
 

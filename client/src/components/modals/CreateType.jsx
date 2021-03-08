@@ -1,18 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
-import {createType} from "../../http/deviceApi";
+import React, {useContext, useEffect, useState} from 'react';
+import {Button, Dropdown, Form, Modal} from "react-bootstrap";
+import {createType, fetchCategories} from "../../http/deviceApi";
+import {Context} from "../../index";
 
 const CreateType = ({show, onHide}) => {
 
-
+    const {device} = useContext(Context)
     const [value, setValue] = useState('')
+
+
+    useEffect(() => {
+        fetchCategories().then(data => device.setCategories(data))
+    },[device.selectedCategory])
 
 
 
     const addType = () => {
         if(value.trim() !== "") {
-            createType({name: value}).then(data => setValue(data))
-            onHide()
+            createType({name: value, categoryId: device.selectedCategory.id}).then(data => setValue(data))
+
+
 
         }
     }
@@ -32,6 +39,19 @@ const CreateType = ({show, onHide}) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
+                    <Dropdown className="mt-3">
+                        <Dropdown.Toggle> {"Выберете тип"} </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            {device.categories.map(category =>
+                                <Dropdown.Item
+                                    key={category.id}
+                                    onClick={() => device.setSelectedCategory(category)}
+                                >
+                                    {category.name}
+                                </Dropdown.Item>
+                            )}
+                        </Dropdown.Menu>
+                    </Dropdown>
                     <Form.Control
                         value={value}
                         onChange={(e) => setValue(e.target.value)}

@@ -1,20 +1,38 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import classes from './TypeBar.module.scss';
 import {Context} from "../../index";
 import ListGroup from "react-bootstrap/ListGroup";
 import {observer} from "mobx-react-lite";
+import {NavLink} from "react-bootstrap";
+import {SUBCATEGORY_ROUTE} from "../../utils/consts";
+import {useHistory} from "react-router-dom";
 
 
 const TypeBar = observer(() => {
+
+    const history = useHistory()
+
     const {device} = useContext(Context)
+    const [mode, setMode] = useState(false)
+
+    const setModeCallback = (type) => {
+        device.selectedCategory(type)
+        setMode(true)
+    }
+
     return (
         <div>
             <ListGroup>
-                {device.types.map(type =>
+                {device.categories.map(type =>
                     <ListGroup.Item
-                        active={type.id === device.selectedType.id}
-                        onClick={() => device.setSelectedType(type)}
+                        active={type.id === device.selectedCategory.id}
+                        // onClick={() => device.setSelectedCategory(type)}
                         style={{cursor: 'pointer', textAlign: 'left'}}
-
+                        onMouseOver={() => {
+                            device.setSelectedCategory(type)
+                            setMode(true)
+                        }}
+                        onBlur={() => setMode(false)}
                         key={type.id}
                     >
                         {type.name}
@@ -22,6 +40,28 @@ const TypeBar = observer(() => {
                     </ListGroup.Item>
                 )}
             </ListGroup>
+            {mode ?
+                <div
+                    onMouseOver={() => setMode(true)}
+                    onMouseLeave={() => setMode(false)}
+                    className={classes.dropdown}
+                >
+                    {device.types.map(type => {
+                        if (type.categoryId === device.selectedCategory.id) {
+                            return <div
+                                onClick={() => {
+                                    history.push(SUBCATEGORY_ROUTE + '/' +  type.name)
+                                    device.setSelectedType(type)
+                                }}
+                                key={type.id}
+                            >
+                                {type.name}</div>
+                        }
+                    })}
+                </div>
+                :
+                ""
+            }
         </div>
     );
 });
