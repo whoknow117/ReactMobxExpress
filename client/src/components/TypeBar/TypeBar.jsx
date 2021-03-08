@@ -23,12 +23,13 @@ const TypeBar = observer(() => {
                 {device.categories.map(type =>
                     <ListGroup.Item
                         active={type.id === device.selectedCategory.id}
-                        onClick={() => device.setSelectedCategory(type)}
+                        // onClick={() => device.setSelectedCategory(type)}
                         style={{cursor: 'pointer', textAlign: 'left'}}
                         onMouseOver={() =>{
+                            device.setSelectedCategory(type)
                                 setMode(true)
                         }}
-                        onMouseLeave={()=> setMode(false)}
+                        onBlur={()=> setMode(false)}
                         key={type.id}
                     >
                         {type.name}
@@ -36,10 +37,11 @@ const TypeBar = observer(() => {
                     </ListGroup.Item>
                 )}
             </ListGroup>
-            {mode ? <div className={classes.dropdown}>
+            {mode ? <div onMouseOver={()=> setMode(true)} onMouseLeave={()=> setMode(false)} className={classes.dropdown}>
                     {device.types.map(type => {
                         if(type.categoryId === device.selectedCategory.id) {
                             return <div
+                                onClick={()=> device.setSelectedType(type)}
                             key={type.id}
                             >
                                 {type.name}</div>
