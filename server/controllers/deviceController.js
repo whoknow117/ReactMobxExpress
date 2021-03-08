@@ -46,22 +46,32 @@ class DeviceController {
         let devices;
 
         if (!brandId && !typeId) {
-            devices = await Device.findAndCountAll({  limit, offset})
+            devices = await Device.findAndCountAll({ limit, offset})
         }
 
-        if (brandId && !typeId) {
+        if (brandId && !typeId & !categoryId) {
             devices = await Device.findAndCountAll({where: {brandId}, limit, offset})
 
         }
-        if (!brandId && typeId) {
+        if (!brandId && typeId && !categoryId) {
             devices = await Device.findAndCountAll({where: {typeId}, limit, offset})
         }
-        if (brandId && typeId) {
+        if (brandId && typeId && !categoryId) {
             devices = await Device.findAndCountAll({where: {brandId, typeId}, limit, offset})
         }
-        if(categoryId) {
-            devices = await Device.findAndCountAll({where: {categoryId},limit,offset} )
+        if (!brandId && !typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {categoryId}, limit, offset})
         }
+        if (!brandId && typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {typeId,categoryId}, limit, offset})
+        }
+        if (brandId && !typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {brandId,categoryId}, limit, offset})
+        }
+        if (brandId && typeId && categoryId) {
+            devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId}, limit, offset})
+        }
+
         return res.json(devices)
     }
 

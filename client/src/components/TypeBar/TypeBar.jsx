@@ -3,11 +3,14 @@ import classes from './TypeBar.module.scss';
 import {Context} from "../../index";
 import ListGroup from "react-bootstrap/ListGroup";
 import {observer} from "mobx-react-lite";
+import {NavLink} from "react-bootstrap";
+import {SUBCATEGORY_ROUTE} from "../../utils/consts";
+import {useHistory} from "react-router-dom";
 
 
 const TypeBar = observer(() => {
 
-
+    const history = useHistory()
 
     const {device} = useContext(Context)
     const [mode, setMode] = useState(false)
@@ -25,11 +28,11 @@ const TypeBar = observer(() => {
                         active={type.id === device.selectedCategory.id}
                         // onClick={() => device.setSelectedCategory(type)}
                         style={{cursor: 'pointer', textAlign: 'left'}}
-                        onMouseOver={() =>{
+                        onMouseOver={() => {
                             device.setSelectedCategory(type)
-                                setMode(true)
+                            setMode(true)
                         }}
-                        onBlur={()=> setMode(false)}
+                        onBlur={() => setMode(false)}
                         key={type.id}
                     >
                         {type.name}
@@ -37,19 +40,27 @@ const TypeBar = observer(() => {
                     </ListGroup.Item>
                 )}
             </ListGroup>
-            {mode ? <div onMouseOver={()=> setMode(true)} onMouseLeave={()=> setMode(false)} className={classes.dropdown}>
+            {mode ?
+                <div
+                    onMouseOver={() => setMode(true)}
+                    onMouseLeave={() => setMode(false)}
+                    className={classes.dropdown}
+                >
                     {device.types.map(type => {
-                        if(type.categoryId === device.selectedCategory.id) {
+                        if (type.categoryId === device.selectedCategory.id) {
                             return <div
-                                onClick={()=> device.setSelectedType(type)}
-                            key={type.id}
+                                onClick={() => {
+                                    history.push(SUBCATEGORY_ROUTE)
+                                    device.setSelectedType(type)
+                                }}
+                                key={type.id}
                             >
                                 {type.name}</div>
                         }
                     })}
-            </div>
-            :
-            ""
+                </div>
+                :
+                ""
             }
         </div>
     );

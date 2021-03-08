@@ -14,12 +14,12 @@ const CreateType = ({show, onHide}) => {
     },[device.selectedCategory])
 
 
-    console.log(device.selectedCategory.id)
+
     const addType = () => {
         if(value.trim() !== "") {
             createType({name: value, categoryId: device.selectedCategory.id}).then(data => setValue(data))
 
-            onHide()
+
 
         }
     }
