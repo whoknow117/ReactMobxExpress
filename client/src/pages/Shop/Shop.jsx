@@ -18,19 +18,19 @@ const Shop = observer(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null,  null, 1, 2).then(data => {
+        fetchDevices(null, null,  null, device.page, 2).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [])
+    }, [device.page, device.selectedType, device.selectedBrand,device.selectedCategory])
 
 
-    useEffect(() => {
-        fetchDevices(device.selectedType.id, device.selectedBrand.id,device.selectedCategory.id, device.page, device.limit).then(data => {
-            device.setDevices(data.rows)
-            device.setTotalCount(data.count)
-        })
-    }, [device.page, device.selectedType, device.selectedBrand, ])
+    // useEffect(() => {
+    //     fetchDevices(device.selectedType.id, device.selectedBrand.id,device.selectedCategory.id, device.page, device.limit).then(data => {
+    //         device.setDevices(data.rows)
+    //         device.setTotalCount(data.count)
+    //     })
+    // }, [device.page, device.selectedType, device.selectedBrand,])
 
 
     return (

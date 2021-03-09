@@ -9,6 +9,11 @@
   .filter {
     margin-top: 20px;
     border: 1px solid silver;
+    display: flex;
 
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
   }
 }
