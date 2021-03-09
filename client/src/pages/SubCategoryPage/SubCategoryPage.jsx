@@ -40,12 +40,21 @@ const SubCategoryPage = observer(() => {
 
 
 
-    let firstItem = infosParse[0]
 
-    for (let i = 0; i < infosParse.length; i++) {
-        console.log(infosParse[i].title)
+
+    let newArr = []
+    function notEqual (array){
+
+        for(let i = 0; i < array.length; i ++)
+        {
+            if(array[i].title === array[i++].title ){
+                newArr.push(array[i])
+            }
+        }
+        return newArr
     }
 
+    const clearFilter = notEqual(infosParse)
 
 
     return (
@@ -63,7 +72,7 @@ const SubCategoryPage = observer(() => {
                  </Col>
                 <Col className={classes.filter} md={3}>
 
-                    {infosParse.map((el,idx) => {
+                    {clearFilter.map((el,idx) => {
                         // console.log(infosParse[idx].title)
 
 
