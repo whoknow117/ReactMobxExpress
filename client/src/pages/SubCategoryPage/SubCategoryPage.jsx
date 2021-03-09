@@ -39,11 +39,15 @@ const SubCategoryPage = observer(() => {
     let infosParse = JSON.parse(infos)
 
 
-        console.log(infosParse)
 
-        console.log(+typeId)
+    let firstItem = infosParse[0]
 
-    console.log(device.selectedType.id)
+    for (let i = 0; i < infosParse.length; i++) {
+        console.log(infosParse[i].title)
+    }
+
+
+
     return (
          <Container>
              <Row className={classes.itemBar}>
@@ -58,14 +62,19 @@ const SubCategoryPage = observer(() => {
                      )}
                  </Col>
                 <Col className={classes.filter} md={3}>
-                    {infosParse.map(el => {
-                        if(el.typeId) {
+
+                    {infosParse.map((el,idx) => {
+                        // console.log(infosParse[idx].title)
+
+
+                        if(infosParse[idx].title) {
                             return <div key={el.id}>{el.title}</div>
                         }
                         else {
                             return ""
                         }
                     })}
+
                     {/*{infosParse.filter( (info,idx) => info.typeId === device.selectedType.id && info[idx].title === info[idx + 1].title)*/}
                     {/*    .map( el => <div>{el.title}</div>)}*/}
                 </Col>
