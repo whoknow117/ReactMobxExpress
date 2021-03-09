@@ -81,7 +81,7 @@ const SubCategoryPage = observer(() => {
         return acc;
     }, {});
 
-    console.log(Object.values(res));
+    // console.log(res["Высота"].map(el=> el.title));
     return (
         <Container>
             <Row className={classes.itemBar}>
@@ -104,23 +104,17 @@ const SubCategoryPage = observer(() => {
                                 return <div key={el.id}>
                                     {
                                         el.title}
-                                    {/*{infosParse.map(infoEl => {*/}
-                                    {/*    if (el.id) {*/}
-                                    {/*        return <div key={infoEl.id}>{infoEl.description}</div>*/}
-                                    {/*    }*/}
-
-                                    {/*})}*/}
+                                    <div className={classes.description}>
+                                        {res[el.title].map((el,idx) =>  <div key={el.id}>{el.description}</div>)}
+                                    </div>
                                 </div>
                             } else {
                                 return ""
                             }
                         })}
                     </div>
-                    <div className={classes.description}>
-                        {newDescriptionArray.map((el,idx) =>  <div key={el.id}>{el.description}</div>)}
-                    </div>
-                    {/*{infosParse.filter( (info,idx) => info.typeId === device.selectedType.id && info[idx].title === info[idx + 1].title)*/}
-                    {/*    .map( el => <div>{el.title}</div>)}*/}
+
+
                 </Col>
             </Row>
         </Container>
