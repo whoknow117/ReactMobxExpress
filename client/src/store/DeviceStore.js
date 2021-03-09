@@ -19,7 +19,7 @@ export default class DeviceStore {
     }
 
     setInfo(info) {
-        this._info = JSON.stringify(info)
+        this._info = info
     }
 
     setPage(page) {

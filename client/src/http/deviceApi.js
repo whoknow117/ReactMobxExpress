@@ -22,11 +22,8 @@ export const createCategories = async (category) => {
     return data
 }
 
-export const fetchInfos = async () => {
-    const {data} = await $host.get('api/info')
 
-    return data
-}
+
 
 export const createBrand = async (brand) => {
     const {data} = await $authHost.post('api/brand', brand)
@@ -45,7 +42,15 @@ export const createDevice = async (device) => {
     return data
 }
 
+export const fetchInfosTypeKey = async (typeId) => {
+    const {data} = await $host.get('api/info',{
+        params:{
+            typeId
+        }
+    })
 
+    return data
+}
 export const fetchDevices = async (typeId,brandId,categoryId,page, limit ) => {
     const {data} = await $host.get('api/device',{
         params:{

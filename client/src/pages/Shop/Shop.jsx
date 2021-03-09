@@ -5,7 +5,7 @@ import TypeBar from "../../components/TypeBar/TypeBar";
 import {observer} from "mobx-react-lite";
 import BrandBar from "../../components/BrandBar/BrandBar";
 import DeviceList from "../../components/DeviceList/DeviceList";
-import {fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
+import {fetchBrands, fetchCategories, fetchDevices, fetchInfos, fetchTypes} from "../../http/deviceApi";
 import Pages from "../../components/Pages/Pages";
 
 

@@ -2,31 +2,48 @@ import React, {useContext, useEffect} from 'react';
 import classes from './SubCategoryPage.module.scss'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
-import {fetchBrands, fetchCategories, fetchDevices, fetchInfos, fetchTypes} from "../../http/deviceApi";
+import {
+    fetchBrands,
+    fetchCategories,
+    fetchDevices,
+
+    fetchInfosTypeKey,
+    fetchTypes
+} from "../../http/deviceApi";
 import {Col, Container, Row} from "react-bootstrap";
 import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
+import {useParams} from "react-router-dom";
 
 const SubCategoryPage = observer(() => {
 
     const {device} = useContext(Context)
 
+
+    const {typeId} = useParams()
+
+
+
     useEffect(() => {
-        // fetchTypes().then(data => device.setTypes(data))
-        // fetchCategories().then(data => device.setCategories(data))
-        // fetchBrands().then(data => device.setBrands(data))
-        fetchInfos().then(data => device.setInfo(data))
+
+        fetchInfosTypeKey(+typeId ).then(data => {device.setInfo(data)
+
+        })
         fetchDevices(device.selectedType.id, null,  null, 1, 2).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [device.selectedType])
+    },  [device.selectedType, typeId])
 
 
+    let infos = JSON.stringify(device.info)
+    let infosParse = JSON.parse(infos)
 
-    let info = JSON.parse(device.info)
 
-    console.log(info)
+        console.log(infosParse)
 
+        console.log(+typeId)
+
+    console.log(device.selectedType.id)
     return (
          <Container>
              <Row className={classes.itemBar}>
@@ -41,7 +58,16 @@ const SubCategoryPage = observer(() => {
                      )}
                  </Col>
                 <Col className={classes.filter} md={3}>
-                    {info.map(el => <div>{el.title}</div>)}
+                    {infosParse.map(el => {
+                        if(el.typeId) {
+                            return <div key={el.id}>{el.title}</div>
+                        }
+                        else {
+                            return ""
+                        }
+                    })}
+                    {/*{infosParse.filter( (info,idx) => info.typeId === device.selectedType.id && info[idx].title === info[idx + 1].title)*/}
+                    {/*    .map( el => <div>{el.title}</div>)}*/}
                 </Col>
              </Row>
          </Container>

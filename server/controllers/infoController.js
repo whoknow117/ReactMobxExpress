@@ -5,7 +5,7 @@ class InfoController {
 
     async getAll( req, res) {
 
-        const info = await DeviceInfo.findAll( )
+        const info = await DeviceInfo.findAll()
         return res.json(info)
     }
 
