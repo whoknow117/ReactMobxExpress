@@ -7,7 +7,7 @@ import DeviceStore from "./store/DeviceStore";
 
 
 
-console.log(process.env.REACT_APP_API_URL)
+
 
 
 export const Context = createContext(null )

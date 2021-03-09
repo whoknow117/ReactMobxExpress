@@ -12,7 +12,7 @@ const AppRouter = () => {
 
     const {user} = useContext(Context)
 
-    console.log(user)
+
     return (
         <div className={classes.wrapper}>
             <Switch>

@@ -38,9 +38,6 @@ const SubCategoryPage = observer(() => {
     let infos = JSON.stringify(device.info)
     let infosParse = JSON.parse(infos)
 
-    var array  = [{name:'Anna'}, {name:'Bob'}, {name:'Joe'}, {name:'Anna'}];
-
-
 
     let newArr = []
 
@@ -58,30 +55,65 @@ const SubCategoryPage = observer(() => {
     let descriptionArr = []
 
     function descriptionArray(arr) {
-       arr.sort((prev, next) => {
-           if(prev.title < next.title) return -1;
-           if(prev.title > next.title) return  1;
-       })
+        arr.sort((prev, next) => {
+            if (prev.title < next.title) return -1;
+            if (prev.title > next.title) return 1;
+        })
         return arr.reverse()
     }
 
 
     const newDescriptionArray = descriptionArray(infosParse)
 
-    console.log(newDescriptionArray )
+    let description = []
 
-    const res = newDescriptionArray.reduce((acc, item) => {
+    const filterDescription = (descr) => {
+        for (let i = 0; i < descr.length; i++) {
+            if (descr[i].description) {
+                description.push(descr[i])
 
-        console.log(acc[item.title])
+            }
+
+        }
+        return description
+
+
+    }
+
+    const filteredDescription = filterDescription(newDescriptionArray)
+
+
+    const newFilterArr = []
+    const newFilterArrActive = []
+
+    const filterArr = (arr) => {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].description === arr[i++].description) {
+                newFilterArr.push(arr[i])
+            } else if (arr[i].description !== arr[i++].description) {
+            }
+            newFilterArr.push(arr[i])
+        }
+        return newFilterArrActive
+    }
+
+
+    let newRes = filterArr(filteredDescription)
+
+
+    const res = filteredDescription.reduce((acc, item) => {
+
+
         if (acc[item.title]) {
             acc[item.title] = [...acc[item.title], item];
         } else {
             acc[item.title] = [item];
+
         }
         return acc;
     }, {});
 
-    // console.log(res["Высота"].map(el=> el.title));
+
     return (
         <Container>
             <Row className={classes.itemBar}>
@@ -105,7 +137,7 @@ const SubCategoryPage = observer(() => {
                                     {
                                         el.title}
                                     <div className={classes.description}>
-                                        {res[el.title].map((el,idx) =>  <div key={el.id}>{el.description}</div>)}
+                                        {res[el.title].map((el, idx) => <div key={el.id}>{el.description}</div>)}
                                     </div>
                                 </div>
                             } else {
