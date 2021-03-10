@@ -20,7 +20,7 @@ const App = observer(()  =>{
            check().then(data => {
                user.setIsAuth(true)
                user.setUser (true)
-           }).finally(() => console.log('help'))
+           }).finally(() => console.log('App'))
 
 
 

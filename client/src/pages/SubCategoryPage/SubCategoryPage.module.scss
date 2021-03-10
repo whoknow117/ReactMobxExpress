@@ -1,11 +1,20 @@
 
-.sub {
-  width: 400px;
-  height: 400px;
-  background: silver;
-  .item {
-    width: 200px;
-    height: 200px;
-    background:grey;
+.itemBar {
+  width: 100%;
+  height: auto;
+
+  .devices {
+    display: flex;
+  }
+  .filter {
+    margin-top: 20px;
+    border: 1px solid silver;
+    display: flex;
+
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid silver;
   }
 }

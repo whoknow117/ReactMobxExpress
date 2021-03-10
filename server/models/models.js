@@ -92,6 +92,8 @@ BasketDevice.belongsTo(Device)
 Device.hasMany(DeviceInfo, {as: 'info'});
 DeviceInfo.belongsTo(Device)
 
+Type.hasMany(DeviceInfo, {as:'info'})
+DeviceInfo.belongsTo(Type)
 
 Type.belongsToMany(Brand,{through: TypeBrand})
 Brand.belongsToMany(Type,{through: TypeBrand})

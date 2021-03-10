@@ -5,12 +5,14 @@ const userRouter = require('./userRouter')
 const typeRouter = require('./typeRouter')
 const brandRouter = require('./brandRouter')
 const categoryRouter = require('./categoryRouter')
+const infoRouter = require('./deviceInfoRouter')
 
 
 router.use('/user',userRouter)
 router.use('/device',deviceRouter)
 router.use('/type',typeRouter)
 router.use('/brand',brandRouter)
+router.use('/info',infoRouter)
 router.use('/category',categoryRouter)
 
 
