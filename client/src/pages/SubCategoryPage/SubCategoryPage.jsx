@@ -52,8 +52,6 @@ const SubCategoryPage = observer(() => {
 
     let clearFilter = notEqual(infosParse)
 
-    let descriptionArr = []
-
     function descriptionArray(arr) {
         arr.sort((prev, next) => {
             if (prev.title < next.title) return -1;
@@ -64,44 +62,51 @@ const SubCategoryPage = observer(() => {
 
 
     const newDescriptionArray = descriptionArray(infosParse)
+    console.log(newDescriptionArray)
 
-    let description = []
+    const newArray1 = []
+    const newArray2 = []
 
-    const filterDescription = (descr) => {
-        for (let i = 0; i < descr.length; i++) {
-            if (descr[i].description) {
-                description.push(descr[i])
-
-            }
-
+    for (let i = 0; i < newDescriptionArray.length; i++) {
+        if (newDescriptionArray[i].description === newDescriptionArray[i++].description) {
+            newArray1.push(newDescriptionArray[i])
+        } else {
+            newArray2.push(newDescriptionArray[i])
         }
-        return description
-
-
     }
+    // console.log(newArray1)
 
-    const filteredDescription = filterDescription(newDescriptionArray)
-
-
-    const newFilterArr = []
-    const newFilterArrActive = []
-
-    const filterArr = (arr) => {
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].description === arr[i++].description) {
-                newFilterArr.push(arr[i])
-            } else if (arr[i].description !== arr[i++].description) {
-            }
-            newFilterArr.push(arr[i])
+    let newArray = newDescriptionArray.reduce((acc, item) => {
+        if (acc[item.description]) {
+            acc[item.description] = [...acc[item.description]]
+        } else {
+            acc[item.description] = [item]
         }
-        return newFilterArrActive
-    }
+        return acc
+
+    }, {})
 
 
-    let newRes = filterArr(filteredDescription)
+    // let oKNewArray = Object.keys(newArray)
+
+    // console.log(newArray)
+
+    // const newArray1=[]
+    // const newArray2=[]
+    // let firstItem = filteredDescription[0]
+    //
+    // for (let i = 0; i < filteredDescription.length; i++){
+    //     if( firstItem !== filteredDescription[i++].description){
+    //         newArray1.push(filteredDescription[i])
+    //
+    //     } else {
+    //        console.log('what')
+    //     }
+    // }
+    // console.log(newArray1)
 
 
-    const res = filteredDescription.reduce((acc, item) => {
+    const res = newDescriptionArray.reduce((acc, item) => {
 
 
         if (acc[item.title]) {
@@ -112,6 +117,15 @@ const SubCategoryPage = observer(() => {
         }
         return acc;
     }, {});
+    console.log('res', res)
+
+
+    let resultArr = {
+        'цвет': 'green',
+        'q': '111',
+    }
+
+    window.resultArr = resultArr
 
 
     return (
@@ -137,7 +151,39 @@ const SubCategoryPage = observer(() => {
                                     {
                                         el.title}
                                     <div className={classes.description}>
-                                        {res[el.title].map((el, idx) => <div key={el.id}>{el.description}</div>)}
+
+                                        {
+                                            res[el.title].map((el) => {
+                                                return <div>{el.description}</div>
+                                            })
+                                        }
+
+                                        {/*{
+
+                                            res[el.title].forEach((el, idx, array) => {
+                                                debugger
+
+                                                resultArr[el.title] = el.description
+
+                                                // for (let i = 0; i < res[el.title].length; i ++){
+                                                //     resultArr.push(el.description)
+                                                //
+                                                //      12if(el.description === resultArr[0]){
+                                                //         return
+                                                //     } else {
+                                                //         resultArr.push([el.description])
+                                                //     }
+                                                // }
+
+                                            })
+                                        }*/}
+                                        {/*{*/}
+                                        {/*    res[el.title].filter((el) => {*/}
+                                        {/*        debugger*/}
+                                        {/*        return el.description !== resultArr[el.title]*/}
+                                        {/*    })*/}
+                                        {/*}*/}
+
                                     </div>
                                 </div>
                             } else {
