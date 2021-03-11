@@ -25,10 +25,11 @@ const SubCategoryPage = observer(() => {
     useEffect(() => {
 
         fetchInfosTypeKey(+typeId).then(data => {
+            console.log(data)
             device.setInfo(data)
 
         })
-        fetchDevices(device.selectedType.id, null, null, 1, 2).then(data => {
+        fetchDevices(device.selectedType.id, null, null, 1, 8).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
@@ -62,29 +63,29 @@ const SubCategoryPage = observer(() => {
 
 
     const newDescriptionArray = descriptionArray(infosParse)
-    console.log(newDescriptionArray)
 
-    const newArray1 = []
-    const newArray2 = []
 
-    for (let i = 0; i < newDescriptionArray.length; i++) {
-        if (newDescriptionArray[i].description === newDescriptionArray[i++].description) {
-            newArray1.push(newDescriptionArray[i])
-        } else {
-            newArray2.push(newDescriptionArray[i])
-        }
-    }
+    // const newArray1 = []
+    // const newArray2 = []
+    //
+    // for (let i = 0; i < newDescriptionArray.length; i++) {
+    //     if (newDescriptionArray[i].description === newDescriptionArray[i++].description) {
+    //         newArray1.push(newDescriptionArray[i])
+    //     } else {
+    //         newArray2.push(newDescriptionArray[i])
+    //     }
+    // }
     // console.log(newArray1)
 
-    let newArray = newDescriptionArray.reduce((acc, item) => {
-        if (acc[item.description]) {
-            acc[item.description] = [...acc[item.description]]
-        } else {
-            acc[item.description] = [item]
-        }
-        return acc
-
-    }, {})
+    // let newArray = newDescriptionArray.reduce((acc, item) => {
+    //     if (acc[item.description]) {
+    //         acc[item.description] = [...acc[item.description]]
+    //     } else {
+    //         acc[item.description] = [item]
+    //     }
+    //     return acc
+    //
+    // }, {})
 
 
     // let oKNewArray = Object.keys(newArray)
@@ -105,8 +106,23 @@ const SubCategoryPage = observer(() => {
     // }
     // console.log(newArray1)
 
+    const filter = (arr) => {
+        const cash = {}
+        const filtered = []
+        arr.forEach(el => {
+            if(!cash[el.description]) {
+                cash[el.description] = el;
+                filtered.push(el)
+            }
+        })
+        return filtered
+    }
 
-    const res = newDescriptionArray.reduce((acc, item) => {
+
+    let filteredDesc = filter(newDescriptionArray)
+    console.log(filteredDesc)
+
+    const res = filteredDesc.reduce((acc, item) => {
 
 
         if (acc[item.title]) {
@@ -117,7 +133,25 @@ const SubCategoryPage = observer(() => {
         }
         return acc;
     }, {});
-    console.log('res', res)
+
+    const res2 = Object.keys(res)
+
+
+    // let res4 = []
+    // for (let i = 0; i < res2.length; i++) {
+    //     debugger
+    //
+    //     res[res2[i]].filter((el) => {
+    //         if (i === 0) {
+    //             res4 = [...res4, res[res2[i]][i]]
+    //             return
+    //         }
+    //
+    //         return el.description === res4[i].description
+    //     })
+    // }
+    //
+    // console.log('res4', res4)
 
 
     let resultArr = {
@@ -153,10 +187,14 @@ const SubCategoryPage = observer(() => {
                                     <div className={classes.description}>
 
                                         {
-                                            res[el.title].map((el) => {
-                                                return <div>{el.description}</div>
+                                            res[el.title].map(el => {
+                                                return <div key={<el className="id"></el>}>{el.description}</div>
                                             })
                                         }
+                                        {/*{*/}
+                                        {/*    res[el.title].filter((el,idx, arr) => el.description === arr[idx].description).*/}
+                                        {/*    map( item => item.description === el.description ? <div>{item.description}</div> : "x")*/}
+                                        {/*}*/}
 
                                         {/*{
 
