@@ -29,7 +29,7 @@ const SubCategoryPage = observer(() => {
             device.setInfo(data)
 
         })
-        fetchDevices(device.selectedType.id, null, null, 1, 2).then(data => {
+        fetchDevices(device.selectedType.id, null, null, 1, 8).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
