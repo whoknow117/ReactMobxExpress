@@ -10,19 +10,19 @@ import Pages from "../../components/Pages/Pages";
 
 
 const Shop = observer(() => {
-
-    let {device} = useContext(Context)
-
-
-    useEffect(() => {
-        fetchTypes().then(data => device.setTypes(data))
-        fetchCategories().then(data => device.setCategories(data))
-        fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null,  null, device.page, 12).then(data => {
-            device.setDevices(data.rows)
-            device.setTotalCount(data.count)
-        })
-    }, [device.page, device.selectedType, device.selectedBrand,device.selectedCategory])
+    //
+    // let {device} = useContext(Context)
+    //
+    //
+    // useEffect(() => {
+    //     fetchTypes().then(data => device.setTypes(data))
+    //     fetchCategories().then(data => device.setCategories(data))
+    //     fetchBrands().then(data => device.setBrands(data))
+    //     fetchDevices(null, null,  null, device.page, 12).then(data => {
+    //         device.setDevices(data.rows)
+    //         device.setTotalCount(data.count)
+    //     })
+    // }, [device.page, device.selectedType, device.selectedBrand,device.selectedCategory])
 
 
     // useEffect(() => {
