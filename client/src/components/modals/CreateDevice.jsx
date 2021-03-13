@@ -21,18 +21,18 @@ const CreateDevice = observer(({show, onHide}) => {
     }, [])
 
 
-    const addInfo = () => {
-        setInfo([...info, {title: '', description: '', number: Date.now()}])
-    }
-    const removeInfo = (number) => {
-        setInfo(info.filter(i => i.number !== number))
-    }
+    // const addInfo = () => {
+    //     setInfo([...info, {title: '', description: '', number: Date.now()}])
+    // }
+    // const removeInfo = (number) => {
+    //     setInfo(info.filter(i => i.number !== number))
+    // }
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
-    const changeInfo = (key, value, number) => {
-        setInfo(info.map( i => i.number === number ? {...i, [key]: value} : i))
-    }
+    // const changeInfo = (key, value, number) => {
+    //     setInfo(info.map( i => i.number === number ? {...i, [key]: value} : i))
+    // }
 
 
 
@@ -44,7 +44,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
         formData.append('categoryId', device.selectedCategory.id)
-        formData.append('info', JSON.stringify(info))
+        // formData.append('info', JSON.stringify(info))
 
         createDevice(formData).then(data => data)
 
@@ -126,7 +126,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
                         <hr/>
-                        <Button onClick={addInfo}>Добавить новое свойство </Button>
+                        <Button  >Добавить новое свойство </Button>
                         {
                             info.map(i =>
                                 <Row key={i.number}>
@@ -134,7 +134,7 @@ const CreateDevice = observer(({show, onHide}) => {
                                         <Form.Control
                                             value={i.title}
 
-                                            onChange={(e) => changeInfo('title', e.target.value, i.number)}
+
                                             placeholder="Введите название характеристики"
                                         />
                                     </Col>
@@ -142,13 +142,12 @@ const CreateDevice = observer(({show, onHide}) => {
                                         <Form.Control
                                             value={i.description}
 
-                                            onChange={(e) => changeInfo('description', e.target.value, i.number)}
                                             placeholder="Введите описание характеристики"
                                         />
                                     </Col>
 
                                     <Col md={4} className="mt-3">
-                                        <Button onClick={() => removeInfo(i.number)}>Удалить</Button>
+                                        <Button  >Удалить</Button>
                                     </Col>
                                 </Row>
                             )
