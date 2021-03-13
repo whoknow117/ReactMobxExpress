@@ -164,7 +164,8 @@ const CreateDevice = observer(({show, onHide}) => {
                         {device.info.map(i => {
                                 return (
                                     <div>
-
+                                        <div>{i.title}</div>
+                                        <input type="text"/>
                                 </div>)
                             }
                         )}
