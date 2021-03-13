@@ -8,7 +8,11 @@ export const createInfo = async (info) => {
 }
 
 
-export const fetchInfos = async () => {
-    const {data} = await $host.get('api/info')
+export const fetchInfos = async (typeId) => {
+    const {data} = await $host.get('api/info', {
+        params: {
+            typeId
+        }
+    })
     return data
 }

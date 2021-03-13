@@ -3,6 +3,8 @@ import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
 import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
+import {fetchInfos} from "../../http/categoryInfoApi";
+import {useParams} from "react-router-dom";
 
 const CreateDevice = observer(({show, onHide}) => {
 
@@ -12,13 +14,21 @@ const CreateDevice = observer(({show, onHide}) => {
     const [price, setPrice] = useState(0)
     const [file, setFile] = useState(null)
 
+    const params = useParams()
+    console.log(params)
 
     useEffect(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchBrands().then(data => device.setBrands(data))
         fetchCategories().then(data => device.setCategories(data))
+
         fetchDevices().then(data => device.setDevices(data.rows))
     }, [])
+
+
+    useEffect(() => {
+        fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
+    }, [device.selectedType])
 
 
     // const addInfo = () => {
@@ -33,7 +43,6 @@ const CreateDevice = observer(({show, onHide}) => {
     // const changeInfo = (key, value, number) => {
     //     setInfo(info.map( i => i.number === number ? {...i, [key]: value} : i))
     // }
-
 
 
     const addDevice = () => {
@@ -126,32 +135,39 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
                         <hr/>
-                        <Button  >Добавить новое свойство </Button>
-                        {
-                            info.map(i =>
-                                <Row key={i.number}>
-                                    <Col md={4} className="mt-3">
-                                        <Form.Control
-                                            value={i.title}
+                        {/*<Button  >Добавить новое свойство </Button>*/}
+                        {/*{*/}
+                        {/*    info.map(i =>*/}
+                        {/*        <Row key={i.number}>*/}
+                        {/*            <Col md={4} className="mt-3">*/}
+                        {/*                <Form.Control*/}
+                        {/*                    value={i.title}*/}
 
 
-                                            placeholder="Введите название характеристики"
-                                        />
-                                    </Col>
-                                    <Col md={4} className="mt-3">
-                                        <Form.Control
-                                            value={i.description}
+                        {/*                    placeholder="Введите название характеристики"*/}
+                        {/*                />*/}
+                        {/*            </Col>*/}
+                        {/*            <Col md={4} className="mt-3">*/}
+                        {/*                <Form.Control*/}
+                        {/*                    value={i.description}*/}
 
-                                            placeholder="Введите описание характеристики"
-                                        />
-                                    </Col>
+                        {/*                    placeholder="Введите описание характеристики"*/}
+                        {/*                />*/}
+                        {/*            </Col>*/}
 
-                                    <Col md={4} className="mt-3">
-                                        <Button  >Удалить</Button>
-                                    </Col>
-                                </Row>
-                            )
-                        }
+                        {/*            <Col md={4} className="mt-3">*/}
+                        {/*                <Button  >Удалить</Button>*/}
+                        {/*            </Col>*/}
+                        {/*        </Row>*/}
+                        {/*    )*/}
+                        {/*}*/}
+                        {device.info.map(i => {
+                                return (
+                                    <div>
+
+                                </div>)
+                            }
+                        )}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
