@@ -18,15 +18,15 @@ class DeviceController {
                 typeId,
                 categoryId,
                 img: fileName,
-
+                infoDescription
 
             })
             if (infoDescription) {
                 infoDescription = JSON.parse(infoDescription)
                 infoDescription.forEach(i =>
-                    DeviceInfo.create({
+                    DeviceInfoDescription.create({
                         title: i.title,
-                        infoId: i.infoId,
+                        deviceInfoId: i.infoId,
                         deviceId: device.id,
                     })
                 )
