@@ -6,8 +6,8 @@ const ApiError = require('../error/ApiError')
 class DeviceInfoDescriptionController  {
     async create (req,res,next) {
         try {
-            let {title, deviceId,infoId} = req.body
-            const infoDescription = await DeviceInfoDescription.create({title,deviceId,infoId})
+            let {title,infoId, deviceId} = req.body
+            const infoDescription = await DeviceInfoDescription.create({title,infoId,deviceId})
             return res.json(infoDescription)
         }
         catch (e) {
