@@ -16,3 +16,19 @@ export const fetchInfos = async (typeId) => {
     })
     return data
 }
+
+
+export const createInfoDescription = async (infoDescription) => {
+    const {data} = await $authHost.post('api/infoDescription', infoDescription)
+    return data
+}
+
+export const fetchInfoDescription = async (deviceId, infoId) => {
+    const {data} = await $host.get('api/infoDescription', {
+        params: {
+            deviceId,
+            infoId
+        }
+    })
+    return data
+}

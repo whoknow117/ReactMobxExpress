@@ -12,15 +12,12 @@ const CreateInfo = ({show, onHide}) => {
 
     useEffect(() => {
         fetchTypes(device.setSelectedType.id).then(data => device.setTypes(data))
-    },[device.selectedType])
-
-
+    }, [device.selectedType])
 
 
     const addInfo = () => {
-        if(value.trim() !== "") {
+        if (value.trim() !== "") {
             createInfo({title: value, typeId: device.selectedType.id}).then(data => setValue(data))
-
 
 
         }
@@ -63,7 +60,7 @@ const CreateInfo = ({show, onHide}) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
-                <Button variant="outline-dark"  onClick={addInfo}>Добавить</Button>
+                <Button variant="outline-dark" onClick={addInfo}>Добавить</Button>
             </Modal.Footer>
         </Modal>
     );

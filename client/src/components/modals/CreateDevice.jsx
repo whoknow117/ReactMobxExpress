@@ -40,9 +40,17 @@ const CreateDevice = observer(({show, onHide}) => {
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
-    // const changeInfo = (key, value, number) => {
-    //     setInfo(info.map( i => i.number === number ? {...i, [key]: value} : i))
-    // }
+    const changeInfo = (value, infoId) => {
+         let newDescription = {
+
+             title: value,
+             infoId: infoId
+
+
+         }
+        setInfo([...info, newDescription])
+
+    }
 
 
     const addDevice = () => {
@@ -53,7 +61,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
         formData.append('categoryId', device.selectedCategory.id)
-        // formData.append('info', JSON.stringify(info))
+        formData.append('info', JSON.stringify(info))
 
         createDevice(formData).then(data => data)
 
@@ -163,12 +171,15 @@ const CreateDevice = observer(({show, onHide}) => {
                         {/*}*/}
                         {device.info.map(i => {
                                 return (
-                                    <div>
+                                    <div key={i.id}>
                                         <div>{i.title}
                                             {i.id}
 
                                         </div>
-                                        <input type="text"/>
+                                        <input
+
+                                            onChange={(e) => changeInfo(e.target.value,i.id)}
+                                            type="text"/>
                                 </div>)
                             }
                         )}
