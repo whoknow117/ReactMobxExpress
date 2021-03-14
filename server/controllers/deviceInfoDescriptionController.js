@@ -20,3 +20,6 @@ class DeviceInfoDescriptionController  {
     }
 
 }
+
+
+module.exports = new DeviceInfoDescriptionController()

@@ -4,7 +4,7 @@ const router = new Router()
 
 
 
-// router.get('/',infoController.getAll)
+router.post('/',infoController.create)
 router.get('/',infoController.getAllTypeId)
 
 

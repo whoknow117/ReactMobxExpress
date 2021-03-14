@@ -59,11 +59,7 @@ const DeviceInfoDescription = sequelize.define('device_info_description', {
     title: {type: DataTypes.STRING, allowNull: false},
 })
 
-const DeviceInfo = sequelize.define('device_info', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    title: {type: DataTypes.STRING, allowNull: false},
-    description: {type: DataTypes.STRING, allowNull: false},
-})
+
 
 const TypeBrand = sequelize.define('type_brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -100,10 +96,14 @@ Rating.belongsTo(Device)
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
+Device.hasMany(DeviceInfoDescription, {as: 'info_description'})
+DeviceInfoDescription.belongsTo(Device)
+
+DeviceInfo.hasMany(DeviceInfoDescription, {as: 'info_description'})
+DeviceInfoDescription.belongsTo(DeviceInfo)
 
 
-// Device.hasMany(DeviceInfo, {as: 'info'});
-// DeviceInfo.belongsTo(Device)
+
 
 
 Type.hasMany(DeviceInfo, {as:'info'})
@@ -127,5 +127,6 @@ module.exports = {
     Brand,
     Rating,
     User,
-    Category
+    Category,
+    DeviceInfoDescription
 }

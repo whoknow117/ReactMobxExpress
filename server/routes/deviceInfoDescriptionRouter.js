@@ -6,7 +6,7 @@ const deviceInfoDescriptionController = require('../controllers/deviceInfoDescri
 
 
 router.post('/',deviceInfoDescriptionController.create)
-router.get('/',deviceInfoDescriptionController.getAllTypeId)
+router.get('/',deviceInfoDescriptionController.getAll)
 
 
 
