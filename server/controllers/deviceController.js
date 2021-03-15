@@ -7,7 +7,7 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId,categoryId,info,infoDescription} = req.body
+            let {name, price, brandId, typeId,categoryId, infoDescription} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -19,16 +19,16 @@ class DeviceController {
                 categoryId,
                 img: fileName,
                 infoDescription,
-                info
+
 
             })
-            if (infoDescription && info) {
-                info = JSON.parse(info)
+            if (infoDescription) {
+
                 infoDescription = JSON.parse(infoDescription)
                 infoDescription.forEach(i =>
                     DeviceInfoDescription.create({
                         title: i.title,
-                        deviceInfoId: (info.map( inf => inf.id === i.id ? inf.id : "")),
+                        deviceInfoId: i.infoId,
                         deviceId: device.id,
                     })
                 )
@@ -51,7 +51,7 @@ class DeviceController {
             devices = await Device.findAndCountAll({ limit, offset})
         }
 
-        if (brandId && !typeId & !categoryId) {
+         if (brandId && !typeId & !categoryId) {
             devices = await Device.findAndCountAll({where: {brandId}, limit, offset})
 
         }
