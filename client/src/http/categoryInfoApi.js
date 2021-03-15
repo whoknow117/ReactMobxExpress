@@ -23,11 +23,11 @@ export const createInfoDescription = async (infoDescription) => {
     return data
 }
 
-export const fetchInfoDescription = async (deviceId, infoId) => {
+export const fetchInfoDescription = async (deviceId, deviceInfoId) => {
     const {data} = await $host.get('api/infoDescription', {
         params: {
             deviceId,
-            infoId
+            deviceInfoId
         }
     })
     return data

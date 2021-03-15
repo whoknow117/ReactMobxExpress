@@ -23,7 +23,7 @@ const CreateInfo = ({show, onHide}) => {
         }
     }
 
-    debugger;
+
     return (
         <Modal
             show={show}

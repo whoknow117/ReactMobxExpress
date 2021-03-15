@@ -9,13 +9,14 @@ import {useParams} from "react-router-dom";
 const CreateDevice = observer(({show, onHide}) => {
 
     const {device} = useContext(Context)
-    const [info, setInfo] = useState([])
+    const [infoDescription, setInfoDescription] = useState([])
+    const [value,setValue] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [file, setFile] = useState(null)
 
     const params = useParams()
-    console.log(params)
+
 
     useEffect(() => {
         fetchTypes().then(data => device.setTypes(data))
@@ -40,20 +41,27 @@ const CreateDevice = observer(({show, onHide}) => {
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
-    const changeInfo = (value, infoId) => {
-         let newDescription = {
-
-             title: value,
-             infoId: infoId
-
-
-         }
-        setInfo([...info, newDescription])
-
+    // const changeInfo = (value, infoId) => {
+    //      let newDescription = {
+    //
+    //          title: value,
+    //          infoId: infoId
+    //
+    //
+    //      }
+    //     setInfo([...info, newDescription])
+    //
+    // }
+    const changeInfo = (value,deviceInfoId) => {
+        setInfoDescription([...infoDescription, {
+            title: value,
+            deviceInfoId: deviceInfoId
+        }])
     }
 
 
-    const addDevice = () => {
+    const addDevice = ( ) => {
+
         const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)
@@ -61,11 +69,12 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
         formData.append('categoryId', device.selectedCategory.id)
-        formData.append('info', JSON.stringify(info))
-
+        formData.append('infoDescription', JSON.stringify(infoDescription))
+        console.log(infoDescription)
         createDevice(formData).then(data => data)
 
     }
+
     return (
         <div>
             <Modal
@@ -170,6 +179,7 @@ const CreateDevice = observer(({show, onHide}) => {
                         {/*    )*/}
                         {/*}*/}
                         {device.info.map(i => {
+
                                 return (
                                     <div key={i.id}>
                                         <div>{i.title}
@@ -178,7 +188,8 @@ const CreateDevice = observer(({show, onHide}) => {
                                         </div>
                                         <input
 
-                                            onChange={(e) => changeInfo(e.target.value,i.id)}
+                                            onChange={(e) => changeInfo(  e.target.value,i.id )}
+
                                             type="text"/>
                                 </div>)
                             }
