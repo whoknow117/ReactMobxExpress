@@ -10,6 +10,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
+    const [info, setInfo] = useState([])
     const [value,setValue] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
@@ -22,7 +23,6 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchTypes().then(data => device.setTypes(data))
         fetchBrands().then(data => device.setBrands(data))
         fetchCategories().then(data => device.setCategories(data))
-
         fetchDevices().then(data => device.setDevices(data.rows))
     }, [])
 
@@ -52,7 +52,9 @@ const CreateDevice = observer(({show, onHide}) => {
     //     setInfo([...info, newDescription])
     //
     // }
-    const changeInfo = (value,deviceInfoId) => {
+    const changeInfo = (i,value,deviceInfoId) => {
+
+
         setInfoDescription([...infoDescription, {
             title: value,
             deviceInfoId: deviceInfoId
@@ -69,6 +71,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
         formData.append('categoryId', device.selectedCategory.id)
+        formData.append('info', JSON.stringify(info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
         console.log(infoDescription)
         createDevice(formData).then(data => data)
@@ -152,32 +155,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
                         <hr/>
-                        {/*<Button  >Добавить новое свойство </Button>*/}
-                        {/*{*/}
-                        {/*    info.map(i =>*/}
-                        {/*        <Row key={i.number}>*/}
-                        {/*            <Col md={4} className="mt-3">*/}
-                        {/*                <Form.Control*/}
-                        {/*                    value={i.title}*/}
 
-
-                        {/*                    placeholder="Введите название характеристики"*/}
-                        {/*                />*/}
-                        {/*            </Col>*/}
-                        {/*            <Col md={4} className="mt-3">*/}
-                        {/*                <Form.Control*/}
-                        {/*                    value={i.description}*/}
-
-                        {/*                    placeholder="Введите описание характеристики"*/}
-                        {/*                />*/}
-                        {/*            </Col>*/}
-
-                        {/*            <Col md={4} className="mt-3">*/}
-                        {/*                <Button  >Удалить</Button>*/}
-                        {/*            </Col>*/}
-                        {/*        </Row>*/}
-                        {/*    )*/}
-                        {/*}*/}
                         {device.info.map(i => {
 
                                 return (
@@ -187,8 +165,12 @@ const CreateDevice = observer(({show, onHide}) => {
 
                                         </div>
                                         <input
-
-                                            onChange={(e) => changeInfo(  e.target.value,i.id )}
+                                            onClick={() => {
+                                                device.setSelectedInfo(i)
+                                                console.log(i)
+                                            }
+                                            }
+                                            onChange={(e) => changeInfo( i, e.target.value,i.id )}
 
                                             type="text"/>
                                 </div>)
@@ -206,3 +188,34 @@ const CreateDevice = observer(({show, onHide}) => {
 });
 
 export default CreateDevice;
+
+
+
+
+
+{/*<Button  >Добавить новое свойство </Button>*/}
+{/*{*/}
+{/*    info.map(i =>*/}
+{/*        <Row key={i.number}>*/}
+{/*            <Col md={4} className="mt-3">*/}
+{/*                <Form.Control*/}
+{/*                    value={i.title}*/}
+
+
+{/*                    placeholder="Введите название характеристики"*/}
+{/*                />*/}
+{/*            </Col>*/}
+{/*            <Col md={4} className="mt-3">*/}
+{/*                <Form.Control*/}
+{/*                    value={i.description}*/}
+
+{/*                    placeholder="Введите описание характеристики"*/}
+{/*                />*/}
+{/*            </Col>*/}
+
+{/*            <Col md={4} className="mt-3">*/}
+{/*                <Button  >Удалить</Button>*/}
+{/*            </Col>*/}
+{/*        </Row>*/}
+{/*    )*/}
+{/*}*/}

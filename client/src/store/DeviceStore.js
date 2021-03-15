@@ -11,12 +11,17 @@ export default class DeviceStore {
         this._selectedType = {}
         this._selectedBrand = {}
         this._selectedCategory = {}
+        this._selectedInfo = {}
         this._page = 1
         this._totalCount = 0
         this._limit = 2
         makeAutoObservable(this)
     }
 
+
+    setSelectedInfo(selectedInfo) {
+        this._selectedInfo = selectedInfo
+    }
     setInfo(info) {
         this._info = info
     }
@@ -104,6 +109,10 @@ export default class DeviceStore {
 
     get page() {
         return this._page
+    }
+
+    get selectedInfo () {
+        return this._selectedInfo
     }
 
 }
