@@ -58,8 +58,6 @@ const DeviceInfoDescription = sequelize.define('device_info_description', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
 
-
-
 })
 
 

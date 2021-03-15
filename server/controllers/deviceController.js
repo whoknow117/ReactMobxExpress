@@ -24,7 +24,10 @@ class DeviceController {
             })
             if (infoDescription) {
 
+
+
                 infoDescription = JSON.parse(infoDescription)
+
                 infoDescription.forEach(i =>
                     DeviceInfoDescription.create({
                         title: i.title,
