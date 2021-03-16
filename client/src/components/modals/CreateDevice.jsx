@@ -11,7 +11,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
-    const [value,setValue] = useState('')
+    const [value, setValue] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [file, setFile] = useState(null)
@@ -38,31 +38,16 @@ const CreateDevice = observer(({show, onHide}) => {
     const removeInfo = (number) => {
         setInfo(info.filter(i => i.number !== number))
     }
+
+    const changeInfo = (key, value, number) => {
+        setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+    }
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
-    // const changeInfo = (value, infoId) => {
-    //      let newDescription = {
-    //
-    //          title: value,
-    //          infoId: infoId
-    //
-    //
-    //      }
-    //     setInfo([...info, newDescription])
-    //
-    // }
-    const changeInfo = (value ) => {
 
 
-       setInfoDescription([...infoDescription, {
-            title: value,
-
-        }])
-    }
-
-
-    const addDevice = ( ) => {
+    const addDevice = () => {
 
         const formData = new FormData()
         formData.append('name', name)
@@ -156,7 +141,7 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Form.Control>
                         <hr/>
 
-                        <Button onClick={addInfo}  >Добавить новое свойство </Button>
+                        <Button onClick={addInfo}>Добавить новое свойство </Button>
                         {
                             info.map(i =>
                                 <Row key={i.number}>
@@ -164,20 +149,20 @@ const CreateDevice = observer(({show, onHide}) => {
                                         <Form.Control
                                             value={i.title}
 
-
+                                            onChange={(e)=> changeInfo('title',e.target.value,)}
                                             placeholder="Введите название характеристики"
                                         />
                                     </Col>
                                     <Col md={4} className="mt-3">
                                         <Form.Control
                                             value={i.description}
-
+                                            onChange={(e)=> changeInfo('description',e.target.value,)}
                                             placeholder="Введите описание характеристики"
                                         />
                                     </Col>
 
                                     <Col md={4} className="mt-3">
-                                        <Button  >Удалить</Button>
+                                        <Button>Удалить</Button>
                                     </Col>
                                 </Row>
                             )
