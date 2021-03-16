@@ -14,6 +14,7 @@ router.use('/device',deviceRouter)
 router.use('/type',typeRouter)
 router.use('/brand',brandRouter)
 router.use('/info',infoRouter)
+router.use('infoDescription', deviceInfoDescriptionRouter)
 router.use('/category',categoryRouter)
 
 

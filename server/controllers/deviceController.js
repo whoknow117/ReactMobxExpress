@@ -1,4 +1,4 @@
-const {Device, DeviceInfo,DeviceInfoDescription} = require('../models/models')
+const {Device, DeviceInfo} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
@@ -7,7 +7,7 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId,categoryId, infoDescription} = req.body
+            let {name, price, brandId, typeId,categoryId, info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -18,21 +18,23 @@ class DeviceController {
                 typeId,
                 categoryId,
                 img: fileName,
-                infoDescription,
+
 
 
             })
-            if (infoDescription) {
+            if (info) {
 
 
 
-                infoDescription = JSON.parse(infoDescription)
+                info = JSON.parse(info)
 
-                infoDescription.forEach(i =>
-                    DeviceInfoDescription.create({
+                info.forEach(i =>
+                    DeviceInfo.create({
                         title: i.title,
-                        deviceInfoId: i.infoId,
+                        typeId: device.typeId,
                         deviceId: device.id,
+
+
                     })
                 )
             }
