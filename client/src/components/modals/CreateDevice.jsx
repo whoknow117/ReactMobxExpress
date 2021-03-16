@@ -3,7 +3,7 @@ import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
 import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
-import {fetchInfos} from "../../http/categoryInfoApi";
+import {createInfoDescription, fetchInfos} from "../../http/categoryInfoApi";
 import {useParams} from "react-router-dom";
 
 const CreateDevice = observer(({show, onHide}) => {
@@ -32,12 +32,12 @@ const CreateDevice = observer(({show, onHide}) => {
     }, [device.selectedType])
 
 
-    // const addInfo = () => {
-    //     setInfo([...info, {title: '', description: '', number: Date.now()}])
-    // }
-    // const removeInfo = (number) => {
-    //     setInfo(info.filter(i => i.number !== number))
-    // }
+    const addInfo = () => {
+        setInfo([...info, {title: '', description: '', number: Date.now()}])
+    }
+    const removeInfo = (number) => {
+        setInfo(info.filter(i => i.number !== number))
+    }
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
@@ -52,12 +52,12 @@ const CreateDevice = observer(({show, onHide}) => {
     //     setInfo([...info, newDescription])
     //
     // }
-    const changeInfo = (i,value,deviceInfoId) => {
+    const changeInfo = (value ) => {
 
 
-        setInfoDescription([...infoDescription, {
+       setInfoDescription([...infoDescription, {
             title: value,
-            deviceInfoId: deviceInfoId
+
         }])
     }
 
@@ -71,9 +71,9 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
         formData.append('categoryId', device.selectedCategory.id)
-        formData.append('info', JSON.stringify(info))
+        // formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
-        console.log(infoDescription)
+        console.log(JSON.stringify(device.info))
         createDevice(formData).then(data => data)
 
     }
@@ -156,26 +156,49 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Form.Control>
                         <hr/>
 
-                        {device.info.map(i => {
+                        <Button onClick={addInfo}  >Добавить новое свойство </Button>
+                        {
+                            info.map(i =>
+                                <Row key={i.number}>
+                                    <Col md={4} className="mt-3">
+                                        <Form.Control
+                                            value={i.title}
 
-                                return (
-                                    <div key={i.id}>
-                                        <div>{i.title}
-                                            {i.id}
 
-                                        </div>
-                                        <input
-                                            onClick={() => {
-                                                device.setSelectedInfo(i)
-                                                console.log(i)
-                                            }
-                                            }
-                                            onChange={(e) => changeInfo( i, e.target.value,i.id )}
+                                            placeholder="Введите название характеристики"
+                                        />
+                                    </Col>
+                                    <Col md={4} className="mt-3">
+                                        <Form.Control
+                                            value={i.description}
 
-                                            type="text"/>
-                                </div>)
-                            }
-                        )}
+                                            placeholder="Введите описание характеристики"
+                                        />
+                                    </Col>
+
+                                    <Col md={4} className="mt-3">
+                                        <Button  >Удалить</Button>
+                                    </Col>
+                                </Row>
+                            )
+                        }
+
+                        {/*{device.info.map(i => {*/}
+
+                        {/*        return (*/}
+                        {/*            <div key={i.id}>*/}
+                        {/*                <div>{i.title}*/}
+                        {/*                    {i.id}*/}
+
+                        {/*                </div>*/}
+                        {/*                <input*/}
+
+                        {/*                    onChange={(e) => addDescription(e.target.value,i.id)}*/}
+
+                        {/*                    type="text"/>*/}
+                        {/*        </div>)*/}
+                        {/*    }*/}
+                        {/*)}*/}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -192,30 +215,3 @@ export default CreateDevice;
 
 
 
-
-{/*<Button  >Добавить новое свойство </Button>*/}
-{/*{*/}
-{/*    info.map(i =>*/}
-{/*        <Row key={i.number}>*/}
-{/*            <Col md={4} className="mt-3">*/}
-{/*                <Form.Control*/}
-{/*                    value={i.title}*/}
-
-
-{/*                    placeholder="Введите название характеристики"*/}
-{/*                />*/}
-{/*            </Col>*/}
-{/*            <Col md={4} className="mt-3">*/}
-{/*                <Form.Control*/}
-{/*                    value={i.description}*/}
-
-{/*                    placeholder="Введите описание характеристики"*/}
-{/*                />*/}
-{/*            </Col>*/}
-
-{/*            <Col md={4} className="mt-3">*/}
-{/*                <Button  >Удалить</Button>*/}
-{/*            </Col>*/}
-{/*        </Row>*/}
-{/*    )*/}
-{/*}*/}
