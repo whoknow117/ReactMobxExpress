@@ -33,7 +33,11 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
     }, [device.selectedType])
 
-
+    const powerCallback = (power) => {
+        if(power.trim !== "") {
+            setPower(power)
+        }
+    }
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}])
     }
@@ -146,9 +150,9 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
                         <Form.Control
-                            onChange={(e) => setPower( e.target.value)}
+                            onChange={(e) => powerCallback(e.target.value)}
                             className="mt-3"
-                            placeholder="Введите цвет"
+                            placeholder="Введите мощьность"
                             type="text"
                         >
 

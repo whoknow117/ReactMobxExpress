@@ -36,6 +36,8 @@ const Filter = ({setColor, setPower}) => {
     const fP = filteredPower()
     const fD = filterTitleDescription()
 
+  console.log(fP)
+
 
 
 
@@ -51,7 +53,11 @@ const Filter = ({setColor, setPower}) => {
         })
         return filtered
     }
-
+    console.log(filteredPower()[0] === "")
+    let pow = filterPower(filteredPower())
+    if(filteredPower()[0] === ""){
+        pow = ""
+    }
     const filter = (arr) => {
         const cash = {}
         const filtered = []
@@ -65,7 +71,7 @@ const Filter = ({setColor, setPower}) => {
     }
 
     const filt = filter(filterTitleDescription())
-    const pow = filterPower(filteredPower())
+
 
     console.log(filt)
 
@@ -82,15 +88,18 @@ const Filter = ({setColor, setPower}) => {
                     }): ""}
                 </div>
 
-                <div className={classes.filterBlock}>
-                    {pow[0] !== undefined || pow[0] !== ""? <div className={classes.title}>Мощьность </div> : ""}
-                    {pow ? pow.map(el => {
-                        return (
+                {pow[0] !== undefined || pow[0]  =="" ?
+                    <div className={classes.filterBlock}>
+                        {pow[0] !== undefined || pow[0] === ""    ? <div className={classes.title}>Мощьность </div> : ""}
+                        {pow[0] !== undefined || pow[0] === "" ? pow.map(el => {
+                            console.log(pow[0])
 
-                            <div key={v1()}  onClick={()=> setPower(el)} className={classes.description}>{el}</div>
-                        )
-                    }): ""}
-                </div>
+                            return (
+
+                                <div key={v1()}  onClick={()=> setPower(el)} className={classes.description}>{el}</div>
+                            )
+                        }): ""}
+                    </div> : ""}
 
 
             </Col>
