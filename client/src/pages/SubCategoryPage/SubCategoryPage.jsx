@@ -14,6 +14,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
 import {useParams} from "react-router-dom";
 import {v1} from "uuid";
+import Filter from "./Filter/Filter";
 
 const SubCategoryPage = observer(() => {
 
@@ -22,7 +23,7 @@ const SubCategoryPage = observer(() => {
     const [color, setColor] = useState('')
     const [power, setPower] = useState('')
 
-    console.log(power)
+
 
     const filterTitleDescription = () => {
         return device.devices.map(el => el.color)
@@ -65,7 +66,7 @@ const SubCategoryPage = observer(() => {
 
     useEffect(() => {
 
-        fetchInfosTypeKey(+typeId).then(data => {
+        fetchInfosTypeKey( typeId).then(data => {
 
             device.setInfo(data)
 
@@ -74,10 +75,10 @@ const SubCategoryPage = observer(() => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [device.selectedType, typeId,power, color])
+    }, [device.selectedType, typeId,color,power])
 
 
-
+    console.log(pow)
 
     return (
         <Container>
@@ -91,29 +92,30 @@ const SubCategoryPage = observer(() => {
                         />
                     )}
                 </Col>
-                <Col className={classes.filter} md={3}>
-                    <div className={classes.filterBlock}>
-                        {filt !== null ? <div className={classes.title}>Цвет </div> : ""}
-                        {filt ? filt.map(el=> {
-                            return (
+                <Filter setColor={setColor} setPower={setPower}/>
+                {/*<Col className={classes.filter} md={3}>*/}
+                {/*    <div className={classes.filterBlock}>*/}
+                {/*        {filt !== [] ? <div className={classes.title}>Цвет </div> : ""}*/}
+                {/*        {filt ? filt.map(el=> {*/}
+                {/*            return (*/}
 
-                                <div key={v1()} onClick={()=> setColor(el)} className={classes.description}>{el}</div>
-                            )
-                        }): ""}
-                            </div>
+                {/*                <div key={v1()} onClick={()=> setColor(el)} className={classes.description}>{el}</div>*/}
+                {/*            )*/}
+                {/*        }): ""}*/}
+                {/*            </div>*/}
 
-                    <div className={classes.filterBlock}>
-                        {pow !== null ? <div className={classes.title}>Мощьность </div> : ""}
-                        {pow ? pow.map(el => {
-                            return (
+                {/*    <div className={classes.filterBlock}>*/}
+                {/*        {pow !==[] ? <div className={classes.title}>Мощьность </div> : ""}*/}
+                {/*        {pow ? pow.map(el => {*/}
+                {/*            return (*/}
 
-                                <div key={v1()}  onClick={()=> setPower(el)} className={classes.description}>{el}</div>
-                            )
-                        }): ""}
-                    </div>
+                {/*                <div key={v1()}  onClick={()=> setPower(el)} className={classes.description}>{el}</div>*/}
+                {/*            )*/}
+                {/*        }): ""}*/}
+                {/*    </div>*/}
 
 
-                            </Col>
+                {/*            </Col>*/}
                             </Row>
                             </Container>
                             );
