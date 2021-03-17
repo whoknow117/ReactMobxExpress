@@ -7,7 +7,7 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId,categoryId, info} = req.body
+            let {name, price, brandId, typeId,color,power,categoryId, info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -16,6 +16,8 @@ class DeviceController {
                 price,
                 brandId,
                 typeId,
+                color,
+                power,
                 categoryId,
                 img: fileName,
 
@@ -23,7 +25,6 @@ class DeviceController {
 
             })
             if (info) {
-
 
 
                 info = JSON.parse(info)
@@ -48,7 +49,7 @@ class DeviceController {
 
     async getAll(req, res, next) {
 
-        let {brandId, typeId,categoryId, limit, page} = req.query
+        let {brandId, typeId,categoryId,color,power, limit, page} = req.query
         let offset = page * limit - limit
         let devices;
 
@@ -78,6 +79,20 @@ class DeviceController {
         if (brandId && typeId && categoryId) {
             devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId}, limit, offset})
         }
+
+        if (!brandId && typeId && !categoryId && color) {
+            devices = await Device.findAndCountAll({where: { typeId,color}, limit, offset})
+        }
+        if (!brandId && typeId && !categoryId && color) {
+            devices = await Device.findAndCountAll({where: { typeId,color}, limit, offset})
+        }
+        if (!brandId && typeId && !categoryId && color && power) {
+            devices = await Device.findAndCountAll({where: { typeId,color,power}, limit, offset})
+        }
+        if (!brandId && typeId && !categoryId && power && !color) {
+            devices = await Device.findAndCountAll({where: { typeId,power}, limit, offset})
+        }
+
 
         return res.json(devices)
     }
