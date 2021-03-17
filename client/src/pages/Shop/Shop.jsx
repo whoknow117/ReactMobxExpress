@@ -7,6 +7,7 @@ import BrandBar from "../../components/BrandBar/BrandBar";
 import DeviceList from "../../components/DeviceList/DeviceList";
 import {fetchBrands, fetchCategories, fetchDevices, fetchInfos, fetchTypes} from "../../http/deviceApi";
 import Pages from "../../components/Pages/Pages";
+import classes from './Shop.module.scss';
 
 
 const Shop = observer(() => {
@@ -18,7 +19,7 @@ const Shop = observer(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null,  null, null,null,null,device.page, 12).then(data => {
+        fetchDevices(null, device.selectedBrand.id,  null, null,null,null,device.page, 12).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
@@ -35,7 +36,7 @@ const Shop = observer(() => {
 
     return (
 
-        <Container>
+        <Container className={classes.container}>
             <Row>
                 <Col className="mt-2" md={3}>
                     <TypeBar/>

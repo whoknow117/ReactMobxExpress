@@ -4,6 +4,7 @@ import {Button, Container, Form, FormControl, Nav, Navbar, NavLink} from "react-
 import {ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../../utils/consts";
 import {observer} from "mobx-react-lite";
 import {useHistory} from 'react-router-dom'
+import classes from './NavBar.module.scss';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
