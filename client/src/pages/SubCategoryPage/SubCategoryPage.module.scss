@@ -2,16 +2,26 @@
 .itemBar {
   width: 100%;
   height: auto;
-
+ 
   .devices {
     display: flex;
+    flex-display: column;
+
+    overflow: hidden;
+    flex-wrap: wrap;
   }
+
   .filter {
     margin-top: 20px;
     border: 1px solid silver;
-    display: flex;
 
+
+    position: relative;
+    .filterBlock {
+      display: flex;
+    }
   }
+
   .description {
     display: flex;
     flex-direction: column;

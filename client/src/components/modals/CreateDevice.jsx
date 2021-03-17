@@ -14,6 +14,8 @@ const CreateDevice = observer(({show, onHide}) => {
     const [value, setValue] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
+    const [color, setColor]= useState('')
+    const [power, setPower]= useState('')
     const [file, setFile] = useState(null)
 
     const params = useParams()
@@ -55,6 +57,8 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
+        formData.append('color', color)
+        formData.append('power', power)
         formData.append('categoryId', device.selectedCategory.id)
         // formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
@@ -133,6 +137,22 @@ const CreateDevice = observer(({show, onHide}) => {
                         >
 
                         </Form.Control>
+                        <Form.Control
+                            onChange={(e) => setColor( e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите цвет"
+                            type="text"
+                        >
+
+                        </Form.Control>
+                        <Form.Control
+                            onChange={(e) => setPower( e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите цвет"
+                            type="text"
+                        >
+
+                        </Form.Control>
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
@@ -149,14 +169,14 @@ const CreateDevice = observer(({show, onHide}) => {
                                         <Form.Control
                                             value={i.title}
 
-                                            onChange={(e)=> changeInfo('title',e.target.value,)}
+                                            onChange={(e)=> changeInfo('title',e.target.value,i.number)}
                                             placeholder="Введите название характеристики"
                                         />
                                     </Col>
                                     <Col md={4} className="mt-3">
                                         <Form.Control
                                             value={i.description}
-                                            onChange={(e)=> changeInfo('description',e.target.value,)}
+                                            onChange={(e)=> changeInfo('description',e.target.value,i.number)}
                                             placeholder="Введите описание характеристики"
                                         />
                                     </Col>
