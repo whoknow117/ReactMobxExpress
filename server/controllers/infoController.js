@@ -2,10 +2,18 @@ const {DeviceInfo} = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class InfoController {
-    // async getAll(req, res) {
-    //     const info = await DeviceInfo.findAll();
-    //     return res.json(info)
-    // }
+
+
+    async create (req, res,next) {
+         try {
+             let {title,typeId } = req.body
+             const info = await DeviceInfo.create({title,typeId})
+             return res.json(info)
+         }
+         catch (e) {
+             return ApiError.badRequest(e.message)
+         }
+    }
 
     async getAllTypeId(req, res) {
         let {typeId} = req.query
@@ -15,7 +23,7 @@ class InfoController {
 
         }
         if (typeId) {
-             info = await DeviceInfo.findAll({where: {typeId}})
+            info = await DeviceInfo.findAll({where: {typeId}})
 
 
         }

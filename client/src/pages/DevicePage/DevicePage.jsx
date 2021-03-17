@@ -37,17 +37,17 @@ const DevicePage  = () => {
             </Row>
             <Row className="d-flex flex-column text-sm-left">
                 <h2>Характеристики</h2>
-                {device.info.map((info,index) =>
-                    <Row
-                        key={info.id}
-                        style={{background: index%2 === 0 ? '#f3f3f3' : '#fff'}}
+                {/*{device.info.map((info,index) =>*/}
+                {/*    <Row*/}
+                {/*        key={info.id}*/}
+                {/*        style={{background: index%2 === 0 ? '#f3f3f3' : '#fff'}}*/}
 
-                    >
-                        {info.title} : {info.description}
+                {/*    >*/}
+                {/*        {info.title} : {info.description}*/}
 
-                    </Row>
+                {/*    </Row>*/}
 
-                )}
+                {/*)}*/}
             </Row>
         </Container>
     );

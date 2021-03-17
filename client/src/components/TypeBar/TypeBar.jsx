@@ -8,7 +8,7 @@ import {SUBCATEGORY_ROUTE} from "../../utils/consts";
 import {useHistory} from "react-router-dom";
 
 
-const TypeBar = observer(() => {
+const TypeBar = observer(() =>  {
 
     const history = useHistory()
 

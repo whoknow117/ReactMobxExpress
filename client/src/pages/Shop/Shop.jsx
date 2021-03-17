@@ -10,7 +10,7 @@ import Pages from "../../components/Pages/Pages";
 
 
 const Shop = observer(() => {
-
+    //
     let {device} = useContext(Context)
 
 
@@ -18,7 +18,7 @@ const Shop = observer(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null,  null, device.page, 12).then(data => {
+        fetchDevices(null, null,  null, null,null,device.page, 12).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })

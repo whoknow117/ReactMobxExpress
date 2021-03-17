@@ -19,6 +19,7 @@ const DeviceItem = observer(({dev}) => {
                 </div>
                 <div>
                     {dev.name}
+                    {dev.price}
                 </div>
 
             </Card>

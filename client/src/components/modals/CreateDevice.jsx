@@ -3,14 +3,22 @@ import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
 import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
+import {createInfoDescription, fetchInfos} from "../../http/categoryInfoApi";
+import {useParams} from "react-router-dom";
 
 const CreateDevice = observer(({show, onHide}) => {
 
     const {device} = useContext(Context)
+    const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
+    const [value, setValue] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
+    const [color, setColor]= useState('')
+    const [power, setPower]= useState('')
     const [file, setFile] = useState(null)
+
+    const params = useParams()
 
 
     useEffect(() => {
@@ -21,34 +29,48 @@ const CreateDevice = observer(({show, onHide}) => {
     }, [])
 
 
+    useEffect(() => {
+        fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
+    }, [device.selectedType])
+
+    const powerCallback = (power) => {
+        if(power.trim !== "") {
+            setPower(power)
+        }
+    }
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}])
     }
     const removeInfo = (number) => {
         setInfo(info.filter(i => i.number !== number))
     }
+
+    const changeInfo = (key, value, number) => {
+        setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+    }
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
-    const changeInfo = (key, value, number) => {
-        setInfo(info.map( i => i.number === number ? {...i, [key]: value} : i))
-    }
-
 
 
     const addDevice = () => {
+
         const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
+        formData.append('color', color)
+        formData.append('power', power)
         formData.append('categoryId', device.selectedCategory.id)
-        formData.append('info', JSON.stringify(info))
-
+        // formData.append('info', JSON.stringify(device.info))
+        formData.append('infoDescription', JSON.stringify(infoDescription))
+        console.log(JSON.stringify(device.info))
         createDevice(formData).then(data => data)
 
     }
+
     return (
         <div>
             <Modal
@@ -119,6 +141,22 @@ const CreateDevice = observer(({show, onHide}) => {
                         >
 
                         </Form.Control>
+                        <Form.Control
+                            onChange={(e) => setColor( e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите цвет"
+                            type="text"
+                        >
+
+                        </Form.Control>
+                        <Form.Control
+                            onChange={(e) => powerCallback(e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите мощьность"
+                            type="text"
+                        >
+
+                        </Form.Control>
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
@@ -126,6 +164,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
                         <hr/>
+
                         <Button onClick={addInfo}>Добавить новое свойство </Button>
                         {
                             info.map(i =>
@@ -134,25 +173,41 @@ const CreateDevice = observer(({show, onHide}) => {
                                         <Form.Control
                                             value={i.title}
 
-                                            onChange={(e) => changeInfo('title', e.target.value, i.number)}
+                                            onChange={(e)=> changeInfo('title',e.target.value,i.number)}
                                             placeholder="Введите название характеристики"
                                         />
                                     </Col>
                                     <Col md={4} className="mt-3">
                                         <Form.Control
                                             value={i.description}
-
-                                            onChange={(e) => changeInfo('description', e.target.value, i.number)}
+                                            onChange={(e)=> changeInfo('description',e.target.value,i.number)}
                                             placeholder="Введите описание характеристики"
                                         />
                                     </Col>
 
                                     <Col md={4} className="mt-3">
-                                        <Button onClick={() => removeInfo(i.number)}>Удалить</Button>
+                                        <Button>Удалить</Button>
                                     </Col>
                                 </Row>
                             )
                         }
+
+                        {/*{device.info.map(i => {*/}
+
+                        {/*        return (*/}
+                        {/*            <div key={i.id}>*/}
+                        {/*                <div>{i.title}*/}
+                        {/*                    {i.id}*/}
+
+                        {/*                </div>*/}
+                        {/*                <input*/}
+
+                        {/*                    onChange={(e) => addDescription(e.target.value,i.id)}*/}
+
+                        {/*                    type="text"/>*/}
+                        {/*        </div>)*/}
+                        {/*    }*/}
+                        {/*)}*/}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -165,3 +220,7 @@ const CreateDevice = observer(({show, onHide}) => {
 });
 
 export default CreateDevice;
+
+
+
+
