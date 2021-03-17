@@ -8,10 +8,10 @@ import {fetchDevices} from "../../../http/deviceApi";
 
 
 
-const Filter = ({setColor, setPower}) => {
+const Filter = ({setColor, setPower, setDeviceType}) => {
 
     useEffect(()=>{
-        fetchDevices(typeId, null, null, null, null,1, 8).then(data => {
+        fetchDevices(typeId, null, null, null, null,null,1, 8).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
@@ -19,8 +19,7 @@ const Filter = ({setColor, setPower}) => {
 
     const {device} = useContext(Context)
     const {typeId} = useParams()
-    // const [color, setColor] = useState('')
-    // const [power, setPower] = useState('')
+
 
 
 
@@ -33,13 +32,34 @@ const Filter = ({setColor, setPower}) => {
         return device.devices.map(el => el.power)
     }
 
+    const changeType = () => {
+        return device.devices.map(el => el.productType)
+    }
+
     const fP = filteredPower()
     const fD = filterTitleDescription()
 
-  console.log(fP)
 
 
 
+
+    const filterType = (arr) => {
+        const cash = {}
+        const filtered = []
+        arr.forEach(el => {
+            if (!cash[el]) {
+                cash[el] = el;
+                filtered.push(el)
+            }
+        })
+        return filtered
+    }
+
+
+    let filteredType = filterType(changeType())
+    if(filteredType[0] === ""){
+        filteredType = ""
+    }
 
 
     const filterPower = (arr) => {
@@ -53,7 +73,7 @@ const Filter = ({setColor, setPower}) => {
         })
         return filtered
     }
-    console.log(filteredPower()[0] === "")
+
     let pow = filterPower(filteredPower())
     if(filteredPower()[0] === ""){
         pow = ""
@@ -73,7 +93,6 @@ const Filter = ({setColor, setPower}) => {
     const filt = filter(filterTitleDescription())
 
 
-    console.log(filt)
 
     return (
         <div>
@@ -92,7 +111,7 @@ const Filter = ({setColor, setPower}) => {
                     <div className={classes.filterBlock}>
                         {pow[0] !== undefined || pow[0] === ""    ? <div className={classes.title}>Мощьность </div> : ""}
                         {pow[0] !== undefined || pow[0] === "" ? pow.map(el => {
-                            console.log(pow[0])
+
 
                             return (
 
@@ -100,7 +119,18 @@ const Filter = ({setColor, setPower}) => {
                             )
                         }): ""}
                     </div> : ""}
+                {filteredType[0] !== undefined || filteredType[0]  !== "" ?
+                    <div className={classes.filterBlock}>
+                        {filteredType[0] !== undefined || filteredType[0] === ""    ? <div className={classes.title}>Тип </div> : ""}
+                        {filteredType[0] !== undefined || filteredType[0] === "" ? filteredType.map(el => {
 
+
+                            return (
+
+                                <div key={v1()}  onClick={()=> setDeviceType(el)} className={classes.description}>{el}</div>
+                            )
+                        }): ""}
+                    </div> : ""}
 
             </Col>
         </div>

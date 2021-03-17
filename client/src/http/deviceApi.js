@@ -51,7 +51,7 @@ export const fetchInfosTypeKey = async (typeId) => {
 
     return data
 }
-export const fetchDevices = async (typeId,brandId,categoryId,color , power,page, limit ) => {
+export const fetchDevices = async (typeId,brandId,categoryId, color , power,productType,page, limit ) => {
     const {data} = await $host.get('api/device',{
         params:{
             typeId,
@@ -59,6 +59,7 @@ export const fetchDevices = async (typeId,brandId,categoryId,color , power,page,
             categoryId,
             color,
             power,
+            productType,
             page,
             limit
         }

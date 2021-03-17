@@ -12,6 +12,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
     const [value, setValue] = useState('')
+    const [productType, setProductType] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [color, setColor]= useState('')
@@ -63,6 +64,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('typeId', device.selectedType.id)
         formData.append('color', color)
         formData.append('power', power)
+        formData.append('productType', productType)
         formData.append('categoryId', device.selectedCategory.id)
         // formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
@@ -153,6 +155,14 @@ const CreateDevice = observer(({show, onHide}) => {
                             onChange={(e) => powerCallback(e.target.value)}
                             className="mt-3"
                             placeholder="Введите мощьность"
+                            type="text"
+                        >
+
+                        </Form.Control>
+                        <Form.Control
+                            onChange={(e) =>setProductType(e.target.value)  }
+                            className="mt-3"
+                            placeholder="Введите тип"
                             type="text"
                         >
 
