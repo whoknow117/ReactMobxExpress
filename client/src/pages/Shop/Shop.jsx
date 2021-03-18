@@ -19,7 +19,7 @@ const Shop = observer(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, device.selectedBrand.id,  null, null,null,null,device.page, device.limit).then(data => {
+        fetchDevices(null, device.selectedBrand.id,  null, null,device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })

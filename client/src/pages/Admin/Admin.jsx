@@ -30,7 +30,7 @@ const Admin = () => {
             <Button onClick={showInfoModal} className="mt-2">Добавить Характеристику</Button>
             <CreateType show={typeVisible} onHide={onHideType}/>
             <CreateBrand show={brandVisible} onHide={onHideBrand}/>
-            {/*<CreateInfo show={infoVisible} onHide={onHideVisible}/>*/}
+            <CreateInfo show={infoVisible} onHide={onHideVisible}/>
             <CreateDevice show={deviceDevice} onHide={onHideDevice}/>
         </Container>
     );

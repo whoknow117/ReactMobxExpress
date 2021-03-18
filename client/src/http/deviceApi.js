@@ -1,15 +1,13 @@
 import {$host, $authHost} from "./index";
 
 
-
-
 export const createType = async (type) => {
     const {data} = await $authHost.post('api/type', type)
     return data
 }
 
 
-export const fetchTypes = async ( ) => {
+export const fetchTypes = async () => {
     const {data} = await $host.get('api/type')
     return data
 }
@@ -23,8 +21,6 @@ export const createCategories = async (category) => {
 }
 
 
-
-
 export const createBrand = async (brand) => {
     const {data} = await $authHost.post('api/brand', brand)
     return data
@@ -32,7 +28,7 @@ export const createBrand = async (brand) => {
 
 
 export const fetchBrands = async () => {
-    const {data} = await $host.get('api/brand' )
+    const {data} = await $host.get('api/brand')
     return data
 }
 
@@ -43,22 +39,20 @@ export const createDevice = async (device) => {
 }
 
 export const fetchInfosTypeKey = async (typeId) => {
-    const {data} = await $host.get('api/info',{
-        params:{
+    const {data} = await $host.get('api/info', {
+        params: {
             typeId
         }
     })
 
     return data
 }
-export const fetchDevices = async (typeId,brandId,categoryId, color , power,productType,page, limit ) => {
-    const {data} = await $host.get('api/device',{
-        params:{
+export const fetchDevices = async (typeId, brandId, categoryId, productType, page, limit) => {
+    const {data} = await $host.get('api/device', {
+        params: {
             typeId,
             brandId,
             categoryId,
-            color,
-            power,
             productType,
             page,
             limit
@@ -67,7 +61,7 @@ export const fetchDevices = async (typeId,brandId,categoryId, color , power,prod
     return data
 }
 
-export const fetchDevice = async (id ) => {
+export const fetchDevice = async (id) => {
     const {data} = await $host.get('api/device/' + id)
     return data
 }
