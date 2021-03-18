@@ -1,4 +1,5 @@
-const {Device, DeviceInfo , DeviceInfoDescription} = require('../models/models')
+
+const {Device, DeviceInfo ,DeviceInfoDescription   } = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
@@ -19,7 +20,7 @@ class DeviceController {
                 productType,
                 categoryId,
                 img: fileName,
-
+                infoDescription
 
 
             })
@@ -32,7 +33,7 @@ class DeviceController {
                     DeviceInfoDescription.create({
                         title: i.title,
                         deviceId: device.id,
-                        deviceInfoId: i.id
+                        deviceInfoId: 1
 
 
                     })

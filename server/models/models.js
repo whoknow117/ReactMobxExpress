@@ -100,8 +100,8 @@ DeviceInfoDescription.belongsTo(Device)
 // DeviceInfo.belongsTo(Device)
 
 
-DeviceInfo.hasMany(DeviceInfoDescription, {foreignKey: 'deviceInfoId'})
-DeviceInfoDescription.belongsTo(DeviceInfo, {foreignKey: 'deviceInfoId'})
+DeviceInfo.hasMany(DeviceInfoDescription)
+DeviceInfoDescription.belongsTo(DeviceInfo)
 
 
 Type.hasMany(DeviceInfo)
@@ -125,5 +125,5 @@ module.exports = {
     Rating,
     User,
     Category,
-
+    DeviceInfoDescription
 }
