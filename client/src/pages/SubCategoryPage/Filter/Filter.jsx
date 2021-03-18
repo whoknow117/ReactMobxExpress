@@ -95,7 +95,7 @@ const Filter = ({setColor, setPower, setDeviceType}) => {
 
 
     return (
-        <div>
+
             <Col className={classes.filter} md={3}>
                 <div className={classes.filterBlock}>
                     {filt[0] !== undefined ? <div className={classes.title}>Цвет </div> : ""}
@@ -133,7 +133,7 @@ const Filter = ({setColor, setPower, setDeviceType}) => {
                     </div> : ""}
 
             </Col>
-        </div>
+
     );
 };
 

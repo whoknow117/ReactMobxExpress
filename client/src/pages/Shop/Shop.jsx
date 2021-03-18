@@ -19,7 +19,7 @@ const Shop = observer(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, device.selectedBrand.id,  null, null,null,null,device.page, 12).then(data => {
+        fetchDevices(null, device.selectedBrand.id,  null, null,null,null,device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
@@ -36,8 +36,8 @@ const Shop = observer(() => {
 
     return (
 
-        <Container className={classes.container}>
-            <Row>
+        <div className={classes.container}>
+            <Row className={classes.row}>
                 <Col className="mt-2" md={3}>
                     <TypeBar/>
                 </Col>
@@ -49,7 +49,7 @@ const Shop = observer(() => {
                 </Col>
 
             </Row>
-        </Container>
+        </div>
 
 
     );

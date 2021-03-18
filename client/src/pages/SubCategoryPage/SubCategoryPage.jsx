@@ -24,45 +24,8 @@ const SubCategoryPage = observer(() => {
     const [power, setPower] = useState('')
     const [productType, setProductType] = useState('')
 
-    console.log(productType)
 
-    // const filterTitleDescription = () => {
-    //     return device.devices.map(el => el.color)
-    // }
-    // const filteredPower = () => {
-    //     return device.devices.map(el => el.power)
-    // }
-    //
-    // const fP = filteredPower()
-    // const fD = filterTitleDescription()
-    //
-    //
-    // const filterPower = (arr) => {
-    //     const cash = {}
-    //     const filtered = []
-    //     arr.forEach(el => {
-    //         if (!cash[el]) {
-    //             cash[el] = el;
-    //             filtered.push(el)
-    //         }
-    //     })
-    //     return filtered
-    // }
-    //
-    // const filter = (arr) => {
-    //     const cash = {}
-    //     const filtered = []
-    //     arr.forEach(el => {
-    //         if (!cash[el]) {
-    //             cash[el] = el;
-    //             filtered.push(el)
-    //         }
-    //     })
-    //     return filtered
-    // }
-    //
-    // const filt = filter(filterTitleDescription())
-    // const pow = filterPower(filteredPower())
+
 
 
     useEffect(() => {
@@ -72,9 +35,10 @@ const SubCategoryPage = observer(() => {
             device.setInfo(data)
 
         })
-        fetchDevices(typeId, null, null, color, power, productType,1, 8).then(data => {
+        fetchDevices(typeId, null, null, color, power, productType,device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
+            device.setSelectedType(device.selectedType)
         })
     }, [device.selectedType, typeId,color,power,productType])
 
@@ -82,21 +46,29 @@ const SubCategoryPage = observer(() => {
 
 
     return (
-        <Container>
+        <div className={classes.container}>
             <Row className={classes.itemBar}>
                 <Col md={9} className={classes.devices}>
-                    {device.devices.map(dev =>
-                        <DeviceItem
-                            key={dev.id}
-                            dev={dev}
+                   <div className={classes.separate}>
+                       <div className={classes.itemCount}>
+                           <div className={classes.name}> {device.selectedType.name}</div>
+                           <div>{device.totalCount}</div>
+                       </div>
+                           <div className={classes.itemWrapper}>
+                           {device.devices.map(dev =>
+                               <DeviceItem
+                                   key={dev.id}
+                                   dev={dev}
 
-                        />
-                    )}
+                               />
+                           )}
+                       </div>
+                   </div>
                 </Col>
                 <Filter setDeviceType={setProductType} setColor={setColor} setPower={setPower}/>
 
                             </Row>
-                            </Container>
+                            </div>
                             );
                         });
 

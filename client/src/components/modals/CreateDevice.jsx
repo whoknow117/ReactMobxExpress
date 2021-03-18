@@ -11,7 +11,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
-    const [value, setValue] = useState('')
+
     const [productType, setProductType] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)

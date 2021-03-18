@@ -5,6 +5,7 @@ import {ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../../ut
 import {observer} from "mobx-react-lite";
 import {useHistory} from 'react-router-dom'
 import classes from './NavBar.module.scss';
+import NavBarLogo from "./NavBarLogo/NavBarLogo";
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -28,9 +29,11 @@ const NavBar = observer(() => {
 
     return (
 
-        <Navbar bg="dark" variant="dark">
-            <Container>
-                <div style={{color: '#fff'}}onClick={shopRoute}>КупиДевайс</div>
+        <Navbar className={classes.navbar}>
+            <Container className={classes.container}>
+                <div onClick={shopRoute}>
+                    <NavBarLogo />
+                </div>
                 {user.isAuth === true ?
                     <Nav className="ml-auto">
                         <Button onClick={admineRoute}  style={{marginRight: '10px'}}>Админ панель</Button>
