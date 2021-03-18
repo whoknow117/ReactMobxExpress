@@ -8,7 +8,7 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId ,productType,categoryId, infoDescription,info} = req.body
+            let {name, price, brandId, typeId , categoryId, infoDescription,info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -17,11 +17,10 @@ class DeviceController {
                 price,
                 brandId,
                 typeId,
-                productType,
                 categoryId,
                 img: fileName,
                 infoDescription,
-
+                info
 
 
             })
@@ -32,6 +31,7 @@ class DeviceController {
 
                 infoDescription.forEach((i,idx1) =>
                     DeviceInfoDescription.create({
+                        key:{idx1},
                         title: i.title,
                         deviceId: device.id,
                         deviceInfoId: (info[idx1].id)
@@ -51,7 +51,7 @@ class DeviceController {
     async getAll(req, res, next) {
 
         try{
-            let {brandId, typeId,categoryId,productType, limit, page} = req.query
+            let {brandId,typeId,categoryId, limit, page} = req.query
             let offset = page * limit - limit
             let devices;
 
@@ -100,9 +100,9 @@ class DeviceController {
             // if (!brandId && typeId && !categoryId && productType &&  power &&  color ) {
             //     devices = await Device.findAndCountAll({where: { typeId,productType,power,color}, limit, offset})
             // }
-            if (!brandId && typeId && !categoryId && productType  ) {
-                devices = await Device.findAndCountAll({where: { typeId,productType}, limit, offset})
-            }
+            // if (!brandId && typeId && !categoryId && productType  ) {
+            //     devices = await Device.findAndCountAll({where: { typeId,productType}, limit, offset})
+            // }
 
 
             return res.json(devices)
@@ -118,7 +118,7 @@ class DeviceController {
         const device = await Device.findOne(
             {
                 where: {id},
-                include: [{model: DeviceInfo, as: 'info'}]
+                include: [{model: DeviceInfoDescription, as: 'infoDescription'}]
             }
         )
         return res.json(device)

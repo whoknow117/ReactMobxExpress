@@ -5,13 +5,14 @@ import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes} fr
 import {observer} from "mobx-react-lite";
 import {createInfoDescription, fetchInfos} from "../../http/categoryInfoApi";
 import {useParams} from "react-router-dom";
+import DescriptionInput from "./DescriptionInput/DescriptionInput";
 
 const CreateDevice = observer(({show, onHide}) => {
 
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
-
+    const [value, setValue] = useState("")
     const [productType, setProductType] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
@@ -26,12 +27,12 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchBrands().then(data => device.setBrands(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchDevices().then(data => device.setDevices(data.rows))
-    }, [])
+    }, [ ])
 
 
     useEffect(() => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
-    }, [device.selectedType])
+    }, [device.selectedType,])
 
 
     // const addInfo = () => {
@@ -45,12 +46,13 @@ const CreateDevice = observer(({show, onHide}) => {
     //     setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
     // }
 
-    const changeInfoDescription = (value   ) => {
-        setInfoDescription([...infoDescription,{
-            title: value,
-
-        } ])
-    }
+    // const changeInfoDescription = () => {
+    //     setInfoDescription([...infoDescription,{
+    //         title: value,
+    //
+    //     } ])
+    //     setValue("")
+    // }
 
     const selectFile = (e) => {
         setFile(e.target.files[0])
@@ -65,12 +67,19 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
-        formData.append('productType', productType)
         formData.append('categoryId', device.selectedCategory.id)
         formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
-
+        console.log(JSON.stringify(infoDescription))
         createDevice(formData).then(data => data)
+        setInfoDescription([])
+    }
+
+    const changeInfoDescription = (value) => {
+        setInfoDescription([...infoDescription,{
+            'title': value,
+
+        } ])
 
     }
 
@@ -145,14 +154,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
 
-                        <Form.Control
-                            onChange={(e) =>setProductType(e.target.value)  }
-                            className="mt-3"
-                            placeholder="Введите тип"
-                            type="text"
-                        >
 
-                        </Form.Control>
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
@@ -161,11 +163,17 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Form.Control>
                         <hr/>
 
-                        {device.info.map(el => <div>
-                            <div>
+                        {device.info.map((el,idx) => <div>
+                            <div key={el.id}>
                                 {el.title}
                                 {el.id}
-                                <input onChange={(e) => changeInfoDescription(e.target.value)} type="text"/>
+                                {/*<input onBlur={changeInfoDescription} onChange={(e) =>setValue(e.target.value)} type="text"/>*/}
+                             <DescriptionInput
+
+                                 changeDescription={changeInfoDescription}
+                             />
+
+
                             </div>
 
                         </div>)}

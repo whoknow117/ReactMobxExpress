@@ -39,10 +39,11 @@ const CreateInfo = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Dropdown className="mt-3">
-                        <Dropdown.Toggle> {"Выберете тип"} </Dropdown.Toggle>
+                            <Dropdown.Toggle> {device.selectedType.name || "Выберете тип"} </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {device.types.map(type =>
                                 <Dropdown.Item
+
                                     key={type.id}
                                     onClick={() => device.setSelectedType(type)}
                                 >
