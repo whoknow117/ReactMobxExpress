@@ -1,0 +1,126 @@
+
+
+
+.headerLogo {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 240px;
+  z-index: 140;
+  height: 80px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 12px;
+  &__icon {
+    position: absolute;
+    z-index: 120;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    flex-basis: 70%;
+    height: 70px;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 30px;
+      height: 18px;
+      background: #fff;
+      right: -10px;
+      bottom: 38%;
+    }
+    .image {
+      width: 38px;
+      position: absolute;
+      transform: rotate(-435deg);
+      top: 0px;
+      left: 4px;
+      height: 30px;
+      img {
+        width: 100%;
+      }
+    }
+    svg {
+      width: 64px;
+      height: 64px;
+      fill: orangered;
+      background: transparent;
+    }
+  }
+
+  &__text {
+
+    z-index: 122;
+    font-family: Monserrat, sans-serif;
+    letter-spacing: 3px;
+    color: #242424;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-left: 50px;
+    .txt {
+      margin-left:5px;
+    }
+    .eSpan{
+      display: block;
+      position: absolute;
+      width: 12px;
+      height: 2px;
+      background:orangered;
+      top: calc(43% - 1px);
+      left:calc(50% - 2px);
+      &::before,
+      &::after{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 2px;
+        background: inherit;
+        top: calc(50% - 1px);
+
+      }
+      &::before {
+        transform: translateY(-5px);
+      }
+      &::after{
+        transform: translateY(6px);
+      }
+    }
+
+
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      width:65%;
+
+
+      color: #303030;
+
+      right: 0;
+      top: 66%;
+      font-size: .4rem;
+
+      z-index: -1;
+    }
+
+
+  }
+}
+
+.menuBtnActive {
+  span{
+    &:before {
+      transform: rotate(35deg);
+    }
+  }
+}
+.collapsed {
+  background: #000;
+}
+

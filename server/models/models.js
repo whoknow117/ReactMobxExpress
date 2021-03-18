@@ -32,11 +32,9 @@ const Device = sequelize.define('device', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     price: {type: DataTypes.INTEGER, allowNull: false},
     rating: {type: DataTypes.INTEGER, defaultValue: 0},
-    color: {type: DataTypes.STRING, allowNull: true},
-    made: {type: DataTypes.STRING, allowNull: true},
+
     productType: {type: DataTypes.STRING, allowNull: true},
-    diametr: {type: DataTypes.STRING, allowNull: true},
-    power: {type: DataTypes.STRING, allowNull: true},
+
     img: {type: DataTypes.STRING, allowNull: false},
 
 })
@@ -58,15 +56,14 @@ const Rating = sequelize.define('rating', {
 const DeviceInfo = sequelize.define('device_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
-    description: {type: DataTypes.STRING, allowNull: false}
 })
 
-// const DeviceInfoDescription = sequelize.define('device_info_description', {
-//     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-//     title: {type: DataTypes.STRING, allowNull: false},
-//
-//
-// })
+const DeviceInfoDescription = sequelize.define('device_info_description', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    title: {type: DataTypes.STRING, allowNull: false},
+
+
+})
 
 
 User.hasOne(Basket)
@@ -96,15 +93,15 @@ Rating.belongsTo(Device)
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
-// Device.hasMany(DeviceInfoDescription, {as: 'infoDescription'})
-// DeviceInfoDescription.belongsTo(Device)
+Device.hasMany(DeviceInfoDescription, {as: 'infoDescription'})
+DeviceInfoDescription.belongsTo(Device)
 
-Device.hasMany(DeviceInfo, {as: 'info'})
-DeviceInfo.belongsTo(Device)
+// Device.hasMany(DeviceInfo, {as: 'info'})
+// DeviceInfo.belongsTo(Device)
 
 
-// DeviceInfo.hasMany(DeviceInfoDescription, {foreignKey: 'deviceInfoId'})
-// DeviceInfoDescription.belongsTo(DeviceInfo, {foreignKey: 'deviceInfoId'})
+DeviceInfo.hasMany(DeviceInfoDescription)
+DeviceInfoDescription.belongsTo(DeviceInfo)
 
 
 Type.hasMany(DeviceInfo)
@@ -128,5 +125,5 @@ module.exports = {
     Rating,
     User,
     Category,
-
+    DeviceInfoDescription
 }

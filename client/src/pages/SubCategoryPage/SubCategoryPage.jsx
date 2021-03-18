@@ -22,46 +22,10 @@ const SubCategoryPage = observer(() => {
     const {typeId} = useParams()
     const [color, setColor] = useState('')
     const [power, setPower] = useState('')
+    const [productType, setProductType] = useState('')
 
 
 
-    const filterTitleDescription = () => {
-        return device.devices.map(el => el.color)
-    }
-    const filteredPower = () => {
-        return device.devices.map(el => el.power)
-    }
-
-    const fP = filteredPower()
-    const fD = filterTitleDescription()
-
-
-    const filterPower = (arr) => {
-        const cash = {}
-        const filtered = []
-        arr.forEach(el => {
-            if (!cash[el]) {
-                cash[el] = el;
-                filtered.push(el)
-            }
-        })
-        return filtered
-    }
-
-    const filter = (arr) => {
-        const cash = {}
-        const filtered = []
-        arr.forEach(el => {
-            if (!cash[el]) {
-                cash[el] = el;
-                filtered.push(el)
-            }
-        })
-        return filtered
-    }
-
-    const filt = filter(filterTitleDescription())
-    const pow = filterPower(filteredPower())
 
 
     useEffect(() => {
@@ -71,53 +35,40 @@ const SubCategoryPage = observer(() => {
             device.setInfo(data)
 
         })
-        fetchDevices(typeId, null, null, color, power,1, 8).then(data => {
+        fetchDevices(typeId, null, null, color, power, productType,device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
+            device.setSelectedType(device.selectedType)
         })
-    }, [device.selectedType, typeId,color,power])
+    }, [device.selectedType, typeId,color,power,productType])
 
 
-    console.log(pow)
+
 
     return (
-        <Container>
+        <div className={classes.container}>
             <Row className={classes.itemBar}>
                 <Col md={9} className={classes.devices}>
-                    {device.devices.map(dev =>
-                        <DeviceItem
-                            key={dev.id}
-                            dev={dev}
+                   <div className={classes.separate}>
+                       <div className={classes.itemCount}>
+                           <div className={classes.name}> {device.selectedType.name}</div>
+                           <div>{device.totalCount}</div>
+                       </div>
+                           <div className={classes.itemWrapper}>
+                           {device.devices.map(dev =>
+                               <DeviceItem
+                                   key={dev.id}
+                                   dev={dev}
 
-                        />
-                    )}
+                               />
+                           )}
+                       </div>
+                   </div>
                 </Col>
-                <Filter setColor={setColor} setPower={setPower}/>
-                {/*<Col className={classes.filter} md={3}>*/}
-                {/*    <div className={classes.filterBlock}>*/}
-                {/*        {filt !== [] ? <div className={classes.title}>Цвет </div> : ""}*/}
-                {/*        {filt ? filt.map(el=> {*/}
-                {/*            return (*/}
+                <Filter setDeviceType={setProductType} setColor={setColor} setPower={setPower}/>
 
-                {/*                <div key={v1()} onClick={()=> setColor(el)} className={classes.description}>{el}</div>*/}
-                {/*            )*/}
-                {/*        }): ""}*/}
-                {/*            </div>*/}
-
-                {/*    <div className={classes.filterBlock}>*/}
-                {/*        {pow !==[] ? <div className={classes.title}>Мощьность </div> : ""}*/}
-                {/*        {pow ? pow.map(el => {*/}
-                {/*            return (*/}
-
-                {/*                <div key={v1()}  onClick={()=> setPower(el)} className={classes.description}>{el}</div>*/}
-                {/*            )*/}
-                {/*        }): ""}*/}
-                {/*    </div>*/}
-
-
-                {/*            </Col>*/}
                             </Row>
-                            </Container>
+                            </div>
                             );
                         });
 

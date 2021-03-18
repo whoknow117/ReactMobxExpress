@@ -11,11 +11,11 @@ const CreateDevice = observer(({show, onHide}) => {
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
-    const [value, setValue] = useState('')
+
+    const [productType, setProductType] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
-    const [color, setColor]= useState('')
-    const [power, setPower]= useState('')
+
     const [file, setFile] = useState(null)
 
     const params = useParams()
@@ -33,21 +33,25 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
     }, [device.selectedType])
 
-    const powerCallback = (power) => {
-        if(power.trim !== "") {
-            setPower(power)
-        }
-    }
-    const addInfo = () => {
-        setInfo([...info, {title: '', description: '', number: Date.now()}])
-    }
-    const removeInfo = (number) => {
-        setInfo(info.filter(i => i.number !== number))
+
+    // const addInfo = () => {
+    //     setInfo([...info, {title: '', description: '', number: Date.now()}])
+    // }
+    // const removeInfo = (number) => {
+    //     setInfo(info.filter(i => i.number !== number))
+    // }
+
+    // const changeInfo = (key, value, number) => {
+    //     setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+    // }
+
+    const changeInfoDescription = (value   ) => {
+        setInfoDescription([...infoDescription,{
+            title: value,
+
+        } ])
     }
 
-    const changeInfo = (key, value, number) => {
-        setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
-    }
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
@@ -61,12 +65,11 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
-        formData.append('color', color)
-        formData.append('power', power)
+        formData.append('productType', productType)
         formData.append('categoryId', device.selectedCategory.id)
-        // formData.append('info', JSON.stringify(device.info))
+        formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
-        console.log(JSON.stringify(device.info))
+
         createDevice(formData).then(data => data)
 
     }
@@ -141,18 +144,11 @@ const CreateDevice = observer(({show, onHide}) => {
                         >
 
                         </Form.Control>
-                        <Form.Control
-                            onChange={(e) => setColor( e.target.value)}
-                            className="mt-3"
-                            placeholder="Введите цвет"
-                            type="text"
-                        >
 
-                        </Form.Control>
                         <Form.Control
-                            onChange={(e) => powerCallback(e.target.value)}
+                            onChange={(e) =>setProductType(e.target.value)  }
                             className="mt-3"
-                            placeholder="Введите мощьность"
+                            placeholder="Введите тип"
                             type="text"
                         >
 
@@ -165,32 +161,41 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Form.Control>
                         <hr/>
 
-                        <Button onClick={addInfo}>Добавить новое свойство </Button>
-                        {
-                            info.map(i =>
-                                <Row key={i.number}>
-                                    <Col md={4} className="mt-3">
-                                        <Form.Control
-                                            value={i.title}
+                        {device.info.map(el => <div>
+                            <div>
+                                {el.title}
+                                {el.id}
+                                <input onChange={(e) => changeInfoDescription(e.target.value)} type="text"/>
+                            </div>
 
-                                            onChange={(e)=> changeInfo('title',e.target.value,i.number)}
-                                            placeholder="Введите название характеристики"
-                                        />
-                                    </Col>
-                                    <Col md={4} className="mt-3">
-                                        <Form.Control
-                                            value={i.description}
-                                            onChange={(e)=> changeInfo('description',e.target.value,i.number)}
-                                            placeholder="Введите описание характеристики"
-                                        />
-                                    </Col>
+                        </div>)}
 
-                                    <Col md={4} className="mt-3">
-                                        <Button>Удалить</Button>
-                                    </Col>
-                                </Row>
-                            )
-                        }
+                        {/*<Button onClick={addInfo}>Добавить новое свойство </Button>*/}
+                        {/*{*/}
+                        {/*    info.map(i =>*/}
+                        {/*        <Row key={i.number}>*/}
+                        {/*            <Col md={4} className="mt-3">*/}
+                        {/*                <Form.Control*/}
+                        {/*                    value={i.title}*/}
+
+                        {/*                    onChange={(e)=> changeInfo('title',e.target.value,i.number)}*/}
+                        {/*                    placeholder="Введите название характеристики"*/}
+                        {/*                />*/}
+                        {/*            </Col>*/}
+                        {/*            <Col md={4} className="mt-3">*/}
+                        {/*                <Form.Control*/}
+                        {/*                    value={i.description}*/}
+                        {/*                    onChange={(e)=> changeInfo('description',e.target.value,i.number)}*/}
+                        {/*                    placeholder="Введите описание характеристики"*/}
+                        {/*                />*/}
+                        {/*            </Col>*/}
+
+                        {/*            <Col md={4} className="mt-3">*/}
+                        {/*                <Button>Удалить</Button>*/}
+                        {/*            </Col>*/}
+                        {/*        </Row>*/}
+                        {/*    )*/}
+                        {/*}*/}
 
                         {/*{device.info.map(i => {*/}
 
