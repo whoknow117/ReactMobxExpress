@@ -22,7 +22,7 @@ const NavBar = observer(() => {
 
     const admineRoute = () => {
         history.push(ADMIN_ROUTE)
-        console.log(user)
+
     }
 
     const shopRoute = () => {history.push(SHOP_ROUTE)}

@@ -11,7 +11,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
-
+    const [value, setValue] = useState("")
     const [productType, setProductType] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
@@ -45,7 +45,7 @@ const CreateDevice = observer(({show, onHide}) => {
     //     setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
     // }
 
-    const changeInfoDescription = (value   ) => {
+    const changeInfoDescription = () => {
         setInfoDescription([...infoDescription,{
             title: value,
 
@@ -65,7 +65,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
-        formData.append('productType', productType)
+
         formData.append('categoryId', device.selectedCategory.id)
         formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
@@ -145,14 +145,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
 
-                        <Form.Control
-                            onChange={(e) =>setProductType(e.target.value)  }
-                            className="mt-3"
-                            placeholder="Введите тип"
-                            type="text"
-                        >
 
-                        </Form.Control>
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
@@ -165,7 +158,7 @@ const CreateDevice = observer(({show, onHide}) => {
                             <div>
                                 {el.title}
                                 {el.id}
-                                <input onChange={(e) => changeInfoDescription(e.target.value)} type="text"/>
+                                <input onBlur={changeInfoDescription} onChange={(e) =>setValue(e.target.value)} type="text"/>
                             </div>
 
                         </div>)}

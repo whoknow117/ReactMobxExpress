@@ -11,7 +11,7 @@ import {fetchDevices} from "../../../http/deviceApi";
 const Filter = ({setColor, setPower, setDeviceType}) => {
 
     useEffect(()=>{
-        fetchDevices(typeId, null, null, null, null,null,1, 8).then(data => {
+        fetchDevices(typeId, null, null, 1, 8).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })

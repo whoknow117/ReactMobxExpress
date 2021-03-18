@@ -3,12 +3,10 @@ import classes from './SubCategoryPage.module.scss'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {
-    fetchBrands,
-    fetchCategories,
-    fetchDevices,
 
+    fetchDevices,
     fetchInfosTypeKey,
-    fetchTypes
+
 } from "../../http/deviceApi";
 import {Col, Container, Row} from "react-bootstrap";
 import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
@@ -20,29 +18,40 @@ const SubCategoryPage = observer(() => {
 
     const {device} = useContext(Context)
     const {typeId} = useParams()
-    const [color, setColor] = useState('')
-    const [power, setPower] = useState('')
-    const [productType, setProductType] = useState('')
 
 
 
-
+    console.log(typeId)
 
     useEffect(() => {
 
-        fetchInfosTypeKey( typeId).then(data => {
+        fetchInfosTypeKey(typeId).then(data => {
 
             device.setInfo(data)
 
         })
-        fetchDevices(typeId, null, null, color, power, productType,device.page, device.limit).then(data => {
+        fetchDevices(typeId, null, null,device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
-            device.setSelectedType(device.selectedType)
+
         })
-    }, [device.selectedType, typeId,color,power,productType])
+    }, [ ])
 
+    useEffect(() => {
 
+        fetchInfosTypeKey(typeId).then(data => {
+
+            device.setInfo(data)
+
+        })
+        fetchDevices(typeId, null, null,device.page, device.limit).then(data => {
+            device.setDevices(data.rows)
+            device.setTotalCount(data.count)
+
+        })
+    }, [typeId,device.selectedType, typeId,device.selectedType.id ])
+
+    console.log(JSON.stringify(device.devices))
 
 
     return (
@@ -65,7 +74,7 @@ const SubCategoryPage = observer(() => {
                        </div>
                    </div>
                 </Col>
-                <Filter setDeviceType={setProductType} setColor={setColor} setPower={setPower}/>
+                {/*<Filter setDeviceType={setProductType} setColor={setColor} setPower={setPower}/>*/}
 
                             </Row>
                             </div>
