@@ -48,5 +48,19 @@
       flex-direction: column;
       border: 1px solid silver;
     }
+
+  }
+
+}
+.wrapp {
+  display: flex;
+  .title {
+
+
+  }
+  .description {
+    margin-left: 10px;
+    border: none;
+    color: darkgray;
   }
 }

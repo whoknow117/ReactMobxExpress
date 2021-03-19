@@ -13,6 +13,7 @@ import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
 import {useParams} from "react-router-dom";
 import {v1} from "uuid";
 import Filter from "./Filter/Filter";
+import {fetchInfoDescription} from "../../http/categoryInfoApi";
 
 const SubCategoryPage = observer(() => {
 
@@ -21,7 +22,9 @@ const SubCategoryPage = observer(() => {
 
 
 
-    console.log(typeId)
+
+
+
 
     useEffect(() => {
 
@@ -30,18 +33,9 @@ const SubCategoryPage = observer(() => {
             device.setInfo(data)
 
         })
-        fetchDevices(typeId, null, null,device.page, device.limit).then(data => {
-            device.setDevices(data.rows)
-            device.setTotalCount(data.count)
 
-        })
-    }, [ ])
-
-    useEffect(() => {
-
-        fetchInfosTypeKey(typeId).then(data => {
-
-            device.setInfo(data)
+        fetchInfoDescription().then(data => {
+            device.setInfoDescription(data)
 
         })
         fetchDevices(typeId, null, null,device.page, device.limit).then(data => {
@@ -49,9 +43,28 @@ const SubCategoryPage = observer(() => {
             device.setTotalCount(data.count)
 
         })
-    }, [typeId,device.selectedType, typeId,device.selectedType.id ])
+    }, [typeId,device.selectedType, typeId,device.selectedType.id,   ])
 
-    console.log(JSON.stringify(device.devices))
+
+
+    let descrArr = JSON.stringify(device.infoDescription)
+
+
+    const filter = (arr) => {
+        const cash = {}
+        const filtered = []
+        arr.forEach((el, idx) => {
+            if(!cash[el.title]) {
+                cash[el.title] = el;
+                filtered.push(el)
+            }
+        })
+        return filtered
+    }
+
+    let newArr = filter(device.infoDescription)
+
+    console.log(JSON.stringify(newArr))
 
 
     return (
@@ -74,7 +87,21 @@ const SubCategoryPage = observer(() => {
                        </div>
                    </div>
                 </Col>
-                {/*<Filter setDeviceType={setProductType} setColor={setColor} setPower={setPower}/>*/}
+                {/*<Filter  />*/}
+                <Col md={3} >
+
+                    {device.info.map(i => {
+                        return <div className={classes.wrapp}>
+                            <div className={classes.title}>
+                                {i.title}
+                            </div>
+                            <div className={classes.description}>
+                                {newArr.map(el => el.deviceInfoId === i.id ? <div key={el.id}>{el.title}</div> : "") }
+                            </div>
+
+                        </div>
+                    }) }
+                </Col>
 
                             </Row>
                             </div>

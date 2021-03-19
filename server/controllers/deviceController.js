@@ -82,27 +82,7 @@ class DeviceController {
                 devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId}, limit, offset})
             }
 
-            // if (!brandId && typeId && !categoryId && color) {
-            //     devices = await Device.findAndCountAll({where: { typeId,color}, limit, offset})
-            // }
-            // if (!brandId && typeId && !categoryId && color) {
-            //     devices = await Device.findAndCountAll({where: { typeId,color}, limit, offset})
-            // }
-            // if (!brandId && typeId && !categoryId && color && power) {
-            //     devices = await Device.findAndCountAll({where: { typeId,color,power}, limit, offset})
-            // }
-            // if (!brandId && typeId && !categoryId && power && !color) {
-            //     devices = await Device.findAndCountAll({where: { typeId,power}, limit, offset})
-            // }
-            // if (!brandId && typeId && !categoryId && productType && !power && !color ) {
-            //     devices = await Device.findAndCountAll({where: { typeId,productType}, limit, offset})
-            // }
-            // if (!brandId && typeId && !categoryId && productType &&  power &&  color ) {
-            //     devices = await Device.findAndCountAll({where: { typeId,productType,power,color}, limit, offset})
-            // }
-            // if (!brandId && typeId && !categoryId && productType  ) {
-            //     devices = await Device.findAndCountAll({where: { typeId,productType}, limit, offset})
-            // }
+
 
 
             return res.json(devices)
