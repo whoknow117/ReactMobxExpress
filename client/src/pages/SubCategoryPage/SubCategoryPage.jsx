@@ -42,79 +42,62 @@ const SubCategoryPage = observer(() => {
 
     let descrArr = JSON.stringify(device.infoDescription)
 
-    // let filteredArr = (arr,value  )=>{
-    //     const cash = {}
-    //     const filtered = []
-    //     arr.forEach(el => {
-    //         if(  === value  ) {
-    //             filtered.push(el)
-    //         }
-    //     } )
-    //
-    //     return filtered
-    // }
+    const filters = (arr) => {
+        const cash = {}
+        const filtered = []
+        arr.forEach( el => {
+            if(!cash[el.title]){
+                filtered.push(el)
+            }
+        })
+        return filtered
+    }
 
-    // let newArr = filteredArr(device.infoDescription, "Цвет" )
-
-
-    // console.log(JSON.stringify(device.infoDescription) )
-
-
-    //
-    // const filt = (arr) => {
-    //     const cash = {}
-    //     const filtered = []
-    //     arr.forEach(el =>{
-    //         if(!cash[el.title]) {
-    //              filtered.push(el)
-    //         }
-    //     })
-    //     return filtered
-    // }
-    //  let res = JSON.stringify(filt(device.infoDescription))
-    // console.log(res)
-
-    // const filter = (arr, value) => {
-    //    return arr.filter(el => el.title === value)
-    // }
-    // let fill = filter(device.infoDescription, "Цвет")
-    // console.log(filter )
+    let filteredArray;
 
 
 
 
-    //console.log(strValue)
-
-
-    // const getId = (arr, value) => {
-    //
-    //     let filt = arr.filter(el => el.title === value)
-    //     let mapArr = filt.map(el => el.deviceId)
-    //
-    //     return mapArr
-    // }
-    // const asd = getId(device.infoDescription, strValue)
-    // console.log(asd)
-    // const getIdCallback = (title) => {
-    //     device.setValue(title)
-    //     getId(device.infoDescription, strValue)
-    // }
 
 
 
 
-    const [value, setValue] = useState('')
-    //console.log( newArray)
+
+const [value,setValue] = useState("")
+
+
+
 useEffect(()=> {
+
+
     let strValue = value
     let filteredArr = (arr,value )=>{
         return arr.filter( el => el.title === value)
     }
-
+    console.log(strValue)
     let newArray = filteredArr(device.infoDescription, strValue ).map(el =>{
-        debugger
+
         return el.deviceId
     } )
+    // const filter = (arr) => {
+    //     const cash = {}
+    //     const filtered = []
+    //     arr.forEach((el, idx) => {
+    //         if (!cash[el.title]) {
+    //             cash[el.title] = el;
+    //             filtered.push(el)
+    //         }
+    //     })
+    //     return filtered
+    // }
+    //
+    // let newArr = filter(device.infoDescription)
+
+    console.log(newArray)
+    console.log(JSON.stringify(newArr))
+}, [value])
+
+
     const filter = (arr) => {
         const cash = {}
         const filtered = []
@@ -129,8 +112,6 @@ useEffect(()=> {
 
     let newArr = filter(device.infoDescription)
 
-    console.log(JSON.stringify(newArray))
-}, [value])
 
     return (
         <div className={classes.container}>
@@ -161,7 +142,7 @@ useEffect(()=> {
                                 {i.title}
                             </div>
                             <div className={classes.description}>
-                                {device.infoDescription.map(el => el.deviceInfoId === i.id ?
+                                {newArr.map(el => el.deviceInfoId === i.id ?
                                     <div
                                         key={el.id}
                                         onClick={() => setValue(el.title)}
