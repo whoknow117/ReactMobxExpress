@@ -55,12 +55,12 @@ class DeviceController {
     async getAll(req, res, next) {
 
         try{
-            let {brandId,typeId,categoryId, limit, page} = req.query
+            let {brandId,typeId,categoryId,  limit, page} = req.query
 
             let offset = page * limit - limit
             let devices;
 
-            let arrayOfTaskId = ['1', '2', '3'];
+
 
             if (!brandId && !typeId) {
                 devices = await Device.findAndCountAll({ limit, offset})
@@ -90,17 +90,18 @@ class DeviceController {
             }
 
 
-            if ( arrayOfTaskId   &&  !brandId &&   !typeId && !categoryId  ) {
+            if ( true   &&  !brandId &&   !typeId && !categoryId  ) {
 
                 devices = await Device.findAndCountAll({where: {
                     id: {
-                        [Op.or]: [1,7,3]
+                        [Op.or]: [1,7,2,4,5]
                     }
                     },limit,offset}).then(function(result) {
                         return res.json(result)
                 })
 
             }
+
 
             //
             // Tasks.findAll({
