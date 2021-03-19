@@ -42,23 +42,73 @@ const SubCategoryPage = observer(() => {
 
 
     let descrArr = JSON.stringify(device.infoDescription)
-    console.log(descrArr)
 
-    const filter = (arr) => {
-        const cash = {}
-        const filtered = []
-        arr.forEach((el, idx) => {
-            if (!cash[el.title]) {
-                cash[el.title] = el;
-                filtered.push(el)
-            }
-        })
-        return filtered
+
+    let filteredArr = (arr,value )=>{
+        return arr.filter( el => el.title === value)
     }
 
-    let newArr = filter(device.infoDescription)
+    let newArr = filteredArr(device.infoDescription,"Китай")
+    let mapArr = newArr.map(el => el.deviceId)
 
-    console.log(JSON.stringify(newArr))
+    console.log( mapArr )
+
+
+    // let filteredArr = (arr,value  )=>{
+    //     const cash = {}
+    //     const filtered = []
+    //     arr.forEach(el => {
+    //         if(  === value  ) {
+    //             filtered.push(el)
+    //         }
+    //     } )
+    //
+    //     return filtered
+    // }
+
+
+    // let newArr = filteredArr(device.infoDescription, "Цвет" )
+
+
+    console.log(JSON.stringify(device.infoDescription) )
+
+
+
+    //
+    // const filt = (arr) => {
+    //     const cash = {}
+    //     const filtered = []
+    //     arr.forEach(el =>{
+    //         if(!cash[el.title]) {
+    //              filtered.push(el)
+    //         }
+    //     })
+    //     return filtered
+    // }
+    //  let res = JSON.stringify(filt(device.infoDescription))
+    // console.log(res)
+
+    // const filter = (arr, value) => {
+    //    return arr.filter(el => el.title === value)
+    // }
+    // let fill = filter(device.infoDescription, "Цвет")
+    // console.log(filter )
+
+    // const filter = (arr) => {
+    //     const cash = {}
+    //     const filtered = []
+    //     arr.forEach((el, idx) => {
+    //         if (!cash[el.title]) {
+    //             cash[el.title] = el;
+    //             filtered.push(el)
+    //         }
+    //     })
+    //     return filtered
+    // }
+    //
+    // let newArr = filter(device.infoDescription)
+
+
 
 
     return (
@@ -90,10 +140,14 @@ const SubCategoryPage = observer(() => {
                                 {i.title}
                             </div>
                             <div className={classes.description}>
-                                {newArr.map(el => el.deviceInfoId === i.id ?
-                                    <div
-                                        key={el.id}>{el.title}
-                                    </div> : "")}
+                                {/*{newArr.map(el => el.deviceInfoId === i.id ?*/}
+                                {/*    <div*/}
+                                {/*        key={el.id}>{el.title}*/}
+                                {/*        {el.deviceId}*/}
+                                {/*        <div>*/}
+                                {/*            {el.deviceInfoId}*/}
+                                {/*        </div>*/}
+                                {/*    </div> : "")}*/}
                             </div>
 
                         </div>
