@@ -16,7 +16,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const [productType, setProductType] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
-
+    const [clear,setClear] = useState(false)
     const [file, setFile] = useState(null)
 
     const params = useParams()
@@ -73,6 +73,7 @@ const CreateDevice = observer(({show, onHide}) => {
         console.log(JSON.stringify(infoDescription))
         createDevice(formData).then(data => data)
         setInfoDescription([])
+        setClear(true)
     }
 
     const changeInfoDescription = (value) => {

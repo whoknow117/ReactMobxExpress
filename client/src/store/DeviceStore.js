@@ -8,6 +8,7 @@ export default class DeviceStore {
         this._devices = []
         this._categories = []
         this._info = []
+        this._infoDescription = []
         this._selectedType = {}
         this._selectedBrand = {}
         this._selectedCategory = {}
@@ -22,6 +23,11 @@ export default class DeviceStore {
     setSelectedInfo(selectedInfo) {
         this._selectedInfo = selectedInfo
     }
+
+    setInfoDescription(infoDescription) {
+        this._infoDescription = infoDescription
+    }
+
     setInfo(info) {
         this._info = info
     }
@@ -66,6 +72,9 @@ export default class DeviceStore {
         this._categories = categories
     }
 
+    get infoDescription() {
+        return this._infoDescription
+    }
 
     get info() {
         return this._info

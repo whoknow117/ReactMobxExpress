@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const DescriptionInput = ({changeDescription}) => {
+const DescriptionInput = ({changeDescription, clear}) => {
 
 
 
@@ -11,7 +11,7 @@ const DescriptionInput = ({changeDescription}) => {
 
     const changeCallback = () => {
         changeDescription(value)
-
+         setValue("")
 
     }
     return (
