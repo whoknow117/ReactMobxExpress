@@ -4,4 +4,5 @@ const router = new Router()
 
 router.get('/', infoDescriptionController.getAll)
 
+
 module.exports = router
