@@ -38,13 +38,9 @@ const SubCategoryPage = observer(() => {
             device.setTotalCount(data.count)
 
         })
-    }, [typeId, device.selectedType, typeId, device.selectedType.id, device.value])
-
+    }, [ typeId, device.selectedType, typeId, device.selectedType.id, device.value])
 
     let descrArr = JSON.stringify(device.infoDescription)
-
-
-
 
     // let filteredArr = (arr,value  )=>{
     //     const cash = {}
@@ -58,12 +54,10 @@ const SubCategoryPage = observer(() => {
     //     return filtered
     // }
 
-
     // let newArr = filteredArr(device.infoDescription, "Цвет" )
 
 
     // console.log(JSON.stringify(device.infoDescription) )
-
 
 
     //
@@ -86,6 +80,41 @@ const SubCategoryPage = observer(() => {
     // let fill = filter(device.infoDescription, "Цвет")
     // console.log(filter )
 
+
+
+
+    //console.log(strValue)
+
+
+    // const getId = (arr, value) => {
+    //
+    //     let filt = arr.filter(el => el.title === value)
+    //     let mapArr = filt.map(el => el.deviceId)
+    //
+    //     return mapArr
+    // }
+    // const asd = getId(device.infoDescription, strValue)
+    // console.log(asd)
+    // const getIdCallback = (title) => {
+    //     device.setValue(title)
+    //     getId(device.infoDescription, strValue)
+    // }
+
+
+
+
+    const [value, setValue] = useState('')
+    //console.log( newArray)
+useEffect(()=> {
+    let strValue = value
+    let filteredArr = (arr,value )=>{
+        return arr.filter( el => el.title === value)
+    }
+
+    let newArray = filteredArr(device.infoDescription, strValue ).map(el =>{
+        debugger
+        return el.deviceId
+    } )
     const filter = (arr) => {
         const cash = {}
         const filtered = []
@@ -100,21 +129,8 @@ const SubCategoryPage = observer(() => {
 
     let newArr = filter(device.infoDescription)
 
-
-    let strValue = JSON.stringify(device.value)
-
-
-
-    console.log(strValue)
-
-    let filteredArr = (arr,value )=>{
-        return arr.filter( el => el.title === value)
-    }
-
-    let newArray = filteredArr(device.infoDescription,"Китай")
-    let mapArr = newArray.map(el => el.deviceId)
-    //
-    // console.log( mapArr )
+    console.log(JSON.stringify(newArray))
+}, [value])
 
     return (
         <div className={classes.container}>
@@ -145,10 +161,10 @@ const SubCategoryPage = observer(() => {
                                 {i.title}
                             </div>
                             <div className={classes.description}>
-                                {newArr.map(el => el.deviceInfoId === i.id ?
+                                {device.infoDescription.map(el => el.deviceInfoId === i.id ?
                                     <div
                                         key={el.id}
-                                        onClick={() => device.setValue(el.deviceId)}
+                                        onClick={() => setValue(el.title)}
                                     >{el.title}
 
 
