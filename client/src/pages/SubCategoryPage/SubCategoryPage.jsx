@@ -38,20 +38,12 @@ const SubCategoryPage = observer(() => {
             device.setTotalCount(data.count)
 
         })
-    }, [typeId, device.selectedType, typeId, device.selectedType.id,])
+    }, [typeId, device.selectedType, typeId, device.selectedType.id, device.value])
 
 
     let descrArr = JSON.stringify(device.infoDescription)
 
 
-    let filteredArr = (arr,value )=>{
-        return arr.filter( el => el.title === value)
-    }
-
-    let newArr = filteredArr(device.infoDescription,"Китай")
-    let mapArr = newArr.map(el => el.deviceId)
-
-    console.log( mapArr )
 
 
     // let filteredArr = (arr,value  )=>{
@@ -70,7 +62,7 @@ const SubCategoryPage = observer(() => {
     // let newArr = filteredArr(device.infoDescription, "Цвет" )
 
 
-    console.log(JSON.stringify(device.infoDescription) )
+    // console.log(JSON.stringify(device.infoDescription) )
 
 
 
@@ -94,22 +86,35 @@ const SubCategoryPage = observer(() => {
     // let fill = filter(device.infoDescription, "Цвет")
     // console.log(filter )
 
-    // const filter = (arr) => {
-    //     const cash = {}
-    //     const filtered = []
-    //     arr.forEach((el, idx) => {
-    //         if (!cash[el.title]) {
-    //             cash[el.title] = el;
-    //             filtered.push(el)
-    //         }
-    //     })
-    //     return filtered
-    // }
+    const filter = (arr) => {
+        const cash = {}
+        const filtered = []
+        arr.forEach((el, idx) => {
+            if (!cash[el.title]) {
+                cash[el.title] = el;
+                filtered.push(el)
+            }
+        })
+        return filtered
+    }
+
+    let newArr = filter(device.infoDescription)
+
+
+    let strValue = JSON.stringify(device.value)
+
+
+
+    console.log(strValue)
+
+    let filteredArr = (arr,value )=>{
+        return arr.filter( el => el.title === value)
+    }
+
+    let newArray = filteredArr(device.infoDescription,"Китай")
+    let mapArr = newArray.map(el => el.deviceId)
     //
-    // let newArr = filter(device.infoDescription)
-
-
-
+    // console.log( mapArr )
 
     return (
         <div className={classes.container}>
@@ -140,14 +145,14 @@ const SubCategoryPage = observer(() => {
                                 {i.title}
                             </div>
                             <div className={classes.description}>
-                                {/*{newArr.map(el => el.deviceInfoId === i.id ?*/}
-                                {/*    <div*/}
-                                {/*        key={el.id}>{el.title}*/}
-                                {/*        {el.deviceId}*/}
-                                {/*        <div>*/}
-                                {/*            {el.deviceInfoId}*/}
-                                {/*        </div>*/}
-                                {/*    </div> : "")}*/}
+                                {newArr.map(el => el.deviceInfoId === i.id ?
+                                    <div
+                                        key={el.id}
+                                        onClick={() => device.setValue(el.deviceId)}
+                                    >{el.title}
+
+
+                                    </div> : "")}
                             </div>
 
                         </div>
