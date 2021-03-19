@@ -8,6 +8,8 @@ export default class DeviceStore {
         this._devices = []
         this._categories = []
         this._info = []
+        this._arrayId = []
+        this._value = ""
         this._infoDescription = []
         this._selectedType = {}
         this._selectedBrand = {}
@@ -19,6 +21,14 @@ export default class DeviceStore {
         makeAutoObservable(this)
     }
 
+
+    setValue (value) {
+        this._value = value
+    }
+
+    setArrayId (arrayId) {
+        this._arrayId = arrayId
+    }
 
     setSelectedInfo(selectedInfo) {
         this._selectedInfo = selectedInfo
@@ -70,6 +80,14 @@ export default class DeviceStore {
 
     setCategories(categories) {
         this._categories = categories
+    }
+
+    get value () {
+        return this._value
+    }
+
+    get arrayId () {
+        return this._arrayId
     }
 
     get infoDescription() {

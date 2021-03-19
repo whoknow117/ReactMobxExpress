@@ -34,6 +34,7 @@ class DeviceController {
                         key:{idx1},
                         title: i.title,
                         deviceId: device.id,
+                        typeId: typeId,
                         deviceInfoId: (info[idx1].id)
 
 

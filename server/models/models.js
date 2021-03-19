@@ -101,6 +101,9 @@ DeviceInfoDescription.belongsTo(DeviceInfo)
 Type.hasMany(DeviceInfo)
 DeviceInfo.belongsTo(Type)
 
+Type.hasMany(DeviceInfoDescription)
+DeviceInfoDescription.belongsTo(Type)
+
 Type.belongsToMany(Brand, {through: TypeBrand})
 Brand.belongsToMany(Type, {through: TypeBrand})
 

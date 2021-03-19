@@ -4,7 +4,32 @@ const ApiError = require('../error/ApiError')
 class InfoDescriptionController {
     async getAll (req, res, next) {
         try {
-            let infoDescription = await DeviceInfoDescription.findAll()
+            let {typeId,deviceId, deviceInfoId} = req.query
+            let infoDescription;
+            if(!typeId && !deviceId && !deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll()
+            }
+            if( typeId && !deviceId && !deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll({where:{typeId}})
+            }
+            if(!typeId &&  deviceId && !deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll({where:{deviceId}})
+            }
+            if(!typeId &&  !deviceId &&  deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll({where:{deviceInfoId}})
+            }
+            if(!typeId &&  deviceId && deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll({where:{deviceId,deviceInfoId}})
+            }
+            if( typeId &&  deviceId && deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll({where:{typeId,deviceId,deviceInfoId}})
+            }
+            if( typeId &&  deviceId && !deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll({where:{typeId,deviceId}})
+            }
+            if( typeId &&  !deviceId &&  deviceInfoId) {
+                infoDescription = await DeviceInfoDescription.findAll({where:{typeId,deviceInfoId}})
+            }
             return res.json(infoDescription)
         }
         catch (e){

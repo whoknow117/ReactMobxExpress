@@ -23,8 +23,14 @@ export const fetchInfos = async (typeId) => {
 //     return data
 // }
 
-export const fetchInfoDescription = async ( ) => {
-    const {data} = await $host.get('api/infoDescription')
+export const fetchInfoDescription = async (typeId,deviceId,deviceInfoId) => {
+    const {data} = await $host.get('api/infoDescription',{
+        params: {
+            typeId,
+            deviceId,
+            deviceInfoId
+        }
+    })
 
     return data
 }
