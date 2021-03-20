@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import  React, {useContext, useEffect, useState} from 'react';
 import classes from './TypeBar.module.scss';
 import {Context} from "../../index";
 import ListGroup from "react-bootstrap/ListGroup";
