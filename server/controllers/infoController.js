@@ -1,5 +1,6 @@
 const {DeviceInfo} = require('../models/models')
 const ApiError = require('../error/ApiError')
+const {DeviceInfoDescription} = require("../models/models");
 
 class InfoController {
 
@@ -15,6 +16,12 @@ class InfoController {
          }
     }
 
+    // async getAll(req,res) {
+    //     let {typeId} = req.query
+    //     let info;
+    //
+    // }
+
     async getAllTypeId(req, res) {
         let {typeId} = req.query
         let info;
@@ -23,7 +30,11 @@ class InfoController {
 
         }
         if (typeId) {
-            info = await DeviceInfo.findAll({where: {typeId}})
+            info = await DeviceInfo.findAll(
+                {where: {typeId},
+                    include:[{model: DeviceInfoDescription }]
+
+            })
 
 
         }
