@@ -90,12 +90,13 @@ Rating.belongsTo(Device)
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
-Device.hasMany(DeviceInfoDescription, {as: 'infoDescription'})
-DeviceInfoDescription.belongsTo(Device)
+DeviceInfo.hasMany(DeviceInfoDescription )
+DeviceInfoDescription.belongsTo(DeviceInfo )
 
 
-DeviceInfo.hasMany(DeviceInfoDescription)
-DeviceInfoDescription.belongsTo(DeviceInfo)
+Device.hasMany(DeviceInfoDescription )
+DeviceInfoDescription.belongsTo(Device  )
+
 
 
 Type.hasMany(DeviceInfo)

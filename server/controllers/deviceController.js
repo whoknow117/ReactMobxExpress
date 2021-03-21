@@ -75,34 +75,61 @@ class DeviceController {
                     typeId,
                         id: {
                         [Op.or] : honey
-                        }
-                    },limit,offset})
+                        },
+
+                    },
+
+                        limit,offset}
+                    )
+
             }
 
             if (brandId && !typeId & !categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId}, limit, offset})
+                devices = await Device.findAndCountAll({where: {brandId},
+                    // include:[{model: DeviceInfoDescription,raw: true}],
+                    limit, offset})
 
             }
             if (!brandId && typeId && !categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {typeId}, limit, offset})
+                devices = await Device.findAndCountAll({where: {typeId},
+                    // include:[{model: DeviceInfoDescription,raw: true}],
+                    limit, offset})
             }
             if (brandId && typeId && !categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId, typeId}, limit, offset})
+                devices = await Device.findAndCountAll({where: {brandId, typeId},
+                    // include:[{model: DeviceInfoDescription,raw: true}],
+                    limit, offset})
             }
             if (!brandId && !typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {categoryId}, limit, offset})
+                devices = await Device.findAndCountAll({where: {categoryId},
+
+                    limit, offset})
             }
             if (!brandId && typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {typeId,categoryId}, limit, offset})
+                devices = await Device.findAndCountAll({where: {typeId,categoryId},
+
+                    limit, offset})
             }
             if (brandId && !typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId,categoryId}, limit, offset})
+                devices = await Device.findAndCountAll({where: {brandId,categoryId},
+
+                    limit, offset})
             }
             if (brandId && typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId}, limit, offset})
+                devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId},
+                      // include:[{model: DeviceInfoDescription,raw: true}],
+                    limit, offset})
             }
 
-
+            // {where: {
+            //     typeId,
+            //         id: {
+            //         [Op.or] : honey
+            //     },
+            //
+            // },
+            //
+            //     limit,offset}
 
             // if ( !brandId &&   typeId && !categoryId && honey  ) {
             //
