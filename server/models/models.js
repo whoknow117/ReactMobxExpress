@@ -32,6 +32,9 @@ const Device = sequelize.define('device', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     price: {type: DataTypes.INTEGER, allowNull: false},
     rating: {type: DataTypes.INTEGER, defaultValue: 0},
+    color: {type: DataTypes.STRING },
+    made: {type: DataTypes.STRING },
+
     img: {type: DataTypes.STRING, allowNull: false},
 
 })
@@ -90,12 +93,13 @@ Rating.belongsTo(Device)
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
-Device.hasMany(DeviceInfoDescription, {as: 'infoDescription'})
-DeviceInfoDescription.belongsTo(Device)
+DeviceInfo.hasMany(DeviceInfoDescription )
+DeviceInfoDescription.belongsTo(DeviceInfo )
 
 
-DeviceInfo.hasMany(DeviceInfoDescription)
-DeviceInfoDescription.belongsTo(DeviceInfo)
+Device.hasMany(DeviceInfoDescription )
+DeviceInfoDescription.belongsTo(Device  )
+
 
 
 Type.hasMany(DeviceInfo)

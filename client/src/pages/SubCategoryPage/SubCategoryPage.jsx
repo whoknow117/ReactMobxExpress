@@ -20,6 +20,10 @@ const SubCategoryPage = observer(() => {
     const {device} = useContext(Context)
     const {typeId} = useParams()
 
+    const [value,setValue] = useState("")
+    const [idValue,setIdValue] = useState([])
+    const strIdValue = JSON.stringify(idValue)
+
 
     useEffect(() => {
 
@@ -33,14 +37,14 @@ const SubCategoryPage = observer(() => {
             device.setInfoDescription(data)
 
         })
-        fetchDevices(typeId, null, null, device.page, device.limit).then(data => {
+        fetchDevices(typeId, null, null,strIdValue && strIdValue, device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
 
         })
-    }, [ typeId, device.selectedType, typeId, device.selectedType.id, device.value])
+    }, [ typeId, device.selectedType, typeId, device.selectedType.id, device.value, idValue])
 
-    let descrArr = JSON.stringify(device.infoDescription)
+
 
     const filters = (arr) => {
         const cash = {}
@@ -63,9 +67,9 @@ const SubCategoryPage = observer(() => {
 
 
 
-const [value,setValue] = useState("")
 
 
+console.log(idValue)
 
 useEffect(()=> {
 
@@ -74,11 +78,17 @@ useEffect(()=> {
     let filteredArr = (arr,value )=>{
         return arr.filter( el => el.title === value)
     }
-    console.log(strValue)
-    let newArray = filteredArr(device.infoDescription, strValue ).map(el =>{
+    let newArray = filteredArr(device.infoDescription, strValue).map(i => i.deviceId)
 
-        return el.deviceId
-    } )
+
+
+    console.log(newArray)
+  // for (let i = 0; i < strValue.length; i++) {
+  //       newArray = [...newArray,filteredArr(device.infoDescription, strValue[i] ).map(el =>{
+  //
+  //           return el.deviceId
+  //       } )]
+  // }
     // const filter = (arr) => {
     //     const cash = {}
     //     const filtered = []
@@ -92,9 +102,9 @@ useEffect(()=> {
     // }
     //
     // let newArr = filter(device.infoDescription)
+    setIdValue(newArray)
 
-    console.log(newArray)
-    console.log(JSON.stringify(newArr))
+
 }, [value])
 
 
