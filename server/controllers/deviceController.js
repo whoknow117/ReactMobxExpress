@@ -121,52 +121,7 @@ class DeviceController {
                     limit, offset})
             }
 
-            // {where: {
-            //     typeId,
-            //         id: {
-            //         [Op.or] : honey
-            //     },
-            //
-            // },
-            //
-            //     limit,offset}
 
-            // if ( !brandId &&   typeId && !categoryId && honey  ) {
-            //
-            //     devices = await Device.findAndCountAll({where: {
-            //         typeId,
-            //         id: {
-            //             [Op.or]: honey
-            //         }
-            //         },limit,offset}).then(function(result) {
-            //             return res.json(result)
-            //     })
-            //
-            // }
-            // if ( !brandId &&  typeId && !categoryId && honey  ) {
-            //
-            //     devices = await Device.findAndCountAll({where: {
-            //         typeId,
-            //             id: {
-            //                 [Op.or]: honey
-            //             }
-            //         },limit,offset}).then(function(result) {
-            //         return res.json(result)
-            //     })
-            //
-            // }
-
-
-            //
-            // Tasks.findAll({
-            //     where: {
-            //         task_id: {
-            //             [Op.in]: arrayofTaskId
-            //         }
-            //     }
-            // }).then(function(result) {
-            //     return res.json(result)
-            // });
 
 
             return res.json(devices)
@@ -182,9 +137,17 @@ class DeviceController {
         const device = await Device.findOne(
             {
                 where: {id},
-                include: [{model: DeviceInfoDescription, as: 'infoDescription'}]
+
             }
         )
+        return res.json(device)
+    }
+
+
+    async deleteOne(req,res) {
+
+        const {id} = req.query
+        const device = await Device.destroy({where:{id:id}})
         return res.json(device)
     }
 }
