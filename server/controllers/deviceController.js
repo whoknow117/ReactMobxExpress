@@ -9,7 +9,7 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId , categoryId, infoDescription,info} = req.body
+            let {name, price, brandId, typeId , categoryId,color,made, infoDescription,info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -18,6 +18,8 @@ class DeviceController {
                 price,
                 brandId,
                 typeId,
+                color,
+                made,
                 categoryId,
                 img: fileName,
                 infoDescription,
@@ -60,9 +62,9 @@ class DeviceController {
             let offset = page * limit - limit
             let devices;
 
-            if(honey) {
-                honey = JSON.parse(honey)
-            }
+
+
+
 
 
             if (!brandId && !typeId && !honey) {
@@ -70,34 +72,44 @@ class DeviceController {
 
                     },limit,offset})
             }
-            if (!brandId &&  typeId && honey) {
+            if(!brandId  && !categoryId   && typeId &&  honey) {
+                honey = JSON.parse(honey)
+
                 devices = await Device.findAndCountAll({where: {
-                    typeId,
+                        typeId,
                         id: {
-                        [Op.or] : honey
-                        },
+                            [Op.or] : honey
+                        }
+                    }
+                    ,limit,offset})
+            }
+            if( categoryId   && typeId && brandId && honey) {
+                honey = JSON.parse(honey)
 
-                    },
-
-                        limit,offset}
-                    )
-
+                devices = await Device.findAndCountAll({where: {
+                        typeId,
+                        brandId,
+                        id: {
+                            [Op.and] : honey
+                        }
+                    }
+                    ,limit,offset})
             }
 
-            if (brandId && !typeId & !categoryId && !honey ) {
+            if (brandId && !typeId && !categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {brandId},
-                    // include:[{model: DeviceInfoDescription,raw: true}],
+
                     limit, offset})
 
             }
             if (!brandId && typeId && !categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {typeId},
-                    // include:[{model: DeviceInfoDescription,raw: true}],
+
                     limit, offset})
             }
-            if (brandId && typeId && !categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId, typeId},
-                    // include:[{model: DeviceInfoDescription,raw: true}],
+            if (typeId && brandId && !categoryId && !honey ) {
+                devices = await Device.findAndCountAll({where: {typeId, brandId},
+
                     limit, offset})
             }
             if (!brandId && !typeId && categoryId && !honey ) {
@@ -117,56 +129,10 @@ class DeviceController {
             }
             if (brandId && typeId && categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId},
-                      // include:[{model: DeviceInfoDescription,raw: true}],
+
                     limit, offset})
             }
 
-            // {where: {
-            //     typeId,
-            //         id: {
-            //         [Op.or] : honey
-            //     },
-            //
-            // },
-            //
-            //     limit,offset}
-
-            // if ( !brandId &&   typeId && !categoryId && honey  ) {
-            //
-            //     devices = await Device.findAndCountAll({where: {
-            //         typeId,
-            //         id: {
-            //             [Op.or]: honey
-            //         }
-            //         },limit,offset}).then(function(result) {
-            //             return res.json(result)
-            //     })
-            //
-            // }
-            // if ( !brandId &&  typeId && !categoryId && honey  ) {
-            //
-            //     devices = await Device.findAndCountAll({where: {
-            //         typeId,
-            //             id: {
-            //                 [Op.or]: honey
-            //             }
-            //         },limit,offset}).then(function(result) {
-            //         return res.json(result)
-            //     })
-            //
-            // }
-
-
-            //
-            // Tasks.findAll({
-            //     where: {
-            //         task_id: {
-            //             [Op.in]: arrayofTaskId
-            //         }
-            //     }
-            // }).then(function(result) {
-            //     return res.json(result)
-            // });
 
 
             return res.json(devices)
@@ -182,7 +148,7 @@ class DeviceController {
         const device = await Device.findOne(
             {
                 where: {id},
-                include: [{model: DeviceInfoDescription, as: 'infoDescription'}]
+
             }
         )
         return res.json(device)
