@@ -38,10 +38,10 @@ const Shop = observer(() => {
 
         <div className={classes.container}>
             <Row className={classes.row}>
-               <div className={classes.categoryBar}>
-
-                   <TypeBar/>
-               </div>
+                {device.activeBar ?
+                    <div className={classes.categoryBar}>
+                        <TypeBar/>
+                    </div> : ""}
 
 
                 <Col className="mt-2" md={12    }>

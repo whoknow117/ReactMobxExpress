@@ -13,8 +13,31 @@
       align-items: center;
 
     }
+
+  }
+  .bottomBar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid silver;
+    height: 40px;
     .btn {
       margin-left: auto;
+      align-items:  center;
+      button {
+        background: transparent;
+        display: block;
+
+        display: flex;
+        align-items: center;
+        height: 30px;
+        justify-content: center;
+        border: 1px solid silver;
+        svg {
+          width: 24px;
+
+        }
+      }
     }
   }
 }

@@ -12,6 +12,9 @@ export default class DeviceStore {
         this._value = ""
         this._infoDescription = []
         this._selectedType = {}
+        this._unit = []
+        this._selectedUnit = []
+        this._activeBar = false
         this._selectedBrand = {}
         this._selectedCategory = {}
         this._selectedInfo = {}
@@ -22,8 +25,16 @@ export default class DeviceStore {
     }
 
 
+    setSelectedUnit (selectedUnit) {
+        this._selectedUnit = selectedUnit
+    }
+
     setValue (value) {
         this._value = value
+    }
+
+    setUnit(unit) {
+        this._unit = unit
     }
 
     setArrayId (arrayId) {
@@ -32,6 +43,10 @@ export default class DeviceStore {
 
     setSelectedInfo(selectedInfo) {
         this._selectedInfo = selectedInfo
+    }
+
+    setActive(activeBar) {
+        this._activeBar = activeBar
     }
 
     setInfoDescription(infoDescription) {
@@ -80,6 +95,19 @@ export default class DeviceStore {
 
     setCategories(categories) {
         this._categories = categories
+    }
+
+
+    get selectedUnit () {
+        return this._selectedUnit
+    }
+
+    get unit() {
+        return this._unit
+    }
+
+    get activeBar() {
+        return this._activeBar
     }
 
     get value () {

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
-import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
+import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes, fetchUnits} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
 import {createInfoDescription, fetchInfos} from "../../http/categoryInfoApi";
 import {useParams} from "react-router-dom";
@@ -11,10 +11,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
-    const [info, setInfo] = useState([])
-    const [value, setValue] = useState("")
-
-    const [productType, setProductType] = useState('')
+    const [unit, setUnit] = useState([])
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [clear,setClear] = useState(false)
@@ -27,8 +24,9 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchTypes().then(data => device.setTypes(data))
         fetchBrands().then(data => device.setBrands(data))
         fetchCategories().then(data => device.setCategories(data))
+        fetchUnits().then(data => device.setUnit(data))
         fetchDevices().then(data => device.setDevices(data.rows))
-    }, [device.selectedType ])
+    }, [device.selectedType, device.selectedUnit ])
 
 
     useEffect(() => {
@@ -122,6 +120,19 @@ const CreateDevice = observer(({show, onHide}) => {
                                         onClick={() => device.setSelectedBrand(brand)}
                                     >
                                         {brand.name}
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Dropdown className="mt-3">
+                            <Dropdown.Toggle>{ device.selectedUnit.name || "Выберете способ измерения"}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {device.unit.map(unit =>
+                                    <Dropdown.Item
+                                        key={unit.id}
+                                        onClick={() => device.setSelectedUnit(unit)}
+                                    >
+                                        {unit.name}
                                     </Dropdown.Item>
                                 )}
                             </Dropdown.Menu>
