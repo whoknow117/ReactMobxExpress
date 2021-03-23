@@ -35,6 +35,13 @@ const Device = sequelize.define('device', {
     img: {type: DataTypes.STRING, allowNull: false},
 
 })
+
+const Unit = sequelize.define('unit', {
+    id: {type: DataTypes.INTEGER,primaryKey:true, autoIncrement: true},
+    name: {type: DataTypes.STRING,unique: true, allowNull: false },
+
+})
+
 const Type = sequelize.define('type', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
@@ -63,8 +70,9 @@ const DeviceInfoDescription = sequelize.define('device_info_description', {
 })
 
 
-User.hasOne(Basket)
-Basket.belongsTo(User)
+Unit.hasMany(Device)
+Device.belongsTo(Unit)
+
 
 User.hasMany(Rating)
 Rating.belongsTo(User)
@@ -87,6 +95,8 @@ Device.hasMany(Rating)
 Rating.belongsTo(Device)
 
 
+
+
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
@@ -95,7 +105,7 @@ DeviceInfoDescription.belongsTo(DeviceInfo )
 
 
 Device.hasMany(DeviceInfoDescription )
-DeviceInfoDescription.belongsTo(Device  )
+DeviceInfoDescription.belongsTo(Device)
 
 
 
@@ -123,5 +133,6 @@ module.exports = {
     Rating,
     User,
     Category,
-    DeviceInfoDescription
+    DeviceInfoDescription,
+    Unit
 }

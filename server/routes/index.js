@@ -7,6 +7,7 @@ const brandRouter = require('./brandRouter')
 const categoryRouter = require('./categoryRouter')
 const infoRouter = require('./deviceInfoRouter')
 const infoDescriptionRouter = require('./infoDescriptionRouter')
+const unitRouter = require('./unitRouter')
 
 
 router.use('/user',userRouter)
@@ -15,8 +16,8 @@ router.use('/type',typeRouter)
 router.use('/brand',brandRouter)
 router.use('/info',infoRouter)
 router.use('/infoDescription', infoDescriptionRouter)
-
 router.use('/category',categoryRouter)
+router.use('/unit',unitRouter)
 
 
 

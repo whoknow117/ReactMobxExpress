@@ -18,6 +18,7 @@ class DeviceController {
                 price,
                 brandId,
                 typeId,
+
                 categoryId,
                 img: fileName,
                 infoDescription,
