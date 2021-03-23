@@ -19,11 +19,23 @@
     width: 100%;
     display: flex;
     align-items: center;
-    border: 1px solid silver;
+
     height: 40px;
+    .catalogBtn {
+      background: #000;
+      padding: 10px 20px;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-left: 20px;
+      outline: none;
+    }
     .btn {
       margin-left: auto;
       align-items:  center;
+      margin-right: 10px;
+      outline: none;
       button {
         background: transparent;
         display: block;

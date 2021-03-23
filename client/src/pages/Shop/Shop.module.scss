@@ -2,14 +2,50 @@
   max-width: 1400px;
   margin: 0 auto;
 
+
   .row {
-    width: 100%;
-    max-width: 1400px;
-    flex-grow: 1;
+
+
     position: relative;
 
     .categoryBar {
       position: absolute;
+
+
     }
   }
 }
+
+
+.wrapper {
+  width: 1400px;
+  padding: 0;
+  display: flex;
+  margin: 40px auto 40px auto;
+
+  .propositions {
+
+    height: 360px;
+    overflow: hidden;
+    margin-left: 20px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    padding: 0;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      transition: .2s ease-in-out;
+
+      &:hover {
+        transition: .2s ease-in-out;
+        transform: scale(1.1);
+      }
+
+      object-fit: contain;
+    }
+  }
+
+}
+ 

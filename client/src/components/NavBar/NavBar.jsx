@@ -12,7 +12,7 @@ import Exit from "../../assets/Exit/Exit";
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
-    const [mode,setMode] = useState(false);
+
 
     const {device} = useContext(Context)
 
@@ -24,7 +24,14 @@ const NavBar = observer(() => {
 
     }
 
-
+    const menuActive = () => {
+        if (device.activeBar === false){
+            device.setActive(true)
+        }
+        else {
+            device.setActive(false)
+        }
+    }
 
     const admineRoute = () => {
         history.push(ADMIN_ROUTE)
@@ -44,7 +51,7 @@ const NavBar = observer(() => {
                     </div>
                 <div className={classes.bottomBar}>
 
-                        <button onClick={() => device.setActive(true)}>Каталог товаров</button>
+                        <button className={classes.catalogBtn}  onClick={menuActive}>Каталог товаров</button>
                         {user.isAuth === true ?
                             <Nav className={classes.btn}>
                                 <button onClick={admineRoute} style={{marginRight: '10px'}}><AdminIcon/></button>

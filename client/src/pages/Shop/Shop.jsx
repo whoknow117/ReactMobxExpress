@@ -8,6 +8,8 @@ import DeviceList from "../../components/DeviceList/DeviceList";
 import {fetchBrands, fetchCategories, fetchDevices, fetchInfos, fetchTypes} from "../../http/deviceApi";
 import Pages from "../../components/Pages/Pages";
 import classes from './Shop.module.scss';
+import Slider from "./Slider/Slider";
+import k1 from '../../assets/right.jpg'
 
 
 const Shop = observer(() => {
@@ -43,8 +45,13 @@ const Shop = observer(() => {
                         <TypeBar/>
                     </div> : ""}
 
-
-                <Col className="mt-2" md={12    }>
+                <div className={classes.wrapper}>
+                    <Slider />
+                    <div className={classes.propositions}>
+                        <img src={k1} alt=""/>
+                    </div>
+                </div>
+                <Col className="mt-2"  >
                     <BrandBar/>
 
                     <DeviceList/>

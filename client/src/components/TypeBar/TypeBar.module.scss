@@ -1,16 +1,17 @@
 
 
-.active {
-  background: #000;
-}
+.menu {
+  position: absolute;
+  width: 320px;
+  z-index: 9999;
+  .dropdown {
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+    top: 60px;
+    left: 450px;
+    z-index: 1001;
 
-.dropdown {
-  width: 300px;
-  height: 100vh;
-  position: fixed;
-  top: 60px;
-  left: 450px;
-  z-index: 1001;
-
-  background: silver;
+    background: silver;
+  }
 }

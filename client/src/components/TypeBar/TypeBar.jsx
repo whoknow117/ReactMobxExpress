@@ -21,7 +21,7 @@ const TypeBar = observer(() =>  {
     }
 
     return (
-        <div>
+        <div className={classes.menu}>
             <ListGroup>
                 {device.categories.map(type =>
                     <ListGroup.Item
