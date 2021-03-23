@@ -47,15 +47,27 @@ export const fetchInfosTypeKey = async (typeId) => {
 
     return data
 }
-export const fetchDevices = async (typeId, brandId, categoryId,honey,  page, limit) => {
+export const fetchDevices = async (typeId, brandId, categoryId ,honey,  page, limit) => {
     const {data} = await $host.get('api/device', {
         params: {
             typeId,
             brandId,
+
             honey,
             categoryId,
             page,
             limit
+        }
+    })
+    return data
+}
+
+
+export const deleteDevice = async (id) => {
+    const {data} = await $authHost.delete('api/device/', {
+
+        params: {
+            id
         }
     })
     return data

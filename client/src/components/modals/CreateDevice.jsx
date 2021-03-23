@@ -13,6 +13,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const [infoDescription, setInfoDescription] = useState([])
     const [info, setInfo] = useState([])
     const [value, setValue] = useState("")
+
     const [productType, setProductType] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
@@ -27,12 +28,12 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchBrands().then(data => device.setBrands(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchDevices().then(data => device.setDevices(data.rows))
-    }, [ ])
+    }, [device.selectedType ])
 
 
     useEffect(() => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
-    }, [device.selectedType,])
+    }, [device.selectedType])
 
 
     // const addInfo = () => {
@@ -150,10 +151,30 @@ const CreateDevice = observer(({show, onHide}) => {
                             onChange={(e) => setPrice(+e.target.value)}
                             className="mt-3"
                             placeholder="Введите стоимость товара"
-                            type="number"
+                            type="text"
                         >
 
                         </Form.Control>
+
+
+                        {/*<Form.Control*/}
+                        {/*    onChange={(e) => setColor(e.target.value)}*/}
+                        {/*    className="mt-3"*/}
+                        {/*    placeholder="Введите цвет товара"*/}
+                        {/*    type="text"*/}
+                        {/*>*/}
+
+                        {/*</Form.Control>*/}
+
+
+                        {/*<Form.Control*/}
+                        {/*    onChange={(e) => setMade(e.target.value)}*/}
+                        {/*    className="mt-3"*/}
+                        {/*    placeholder="Введите производство товара"*/}
+                        {/*    type="text"*/}
+                        {/*>*/}
+
+                        {/*</Form.Control>*/}
 
 
                         <Form.Control className="mt-3"

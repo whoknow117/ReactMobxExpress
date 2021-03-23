@@ -31,22 +31,23 @@ const NavBar = observer(() => {
 
         <Navbar className={classes.navbar}>
             <Container className={classes.container}>
-                <div onClick={shopRoute}>
-                    <NavBarLogo />
-                </div>
-                {user.isAuth === true ?
-                    <Nav className="ml-auto">
-                        <Button onClick={admineRoute}  style={{marginRight: '10px'}}>Админ панель</Button>
-                        <Button onClick={() => logOut()} >Выйти</Button>
+               <div className={classes.dflex}> <div onClick={shopRoute}>
+                   <NavBarLogo />
+               </div>
+                   {user.isAuth === true ?
+                       <Nav className={classes.btn}>
+                           <Button onClick={admineRoute}  style={{marginRight: '10px'}}>Админ панель</Button>
+                           <Button onClick={() => logOut()} >Выйти</Button>
 
-                    </Nav>
-                    :
-                    <Nav className="ml-auto">
-                        <Button onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</Button>
+                       </Nav>
+                       :
+                       <Nav className={classes.btn}>
+                           <Button onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</Button>
 
 
-                    </Nav>
-                }
+                       </Nav>
+                   }</div>
+                <div>asd</div>
             </Container>
 
 

@@ -2,7 +2,19 @@
 
 .navbar {
   .container {
-  max-width: 1400px;
+   max-width: 1400px;
+
     background: #fff;
+    flex-direction: column;
+
+    .dflex {
+      display: flex;
+      width: 100%;
+      align-items: center;
+
+    }
+    .btn {
+      margin-left: auto;
+    }
   }
 }

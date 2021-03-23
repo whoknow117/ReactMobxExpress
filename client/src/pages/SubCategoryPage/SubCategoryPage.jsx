@@ -3,7 +3,7 @@ import classes from './SubCategoryPage.module.scss'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {
-
+    fetchBrands,
     fetchDevices,
     fetchInfosTypeKey,
 
@@ -14,18 +14,19 @@ import {useParams} from "react-router-dom";
 import {v1} from "uuid";
 import Filter from "./Filter/Filter";
 import {fetchInfoDescription} from "../../http/categoryInfoApi";
+import BrandBar from "../../components/BrandBar/BrandBar";
 
 const SubCategoryPage = observer(() => {
 
     const {device} = useContext(Context)
     const {typeId} = useParams()
-
     const [value,setValue] = useState("")
     const [idValue,setIdValue] = useState([])
-    const strIdValue = JSON.stringify(idValue)
+
 
 
     useEffect(() => {
+        const strIdValue = JSON.stringify(idValue)
 
         fetchInfosTypeKey(typeId).then(data => {
 
@@ -37,74 +38,35 @@ const SubCategoryPage = observer(() => {
             device.setInfoDescription(data)
 
         })
-        fetchDevices(typeId, null, null,strIdValue && strIdValue, device.page, device.limit).then(data => {
+
+        fetchBrands().then(data => device.setBrands(data))
+        fetchDevices(typeId, null, null,strIdValue, device.page,device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
 
         })
-    }, [ typeId, device.selectedType, typeId, device.selectedType.id, device.value, idValue])
-
-
-
-    const filters = (arr) => {
-        const cash = {}
-        const filtered = []
-        arr.forEach( el => {
-            if(!cash[el.title]){
-                filtered.push(el)
-            }
-        })
-        return filtered
-    }
-
-    let filteredArray;
+    }, [device, typeId, device.selectedType.id, idValue])
 
 
 
 
 
 
-
-
-
-
-
-console.log(idValue)
 
 useEffect(()=> {
 
-
     let strValue = value
-    let filteredArr = (arr,value )=>{
-        return arr.filter( el => el.title === value)
+    let filteredArr = (arr,value  )=> {return arr.filter( el => el.title === value)
+
     }
-    let newArray = filteredArr(device.infoDescription, strValue).map(i => i.deviceId)
+
+    let newArray = filteredArr(device.infoDescription, strValue).map(el => el.deviceId)
 
 
 
-    console.log(newArray)
-  // for (let i = 0; i < strValue.length; i++) {
-  //       newArray = [...newArray,filteredArr(device.infoDescription, strValue[i] ).map(el =>{
-  //
-  //           return el.deviceId
-  //       } )]
-  // }
-    // const filter = (arr) => {
-    //     const cash = {}
-    //     const filtered = []
-    //     arr.forEach((el, idx) => {
-    //         if (!cash[el.title]) {
-    //             cash[el.title] = el;
-    //             filtered.push(el)
-    //         }
-    //     })
-    //     return filtered
-    // }
-    //
-    // let newArr = filter(device.infoDescription)
+
     setIdValue(newArray)
-
-
+    console.log(JSON.stringify(device.infoDescription))
 }, [value])
 
 
@@ -125,6 +87,7 @@ useEffect(()=> {
 
     return (
         <div className={classes.container}>
+
             <Row className={classes.itemBar}>
                 <Col md={9} className={classes.devices}>
                     <div className={classes.separate}>
@@ -143,7 +106,7 @@ useEffect(()=> {
                         </div>
                     </div>
                 </Col>
-                {/*<Filter  />*/}
+
                 <Col md={3}>
 
                     {device.info.map(i => {

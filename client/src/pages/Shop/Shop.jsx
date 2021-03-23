@@ -23,25 +23,28 @@ const Shop = observer(() => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [device.page, device.selectedType, device.selectedBrand,device.selectedCategory])
+    }, [device.page ,device.selectedCategory])
 
 
-    // useEffect(() => {
-    //     fetchDevices(device.selectedType.id, device.selectedBrand.id,device.selectedCategory.id, device.page, device.limit).then(data => {
-    //         device.setDevices(data.rows)
-    //         device.setTotalCount(data.count)
-    //     })
-    // }, [device.page, device.selectedType, device.selectedBrand,])
+    useEffect(() => {
+        fetchDevices(null, device.selectedBrand.id,null,null,  device.page, device.limit).then(data => {
+            device.setDevices(data.rows)
+            device.setTotalCount(data.count)
+        })
+    }, [device.page, device.selectedBrand,])
 
 
     return (
 
         <div className={classes.container}>
             <Row className={classes.row}>
-                <Col className="mt-2" md={3}>
-                    <TypeBar/>
-                </Col>
-                <Col className="mt-2" md={9}>
+               <div className={classes.categoryBar}>
+
+                   <TypeBar/>
+               </div>
+
+
+                <Col className="mt-2" md={12    }>
                     <BrandBar/>
 
                     <DeviceList/>

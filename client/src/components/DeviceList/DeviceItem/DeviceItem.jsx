@@ -12,14 +12,17 @@ const DeviceItem = observer(({dev}) => {
     return (
         <Col  md={3} className={classes.wrapper} onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)}>
             <Card className={classes.card}>
-                <Image className={classes.image}  src={process.env.REACT_APP_API_URL + dev.img}/>
+                <Image className={classes.image} src={process.env.REACT_APP_API_URL + dev.img}/>
                 <div className="text-black-50">Samsung</div>
                 <div>
                     <div>{dev.rating}</div>
                 </div>
                 <div>
-                    {dev.name}
-                    {dev.price}
+                   <div>
+
+                       {dev.name}
+                   </div>
+                    <span>price: {dev.price}</span>
                 </div>
 
             </Card>
