@@ -31,7 +31,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
     useEffect(() => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
-    }, [device.selectedType])
+    }, [device.selectedType,device.selectedUnit])
 
 
     // const addInfo = () => {
@@ -58,6 +58,8 @@ const CreateDevice = observer(({show, onHide}) => {
     }
 
 
+
+
     const addDevice = () => {
 
         const formData = new FormData()
@@ -66,6 +68,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
+        formData.append('unitId', device.selectedUnit.id)
         formData.append('categoryId', device.selectedCategory.id)
         formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
