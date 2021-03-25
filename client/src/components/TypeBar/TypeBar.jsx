@@ -6,7 +6,7 @@ import {observer} from "mobx-react-lite";
 import {NavLink} from "react-bootstrap";
 import {SUBCATEGORY_ROUTE} from "../../utils/consts";
 import {useHistory} from "react-router-dom";
-import {fetchCategories} from "../../http/deviceApi";
+import {fetchCategories, fetchTypes} from "../../http/deviceApi";
 
 
 const TypeBar = observer(() =>  {
@@ -22,8 +22,10 @@ const TypeBar = observer(() =>  {
     }
      useEffect(() => {
          console.log(device.categories)
+         console.log(device.types)
+         fetchTypes().then(data => device.setTypes(data))
          fetchCategories().then(data => device.setCategories(data))
-     },[device.activeBar,device.selectedType])
+     },[device.activeBar])
 
     return (
         <div className={classes.menu}>

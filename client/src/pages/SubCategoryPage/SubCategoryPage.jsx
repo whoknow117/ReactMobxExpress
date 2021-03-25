@@ -92,7 +92,7 @@ useEffect(()=> {
 
             <Row className={classes.itemBar}>
                 {device.activeBar ?
-                    <div className={classes.categoryBar}>
+                    <div  >
                         <TypeBar/>
                     </div> : ""}
                 <Col md={9} className={classes.devices}>
