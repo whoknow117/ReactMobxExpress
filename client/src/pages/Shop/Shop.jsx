@@ -26,7 +26,7 @@ const Shop = observer(() => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [device.page ,device.selectedCategory])
+    }, [device.page ,device.selectedCategory,device.activeBar])
 
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const Shop = observer(() => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [device.page, device.selectedBrand,])
+    }, [device.page, device.selectedBrand,device.activeBar])
 
 
     return (

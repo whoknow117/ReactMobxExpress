@@ -2,6 +2,8 @@
 
 
 .navbar {
+  z-index: 1001;
+  position: relative;
   .container {
     max-width: 1400px;
 

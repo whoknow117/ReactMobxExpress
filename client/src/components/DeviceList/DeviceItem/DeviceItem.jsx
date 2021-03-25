@@ -2,13 +2,13 @@ import React from 'react';
 import classes from './DeviceItem.module.scss';
 import {Card, Col, Image} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {DEVICE_ROUTE} from "../../../utils/consts";
 
 const DeviceItem = observer(({dev}) => {
 
     const history = useHistory()
-
+    const {id} = useParams()
     const sets = (id) => {
         if(id === 1) {
             return <div>шт</div>

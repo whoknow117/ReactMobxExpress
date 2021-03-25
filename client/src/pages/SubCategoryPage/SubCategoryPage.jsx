@@ -3,7 +3,7 @@ import classes from './SubCategoryPage.module.scss'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {
-    fetchBrands,
+    fetchBrands, fetchCategories,
     fetchDevices,
     fetchInfosTypeKey,
 
@@ -37,6 +37,7 @@ const SubCategoryPage = observer(() => {
             device.setInfoDescription(data)
 
         })
+        fetchCategories().then(data => device.setCategories(data))
 
         fetchBrands().then(data => device.setBrands(data))
         fetchDevices(typeId, null, null, strIdValue,null,  device.page,device.limit).then(data => {
@@ -44,7 +45,7 @@ const SubCategoryPage = observer(() => {
             device.setTotalCount(data.count)
 
         })
-    }, [device, typeId, device.selectedType.id, idValue])
+    }, [typeId, device.selectedType.id, idValue, value,device.activeBar])
 
 
 
@@ -65,7 +66,7 @@ useEffect(()=> {
 
 
     setIdValue(newArray)
-    console.log(JSON.stringify(device.infoDescription))
+    console.log(JSON.stringify(newArray ))
 }, [value])
 
 

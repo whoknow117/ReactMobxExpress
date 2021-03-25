@@ -19,7 +19,9 @@ const TypeBar = observer(() =>  {
         device.selectedCategory(type)
         setMode(true)
     }
-
+    useEffect(() => {
+        console.log(device.devices)
+    },[])
     return (
         <div className={classes.menu}>
             <ListGroup>

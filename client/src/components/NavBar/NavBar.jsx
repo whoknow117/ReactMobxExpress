@@ -14,14 +14,10 @@ import {fetchDevices} from "../../http/deviceApi";
 import Search from "./Search/Search";
 
 const NavBar = observer(() => {
-    const {user} = useContext(Context)
+    const {user,device} = useContext(Context)
     const history = useHistory()
 
 
-
-
-
-    const {device} = useContext(Context)
 
 
 
@@ -34,6 +30,7 @@ const NavBar = observer(() => {
     }
 
     const menuActive = () => {
+        console.log(device.activeBar)
         if (device.activeBar === false){
             device.setActive(true)
         }
