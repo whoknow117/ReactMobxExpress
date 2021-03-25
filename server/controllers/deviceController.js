@@ -56,7 +56,7 @@ class DeviceController {
     async getAll(req, res, next) {
 
         try{
-            let {brandId,typeId,categoryId,honey, limit, page} = req.query
+            let {brandId,typeId,categoryId,honey,name, limit, page} = req.query
 
             let offset = page * limit - limit
             let devices;
@@ -65,17 +65,17 @@ class DeviceController {
                 honey = JSON.parse(honey)
             }
 
-            if (!categoryId && !brandId && !typeId && !honey) {
+            if (!name && !categoryId && !brandId && !typeId && !honey) {
                 devices = await Device.findAndCountAll(
 
                     {limit,offset})
             }
-            //
-            // if (!name && !brandId && !typeId && !honey) {
-            //     devices = await Device.findAll({where: {
-            //         name: {[Op.like]: "%" + name + "%"}
-            //         },limit,offset})
-            // }
+
+            if (name && !brandId && !typeId && !honey) {
+                devices = await Device.findAndCountAll({where: {
+                    name: {[Op.like]: "%" + name + "%"}
+                    },limit,offset})
+            }
             if (!categoryId && !brandId &&  typeId && honey) {
                 devices = await Device.findAndCountAll({where: {
                     typeId,
