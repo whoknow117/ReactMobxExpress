@@ -153,14 +153,7 @@ class DeviceController {
     }
 
 
-    // async getAllByText(req,res) {
-    //     const device = Device.findAll({
-    //         where: Sequelize.literal('MATCH (SomeField) AGAINST (:name)'),
-    //         replacements: {
-    //             name: 'Alex'
-    //         }
-    //     });
-    // }
+
 
 
     async deleteOne(req,res) {
@@ -169,7 +162,7 @@ class DeviceController {
         const device = await Device.destroy({where:{id:id,
 
             },
-            // include:[{model: DeviceInfoDescription}],
+
 
         },)
         return res.json(device)
