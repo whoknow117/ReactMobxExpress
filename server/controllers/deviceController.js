@@ -56,7 +56,7 @@ class DeviceController {
     async getAll(req, res, next) {
 
         try{
-            let {brandId,typeId,categoryId,honey, limit, page} = req.query
+            let {brandId,typeId,categoryId,name,honey, limit, page} = req.query
 
             let offset = page * limit - limit
             let devices;
@@ -65,13 +65,18 @@ class DeviceController {
                 honey = JSON.parse(honey)
             }
 
+            if (!name && !brandId && !typeId && !honey) {
+                devices = await Device.findAll(
 
-            if (!brandId && !typeId && !honey) {
-                devices = await Device.findAndCountAll({where: {
+                    {limit,offset})
+            }
 
+            if (name && !brandId && !typeId && !honey) {
+                devices = await Device.findAll({where: {
+                    [Op.like]: "%" + name + "%"
                     },limit,offset})
             }
-            if (!brandId &&  typeId && honey) {
+            if (!name && !brandId &&  typeId && honey) {
                 devices = await Device.findAndCountAll({where: {
                     typeId,
                         id: {
@@ -85,38 +90,38 @@ class DeviceController {
 
             }
 
-            if (brandId && !typeId & !categoryId && !honey ) {
+            if (!name && brandId && !typeId & !categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {brandId},
-                    // include:[{model: DeviceInfoDescription,raw: true}],
+
                     limit, offset})
 
             }
-            if (!brandId && typeId && !categoryId && !honey ) {
+            if (!name && !brandId && typeId && !categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {typeId},
                     // include:[{model: DeviceInfoDescription,raw: true}],
                     limit, offset})
             }
-            if (brandId && typeId && !categoryId && !honey ) {
+            if (!name && brandId && typeId && !categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {brandId, typeId},
                     // include:[{model: DeviceInfoDescription,raw: true}],
                     limit, offset})
             }
-            if (!brandId && !typeId && categoryId && !honey ) {
+            if (!name && !brandId && !typeId && categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {categoryId},
 
                     limit, offset})
             }
-            if (!brandId && typeId && categoryId && !honey ) {
+            if (!name && !brandId && typeId && categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {typeId,categoryId},
 
                     limit, offset})
             }
-            if (brandId && !typeId && categoryId && !honey ) {
+            if (!name && brandId && !typeId && categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {brandId,categoryId},
 
                     limit, offset})
             }
-            if (brandId && typeId && categoryId && !honey ) {
+            if (!name && brandId && typeId && categoryId && !honey ) {
                 devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId},
                       // include:[{model: DeviceInfoDescription,raw: true}],
                     limit, offset})
@@ -145,13 +150,23 @@ class DeviceController {
     }
 
 
+    // async getAllByText(req,res) {
+    //     const device = Device.findAll({
+    //         where: Sequelize.literal('MATCH (SomeField) AGAINST (:name)'),
+    //         replacements: {
+    //             name: 'Alex'
+    //         }
+    //     });
+    // }
+
+
     async deleteOne(req,res) {
 
         const {id} = req.query
         const device = await Device.destroy({where:{id:id,
 
             },
-
+            include:[{model: DeviceInfoDescription}],
 
         },)
         return res.json(device)
