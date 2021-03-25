@@ -10,7 +10,7 @@ const DeviceList = observer(() => {
 
     const {device} = useContext(Context)
 
-    console.log(JSON.stringify(device.devices))
+
 
     return (
         <Row className="d-flex">

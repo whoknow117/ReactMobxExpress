@@ -20,9 +20,9 @@ const Search = () => {
 
         fetchDevices(null,null,null,null,value,1,20).then(data =>  device.setSearchDevice(data.rows) )
 
-    },[value, ])
+    },[value ])
 
-    console.log(JSON.stringify(device.searchDevice))
+    // console.log(JSON.stringify(device.searchDevice))
 
 
 

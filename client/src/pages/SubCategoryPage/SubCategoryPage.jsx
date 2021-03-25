@@ -37,7 +37,7 @@ const SubCategoryPage = observer(() => {
             device.setInfoDescription(data)
 
         })
-        fetchCategories().then(data => device.setCategories(data))
+
 
         fetchBrands().then(data => device.setBrands(data))
         fetchDevices(typeId, null, null, strIdValue,null,  device.page,device.limit).then(data => {
@@ -45,7 +45,7 @@ const SubCategoryPage = observer(() => {
             device.setTotalCount(data.count)
 
         })
-    }, [typeId, device.selectedType.id, idValue, value,device.activeBar])
+    }, [typeId, device.selectedType.id, idValue,  ])
 
 
 

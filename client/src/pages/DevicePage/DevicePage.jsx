@@ -6,14 +6,14 @@ import {fetchDevice} from "../../http/deviceApi";
 
 const DevicePage  = () => {
 
-    const [device, setDevice] = useState({info: []})
+    const [device, setDevice] = useState([])
     const {id} = useParams()
 
     useEffect( () => {
-       
+
         fetchDevice(id).then(data => setDevice(data))
     },[device.searchDevice])
-
+    console.log(JSON.stringify(device.searchDevice))
     return (
         <Container className="mt-3  ">
             <Row>
