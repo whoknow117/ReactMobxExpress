@@ -13,6 +13,7 @@ import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
 import {useParams} from "react-router-dom";
 
 import {fetchInfoDescription} from "../../http/categoryInfoApi";
+import TypeBar from "../../components/TypeBar/TypeBar";
 
 
 const SubCategoryPage = observer(() => {
@@ -38,6 +39,7 @@ const SubCategoryPage = observer(() => {
 
         })
 
+        fetchCategories().then(data => device.setCategories(data))
 
         fetchBrands().then(data => device.setBrands(data))
         fetchDevices(typeId, null, null, strIdValue,null,  device.page,device.limit).then(data => {
@@ -45,7 +47,7 @@ const SubCategoryPage = observer(() => {
             device.setTotalCount(data.count)
 
         })
-    }, [typeId, device.selectedType.id, idValue,  ])
+    }, [ device.selectedType.id, idValue, device.selectedCategory,typeId ,device.selectedType.id])
 
 
 
@@ -54,7 +56,7 @@ const SubCategoryPage = observer(() => {
 
 
 useEffect(()=> {
-
+    console.log(device.categories)
     let strValue = value
     let filteredArr = (arr,value  )=> {return arr.filter( el => el.title === value)
 
@@ -89,6 +91,10 @@ useEffect(()=> {
         <div className={classes.container}>
 
             <Row className={classes.itemBar}>
+                {device.activeBar ?
+                    <div className={classes.categoryBar}>
+                        <TypeBar/>
+                    </div> : ""}
                 <Col md={9} className={classes.devices}>
                     <div className={classes.separate}>
                         <div className={classes.itemCount}>

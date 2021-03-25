@@ -3,6 +3,7 @@ import classes from './DevicePage.module.scss';
 import {Card, Col, Container, Image, Row} from "react-bootstrap";
 import {useParams} from 'react-router-dom'
 import {fetchDevice} from "../../http/deviceApi";
+import TypeBar from "../../components/TypeBar/TypeBar";
 
 const DevicePage  = () => {
 
@@ -13,9 +14,13 @@ const DevicePage  = () => {
 
         fetchDevice(id).then(data => setDevice(data))
     },[device.searchDevice])
-    console.log(JSON.stringify(device.searchDevice))
+
     return (
         <Container className="mt-3  ">
+            {device.activeBar ?
+                <div className={classes.categoryBar}>
+                    <TypeBar/>
+                </div> : ""}
             <Row>
             <Col md={4}>
                 <Image width={300} height={300} src={process.env.REACT_APP_API_URL + device.img}/>

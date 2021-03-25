@@ -20,21 +20,13 @@ const Shop = observer(() => {
 
     useEffect(() => {
         fetchTypes().then(data => device.setTypes(data))
-
+        fetchCategories().then(data => device.setCategories(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null,  null,null, null, device.page, device.limit).then(data => {
+        fetchDevices(null, null, null, null, null, device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [device.page ,device.selectedCategory, ])
-
-
-    // useEffect(() => {
-    //     fetchDevices(null, device.selectedBrand.id,null,null, null, device.page, device.limit).then(data => {
-    //         device.setDevices(data.rows)
-    //         device.setTotalCount(data.count)
-    //     })
-    // }, [device.page, device.selectedBrand, ])
+    }, [device.page, device.selectedCategory, device.selectedBrand])
 
 
     return (
@@ -47,12 +39,12 @@ const Shop = observer(() => {
                     </div> : ""}
 
                 <div className={classes.wrapper}>
-                    <Slider />
+                    <Slider/>
                     <div className={classes.propositions}>
                         <img src={k1} alt=""/>
                     </div>
                 </div>
-                <Col className="mt-2"  >
+                <Col className="mt-2">
 
                     <BestCategory/>
 

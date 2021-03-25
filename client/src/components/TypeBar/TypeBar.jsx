@@ -23,7 +23,7 @@ const TypeBar = observer(() =>  {
      useEffect(() => {
          console.log(device.categories)
          fetchCategories().then(data => device.setCategories(data))
-     },[device.activeBar])
+     },[device.activeBar,device.selectedType])
 
     return (
         <div className={classes.menu}>

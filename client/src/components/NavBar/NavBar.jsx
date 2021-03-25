@@ -10,12 +10,13 @@ import AdminIcon from "../../assets/Admin/AdminIcon";
 import Exit from "../../assets/Exit/Exit";
 import SearchIcon from "../../assets/SearchIcon/SearchIcon";
 import CityAndPhone from "./CityAndPhone/CityAndPhone";
-import {fetchDevices} from "../../http/deviceApi";
+import {fetchCategories, fetchDevices} from "../../http/deviceApi";
 import Search from "./Search/Search";
 
 const NavBar = observer(() => {
-    const {user,device} = useContext(Context)
     const history = useHistory()
+    const {user,device} = useContext(Context)
+
 
 
 
@@ -43,6 +44,7 @@ const NavBar = observer(() => {
         history.push(ADMIN_ROUTE)
 
     }
+
 
     const shopRoute = () => {history.push(SHOP_ROUTE)}
 
