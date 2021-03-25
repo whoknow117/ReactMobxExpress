@@ -148,7 +148,12 @@ class DeviceController {
     async deleteOne(req,res) {
 
         const {id} = req.query
-        const device = await Device.destroy({where:{id:id}})
+        const device = await Device.destroy({where:{id:id,
+
+            },
+
+
+        },)
         return res.json(device)
     }
 }
