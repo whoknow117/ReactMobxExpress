@@ -13,7 +13,7 @@ const Admin = () => {
         const {device} = useContext(Context)
 
     useEffect(() => {
-        fetchDevices(null, null, null,null, device.page,device.limit).then(data => {
+        fetchDevices(null, null, null,null,null, device.page,device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
 

@@ -11,6 +11,7 @@ export default class DeviceStore {
         this._arrayId = []
         this._value = ""
         this._infoDescription = []
+        this._searchDevice = []
         this._selectedType = {}
         this._unit = []
         this._selectedUnit = []
@@ -24,6 +25,9 @@ export default class DeviceStore {
         makeAutoObservable(this)
     }
 
+    setSearchDevice (searchDevice) {
+        this._searchDevice = searchDevice
+    }
 
     setSelectedUnit (selectedUnit) {
         this._selectedUnit = selectedUnit
@@ -97,6 +101,10 @@ export default class DeviceStore {
         this._categories = categories
     }
 
+
+    get searchDevice () {
+        return this._searchDevice
+    }
 
     get selectedUnit () {
         return this._selectedUnit

@@ -13,8 +13,9 @@ const CreateDevice = observer(({show, onHide}) => {
     const [infoDescription, setInfoDescription] = useState([])
     const [unit, setUnit] = useState([])
     const [name, setName] = useState('')
+    const [aliasName, setAliasName] = useState('')
     const [price, setPrice] = useState(0)
-    const [clear,setClear] = useState(false)
+    const [clear, setClear] = useState(false)
     const [file, setFile] = useState(null)
 
     const params = useParams()
@@ -26,38 +27,17 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchCategories().then(data => device.setCategories(data))
         fetchUnits().then(data => device.setUnit(data))
         fetchDevices().then(data => device.setDevices(data.rows))
-    }, [device.selectedType, device.selectedUnit ])
+    }, [device.selectedType, device.selectedUnit])
 
 
     useEffect(() => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
-    }, [device.selectedType,device.selectedUnit])
+    }, [device.selectedType, device.selectedUnit])
 
-
-    // const addInfo = () => {
-    //     setInfo([...info, {title: '', description: '', number: Date.now()}])
-    // }
-    // const removeInfo = (number) => {
-    //     setInfo(info.filter(i => i.number !== number))
-    // }
-
-    // const changeInfo = (key, value, number) => {
-    //     setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
-    // }
-
-    // const changeInfoDescription = () => {
-    //     setInfoDescription([...infoDescription,{
-    //         title: value,
-    //
-    //     } ])
-    //     setValue("")
-    // }
 
     const selectFile = (e) => {
         setFile(e.target.files[0])
     }
-
-
 
 
     const addDevice = () => {
@@ -65,6 +45,7 @@ const CreateDevice = observer(({show, onHide}) => {
         const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)
+        formData.append('aliasName', aliasName)
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
@@ -79,10 +60,10 @@ const CreateDevice = observer(({show, onHide}) => {
     }
 
     const changeInfoDescription = (value) => {
-        setInfoDescription([...infoDescription,{
+        setInfoDescription([...infoDescription, {
             'title': value,
 
-        } ])
+        }])
 
     }
 
@@ -128,7 +109,7 @@ const CreateDevice = observer(({show, onHide}) => {
                             </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown className="mt-3">
-                            <Dropdown.Toggle>{ device.selectedUnit.name || "Выберете способ измерения"}</Dropdown.Toggle>
+                            <Dropdown.Toggle>{device.selectedUnit.name || "Выберете способ измерения"}</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {device.unit.map(unit =>
                                     <Dropdown.Item
@@ -165,30 +146,21 @@ const CreateDevice = observer(({show, onHide}) => {
                             onChange={(e) => setPrice(+e.target.value)}
                             className="mt-3"
                             placeholder="Введите стоимость товара"
-                            type="text"
+                            type="number"
                         >
 
                         </Form.Control>
 
 
-                        {/*<Form.Control*/}
-                        {/*    onChange={(e) => setColor(e.target.value)}*/}
-                        {/*    className="mt-3"*/}
-                        {/*    placeholder="Введите цвет товара"*/}
-                        {/*    type="text"*/}
-                        {/*>*/}
+                        <Form.Control
+                            onChange={(e) => setAliasName(e.target.value.toLowerCase())}
+                            className="mt-3"
+                            placeholder="Введите название для поля поиска"
+                            type="text"
+                        >
 
-                        {/*</Form.Control>*/}
+                        </Form.Control>
 
-
-                        {/*<Form.Control*/}
-                        {/*    onChange={(e) => setMade(e.target.value)}*/}
-                        {/*    className="mt-3"*/}
-                        {/*    placeholder="Введите производство товара"*/}
-                        {/*    type="text"*/}
-                        {/*>*/}
-
-                        {/*</Form.Control>*/}
 
 
                         <Form.Control className="mt-3"
@@ -199,15 +171,15 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Form.Control>
                         <hr/>
 
-                        {device.info.map((el,idx) => <div>
+                        {device.info.map((el, idx) => <div>
                             <div key={el.id}>
                                 {el.title}
                                 {el.id}
                                 {/*<input onBlur={changeInfoDescription} onChange={(e) =>setValue(e.target.value)} type="text"/>*/}
-                             <DescriptionInput
+                                <DescriptionInput
 
-                                 changeDescription={changeInfoDescription}
-                             />
+                                    changeDescription={changeInfoDescription}
+                                />
 
 
                             </div>

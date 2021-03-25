@@ -10,6 +10,7 @@ import Pages from "../../components/Pages/Pages";
 import classes from './Shop.module.scss';
 import Slider from "./Slider/Slider";
 import k1 from '../../assets/right.jpg'
+import BestCategory from "../../components/BestCategory/BestCategory";
 
 
 const Shop = observer(() => {
@@ -21,7 +22,7 @@ const Shop = observer(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null,  null,null, device.page, device.limit).then(data => {
+        fetchDevices(null, null,  null,null, null, device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
@@ -29,7 +30,7 @@ const Shop = observer(() => {
 
 
     useEffect(() => {
-        fetchDevices(null, device.selectedBrand.id,null,null,  device.page, device.limit).then(data => {
+        fetchDevices(null, device.selectedBrand.id,null,null, null, device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
@@ -52,6 +53,9 @@ const Shop = observer(() => {
                     </div>
                 </div>
                 <Col className="mt-2"  >
+
+                    <BestCategory/>
+
                     <BrandBar/>
 
                     <DeviceList/>

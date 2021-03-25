@@ -8,13 +8,12 @@ import {
     fetchInfosTypeKey,
 
 } from "../../http/deviceApi";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
 import {useParams} from "react-router-dom";
-import {v1} from "uuid";
-import Filter from "./Filter/Filter";
+
 import {fetchInfoDescription} from "../../http/categoryInfoApi";
-import BrandBar from "../../components/BrandBar/BrandBar";
+
 
 const SubCategoryPage = observer(() => {
 
@@ -40,7 +39,7 @@ const SubCategoryPage = observer(() => {
         })
 
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(typeId, null, null,strIdValue, device.page,device.limit).then(data => {
+        fetchDevices(typeId, null, null, strIdValue,null,  device.page,device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
 

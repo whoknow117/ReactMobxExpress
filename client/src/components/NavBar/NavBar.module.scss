@@ -1,11 +1,14 @@
+@import "src/variables/variables";
 
 
 .navbar {
   .container {
-   max-width: 1400px;
+    max-width: 1400px;
 
     background: #fff;
     flex-direction: column;
+
+
 
     .dflex {
       display: flex;
@@ -15,12 +18,14 @@
     }
 
   }
+
   .bottomBar {
     width: 100%;
     display: flex;
     align-items: center;
 
     height: 40px;
+
     .catalogBtn {
       background: #000;
       padding: 10px 20px;
@@ -31,11 +36,13 @@
       margin-left: 20px;
       outline: none;
     }
+
     .btn {
       margin-left: auto;
-      align-items:  center;
+      align-items: center;
       margin-right: 10px;
       outline: none;
+
       button {
         background: transparent;
         display: block;
@@ -45,6 +52,7 @@
         height: 30px;
         justify-content: center;
         border: 1px solid silver;
+
         svg {
           width: 24px;
 
@@ -53,3 +61,4 @@
     }
   }
 }
+

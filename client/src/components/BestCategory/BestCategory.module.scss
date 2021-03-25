@@ -1,0 +1,137 @@
+@import 'src/variables/variables';
+
+.popularWrap {
+  margin: 0;
+
+  @media (max-width: 1100px) {
+    display: block;
+  }
+  @media (max-width: 420px) {
+    display: block;
+  }
+}
+
+.blockTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 40px 20px;
+  color: #1f1f1f;
+
+}
+
+.popular {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 14px;
+  margin-top: 30px;
+
+  @media(max-width: 420px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wrap {
+    box-shadow: 0 2px 14px rgba(0, 0, 0, .1);
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    align-items: center;
+    position: relative;
+    transition: .1s ease-in-out;
+    border: 1px solid #e9e9e9;
+
+    &:hover {
+      .title {
+        .span {
+          width: 19px;
+          right: -30px;
+          visibility: visible;
+          opacity: 1;
+
+          &:before {
+            transform: rotate(45deg);
+            transition: .2s ease-in-out;
+          }
+
+          &:after {
+            transform: rotate(-45deg);
+            transition: .2s ease-in-out;
+          }
+        }
+      }
+
+    }
+
+    .title {
+      position: absolute;
+      font-size: 1rem;
+      bottom: 15px;
+      font-weight: 500;
+      color: #373737;
+
+      .span {
+        display: block;
+        width: 0;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        background: $orangeBackgroundColor;
+        transition: .2s ease-in-out;
+        visibility: hidden;
+        opacity: 0;
+
+        &:before,
+        &:after {
+          content: '';
+          display: block;
+          width: 6px;
+          height: 1px;
+          position: absolute;
+          top: 50%;
+          right: 0px;
+          background: inherit;
+          transition: .2s ease-in-out;
+        }
+
+        &:before {
+          transform-origin: right;
+          transform: rotate(0deg);
+        }
+
+        &:after {
+          transform-origin: right;
+          transform: rotate(0deg);
+        }
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 2px 17px rgba(0, 0, 0, .2);
+      transition: .1s ease-in-out;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transition: .2s ease-in-out;
+        background: rgba(255, 255, 255, .1);
+
+      }
+    }
+
+    .image {
+      width: 80px;
+      height: 80px;
+
+      margin-bottom: auto;
+      margin-top: 10px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

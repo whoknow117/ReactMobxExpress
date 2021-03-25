@@ -1,0 +1,58 @@
+@import 'src/variables/variables';
+
+
+.searchForm {
+  width: 50%;
+  display: flex;
+  margin-left: 80px;
+  position: relative;
+
+  .input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $mainTextColor;
+  }
+
+  .searchBtn {
+    border: none;
+    background: transparent;
+
+    svg {
+      width: 24px;
+    }
+  }
+
+  .searchList {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    z-index: 1001;
+    width: 540px;
+    overflow-x:hidden;
+    overflow-y: scroll;
+    height: 120px;
+    opacity: 0;
+    background: silver;
+    .searchItem {
+
+      width: 500px;
+      height: 40px;
+      opacity: 0;
+
+
+
+
+    }
+    .active {
+      width: 540px;
+      z-index: 1001;
+
+      opacity: 1;
+    }
+  }
+  .activeList {
+    opacity: 1  ;
+  }
+
+}
