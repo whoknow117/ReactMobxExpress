@@ -33,10 +33,7 @@ const Shop = observer(() => {
 
         <div className={classes.container}>
             <Row className={classes.row}>
-                {device.activeBar ?
-                    <div className={classes.categoryBar}>
-                        <TypeBar/>
-                    </div> : ""}
+
 
                 <div className={classes.wrapper}>
                     <Slider/>

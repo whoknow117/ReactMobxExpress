@@ -58,6 +58,7 @@ const TypeBar = observer(() =>  {
                         if (type.categoryId === device.selectedCategory.id) {
                             return <div
                                 onClick={() => {
+                                    device.setValue("")
                                     history.push(SUBCATEGORY_ROUTE + '/' +  type.id)
                                     device.setSelectedType(type)
                                 }}

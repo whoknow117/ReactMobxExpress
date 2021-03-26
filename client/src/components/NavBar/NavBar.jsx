@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
-import {Button, Container, Form, FormControl, Nav, Navbar, NavLink} from "react-bootstrap";
+import {Button, Container, Form, FormControl, Nav, Navbar, NavLink, Row} from "react-bootstrap";
 import {ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../../utils/consts";
 import {observer} from "mobx-react-lite";
 import {useHistory} from 'react-router-dom'
@@ -12,6 +12,7 @@ import SearchIcon from "../../assets/SearchIcon/SearchIcon";
 import CityAndPhone from "./CityAndPhone/CityAndPhone";
 import {fetchCategories, fetchDevices} from "../../http/deviceApi";
 import Search from "./Search/Search";
+import TypeBar from "../TypeBar/TypeBar";
 
 const NavBar = observer(() => {
     const history = useHistory()
@@ -63,6 +64,10 @@ const NavBar = observer(() => {
                 <div className={classes.bottomBar}>
 
                         <button className={classes.catalogBtn}  onClick={menuActive}>Каталог товаров</button>
+                    {device.activeBar ?
+                        <div  className={classes.typebar}>
+                            <TypeBar/>
+                        </div> : ""}
                         <Search/>
                         {user.isAuth === true ?
                             <Nav className={classes.btn}>

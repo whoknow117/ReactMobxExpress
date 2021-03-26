@@ -8,7 +8,7 @@ import {SHOP_ROUTE} from "../../utils/consts";
 
 
 
-const AppRouter = () => {
+const AppRouter = ({value,setValue}) => {
 
     const {user} = useContext(Context)
 

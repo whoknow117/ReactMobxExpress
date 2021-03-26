@@ -14,7 +14,7 @@ const App = observer(()  =>{
     const {user} = useContext(Context)
     // const [loading,setLoading] = useState(true)
 
-
+    const [value,setValue] = useState("")
     useEffect(()=> {
 
            check().then(data => {
@@ -35,7 +35,7 @@ const App = observer(()  =>{
         <BrowserRouter>
 
                 <NavBar/>
-                <AppRouter/>
+                <AppRouter value={value} setValue={setValue}/>
 
         </BrowserRouter>
     );

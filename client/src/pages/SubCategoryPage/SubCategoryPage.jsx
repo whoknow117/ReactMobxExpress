@@ -56,8 +56,8 @@ const SubCategoryPage = observer(() => {
 
 
 useEffect(()=> {
-    console.log(device.categories)
-    let strValue = value
+    console.log(device.value)
+    let strValue = device.value
     let filteredArr = (arr,value  )=> {return arr.filter( el => el.title === value)
 
     }
@@ -69,7 +69,7 @@ useEffect(()=> {
 
     setIdValue(newArray)
     console.log(JSON.stringify(newArray ))
-}, [value])
+}, [device.value])
 
 
     const filter = (arr) => {
@@ -91,10 +91,7 @@ useEffect(()=> {
         <div className={classes.container}>
 
             <Row className={classes.itemBar}>
-                {device.activeBar ?
-                    <div  >
-                        <TypeBar/>
-                    </div> : ""}
+
                 <Col md={9} className={classes.devices}>
                     <div className={classes.separate}>
                         <div className={classes.itemCount}>
@@ -124,7 +121,7 @@ useEffect(()=> {
                                 {newArr.map(el => el.deviceInfoId === i.id ?
                                     <div
                                         key={el.id}
-                                        onClick={() => setValue(el.title)}
+                                        onClick={() => device.setValue(el.title)}
                                     >{el.title}
 
 
