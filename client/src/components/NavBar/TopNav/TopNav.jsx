@@ -3,12 +3,22 @@ import classes from './TopNav.module.scss';
 
 const TopNav = () => {
     return (
-        <div>
-            <button>О Нас</button>
-            <button>Организациям</button>
-            <button>Контакты</button>
-            <button>Акции</button>
-        </div>
+        <ul className={classes.list}>
+            <li className={classes.item}>
+                <button className={classes.itemBtn}>О Нас</button>
+            </li>
+
+            <li className={classes.item}>
+                <button className={classes.itemBtn}>Организациям</button>
+            </li>
+
+            <li className={classes.item}>
+                <button className={classes.itemBtn}>Контакты</button>
+            </li>
+            <li className={classes.item}>
+                <button className={classes.itemBtn}>Акции</button>
+            </li>
+        </ul>
     );
 };
 

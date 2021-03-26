@@ -1,5 +1,6 @@
 import Admin from "./pages/Admin/Admin";
 import {
+    ABOUT_ROUTE,
     ADMIN_ROUTE,
     BASKET_ROUTE,
     DEVICE_ROUTE,
@@ -13,6 +14,7 @@ import Shop from "./pages/Shop/Shop";
 import Auth from "./pages/Auth/Auth";
 import DevicePage from "./pages/DevicePage/DevicePage";
 import SubCategoryPage from "./pages/SubCategoryPage/SubCategoryPage";
+import About from "./pages/About/About";
 
 
 export const authRoutes = [
@@ -32,6 +34,10 @@ export const publicRoutes = [
     {
         path: SHOP_ROUTE ,
         Component: Shop
+    },
+    {
+        path: ABOUT_ROUTE,
+        Component: About
     },
     {
         path: SUBCATEGORY_ROUTE + '/:typeId',

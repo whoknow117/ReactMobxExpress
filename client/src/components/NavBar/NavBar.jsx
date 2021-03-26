@@ -13,6 +13,7 @@ import Search from "./Search/Search";
 import TypeBar from "../TypeBar/TypeBar";
 import Basket from "../../assets/Basket/Basket";
 import Electric from "../../assets/Electric/Electric";
+import TopNav from "./TopNav/TopNav";
 
 
 const NavBar = observer(() => {
@@ -58,14 +59,15 @@ const NavBar = observer(() => {
                 <div className={classes.dflex}>
                     <div onClick={shopRoute}>
                         <NavBarLogo/>
-
                     </div>
                     <CityAndPhone/>
-
+                    <TopNav/>
                 </div>
                 <div className={classes.bottomBar}>
 
-                    <button className={classes.catalogBtn} onClick={menuActive}>Каталог товаров</button>
+                    <button onClick={menuActive} className={classes.goodsBtn}><span className={classes.span}></span>Каталог
+                        товаров
+                    </button>
                     {device.activeBar ?
                         <div className={classes.typebar}>
                             <TypeBar/>
