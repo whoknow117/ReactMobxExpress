@@ -3,6 +3,7 @@ const  infoDescriptionController = require('../controllers/infoDescriptionContro
 const router = new Router()
 
 router.get('/', infoDescriptionController.getAll)
+router.delete('/', infoDescriptionController.deleteOne)
 
 
 module.exports = router

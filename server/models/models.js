@@ -120,7 +120,7 @@ DeviceInfo.hasMany(DeviceInfoDescription )
 DeviceInfoDescription.belongsTo(DeviceInfo )
 
 
-Device.hasMany(DeviceInfoDescription )
+Device.hasMany(DeviceInfoDescription,)
 DeviceInfoDescription.belongsTo(Device)
 
 Type.hasMany(DeviceInfo)

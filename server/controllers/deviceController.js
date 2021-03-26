@@ -168,6 +168,8 @@ class DeviceController {
 
 
         },)
+
+        // await DeviceInfoDescription.destroy({where:{deviceId: id}})
         return res.json(device)
     }
 }
