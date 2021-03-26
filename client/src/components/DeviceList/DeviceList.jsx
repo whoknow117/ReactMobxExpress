@@ -4,11 +4,13 @@ import DeviceItem from "./DeviceItem/DeviceItem";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import classes from './DeviceList.module.scss';
+import {fetchDevice, fetchDevices} from "../../http/deviceApi";
 
 
 const DeviceList = observer(() => {
 
     const {device} = useContext(Context)
+
 
 
 

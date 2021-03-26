@@ -6,10 +6,13 @@ export default class DeviceStore {
         this._types = []
         this._brands = []
         this._devices = []
+        this._device = []
         this._categories = []
         this._info = []
         this._arrayId = []
         this._value = ""
+        this._filterName = ""
+
         this._infoDescription = []
         this._searchDevice = []
         this._selectedType = {}
@@ -23,6 +26,14 @@ export default class DeviceStore {
         this._totalCount = 0
         this._limit = 24
         makeAutoObservable(this)
+    }
+
+    setDevice(device) {
+        this._device = device
+    }
+
+    setFilterName (filterName) {
+        this._filterName = filterName
     }
 
     setSearchDevice (searchDevice) {
@@ -99,6 +110,14 @@ export default class DeviceStore {
 
     setCategories(categories) {
         this._categories = categories
+    }
+
+    get device () {
+        return this._device
+    }
+
+    get filterName () {
+        return this._filterName
     }
 
 
