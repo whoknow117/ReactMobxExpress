@@ -31,6 +31,8 @@ const Device = sequelize.define('device', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     aliasName: {type: DataTypes.STRING, unique: true, allowNull: false},
+    article: {type: DataTypes.INTEGER, unique: true, allowNull: false},
+    quantity: {type: DataTypes.STRING, allowNull: true},
     price: {type: DataTypes.INTEGER, allowNull: false},
     rating: {type: DataTypes.INTEGER, defaultValue: 0},
     img: {type: DataTypes.STRING, allowNull: false},
@@ -41,6 +43,12 @@ const Unit = sequelize.define('unit', {
     id: {type: DataTypes.INTEGER,primaryKey:true, autoIncrement: true},
     name: {type: DataTypes.STRING,unique: true, allowNull: false },
 
+})
+
+
+const Available = sequelize.define('available', {
+    id: {type: DataTypes.INTEGER,primaryKey:true, autoIncrement: true},
+    name: {type: DataTypes.STRING,unique: true, allowNull: false },
 })
 
 
@@ -76,6 +84,10 @@ const DeviceInfoDescription = sequelize.define('device_info_description', {
 
 Unit.hasMany(Device)
 Device.belongsTo(Unit)
+
+
+Available.hasMany(Device)
+Device.belongsTo(Available)
 
 
 User.hasMany(Rating)
@@ -139,5 +151,6 @@ module.exports = {
     User,
     Category,
     DeviceInfoDescription,
-    Unit
+    Unit,
+    Available
 }

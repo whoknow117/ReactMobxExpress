@@ -9,7 +9,7 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price,aliasName, brandId, typeId ,unitId, categoryId, infoDescription,info} = req.body
+            let {name, price,aliasName, brandId,quantity,availableId,article, typeId ,unitId, categoryId, infoDescription,info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -17,6 +17,9 @@ class DeviceController {
                 name,
                 price,
                 aliasName,
+                article,
+                availableId,
+                quantity,
                 brandId,
                 typeId,
                 unitId,
