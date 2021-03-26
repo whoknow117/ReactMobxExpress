@@ -13,7 +13,7 @@ const Search = () => {
         history.push(DEVICE_ROUTE + '/' + id)
     }
     const [value,setValue] = useState("")
-    const [array,setArray] = useState([])
+
     const {device} = useContext(Context)
     const history = useHistory()
     useEffect(() => {

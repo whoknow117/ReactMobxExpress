@@ -17,7 +17,7 @@ const DevicePage  = () => {
     useEffect( () => {
 
         fetchDevice(id).then(data => setDevice(data))
-    },[id,device])
+    },[id ])
     // useEffect( () => {
     //     console.log(JSON.stringify(device.device))
     //     fetchDevice(id).then(data => device.setDevice(data))

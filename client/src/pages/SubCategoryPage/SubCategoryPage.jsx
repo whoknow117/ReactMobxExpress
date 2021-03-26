@@ -47,7 +47,7 @@ const SubCategoryPage = observer(() => {
             device.setTotalCount(data.count)
 
         })
-    }, [ device.selectedType.id, idValue, device.selectedCategory,typeId ,device.selectedType.id])
+    }, [   idValue, device.selectedCategory,typeId ,device.selectedType.id])
 
 
 
