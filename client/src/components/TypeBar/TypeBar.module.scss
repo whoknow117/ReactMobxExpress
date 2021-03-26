@@ -1,3 +1,5 @@
+@import 'src/variables/variables';
+
 @font-face {
   font-family: 'PT Root UI';
   src: url('../../fonts/PTRootUI-Light.eot');
@@ -23,21 +25,55 @@
 }
 
 .menu {
-  position: absolute;
+  position: fixed;
   width: 320px;
   min-height: 300px;
-  left: 80px;
-  top: 160px;
+  left:80px;
+  top: 170px;
   z-index:1001;
+  border-radius: 10px;
+  .list {
+    background: #fff;
+    list-style: none;
+    &:first-child {
+      border-top: 1px solid silver;
+    }
+    .item {
+      height: 60px;
+      font-size: 0.94rem;
+      border-left: 1px solid silver;
+      border-right: 1px solid silver;
+      border-bottom: 1px solid silver;
+      padding-left: 65px;
+      display: flex;
+      align-items: center;
+      padding-right: 10px;
+      .icon {
+        position: absolute;
+        left: 0;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          width: 24px;
+        }
 
+      }
+    }
+  }
   .dropdown {
     width: 300px;
     height: 100vh;
     position: fixed;
-    top: 60px;
-    left: 450px;
+    top:170px;
+    left: 400px;
     z-index: 1001;
 
-    background: silver;
+    background: #f5f5f5;
   }
+}
+.active {
+  color:$orangeBackgroundColor;
 }

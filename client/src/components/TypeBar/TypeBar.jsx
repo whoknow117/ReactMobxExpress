@@ -7,9 +7,38 @@ import {NavLink} from "react-bootstrap";
 import {SUBCATEGORY_ROUTE} from "../../utils/consts";
 import {useHistory} from "react-router-dom";
 import {fetchCategories, fetchTypes} from "../../http/deviceApi";
+import Electric from "../../assets/Electric/Electric";
+import Shovel from "../../assets/Shovel/Shovel";
+import Drill from "../../assets/Drill/Drill";
+import Boiler from "../../assets/Boiler/Boiler";
+import Garden from "../../assets/Garden/Garden";
+import Gas from "../../assets/Gas/Gas";
+import Hose from "../../assets/Hose/Hose";
+import Pump from "../../assets/Pump/Pump";
+import Ventilation from "../../assets/Ventilation/Ventilation";
+import Carts from "../../assets/Carts/Carts";
+import Fasteners from "../../assets/Fasteners/Fasteners";
+
+
 
 
 const TypeBar = observer(() =>  {
+
+
+    const sidebarIcons = [
+        {id: '1', icon: <Drill/>},
+        {id: '2', icon: <Boiler/>},
+        {id: '3', icon: <Electric/>},
+        {id: '4', icon: <Garden/>},
+        {id: '5', icon: <Gas/>},
+        {id: '6', icon: <Hose/>},
+        {id: '7', icon: <Pump/>},
+        {id: '8', icon: <Shovel/>},
+        {id: '9', icon: <Ventilation/>},
+        {id: '10', icon: <Carts/>},
+        {id: '11', icon: <Fasteners/>},
+
+    ]
 
     const history = useHistory()
 
@@ -30,24 +59,29 @@ const TypeBar = observer(() =>  {
     return (
         <div className={classes.menu}>
 
-            <ListGroup>
-                {device.categories.map(type =>
-                    <ListGroup.Item
-                        active={type.id === device.selectedCategory.id}
-                        // onClick={() => device.setSelectedCategory(type)}
+            <ul className={classes.list}>
+                {device.categories.map((category,idx) =>
+                    <li
+
+                        className={`${classes.item} ${ category.id === device.selectedCategory.id ? classes.active :""}`}
+                        // onClick={() => device.setSelectedCategory(category)}
                         style={{cursor: 'pointer', textAlign: 'left'}}
                         onMouseOver={() => {
-                            device.setSelectedCategory(type)
+                            device.setSelectedCategory(category)
                             setMode(true)
                         }}
                         onBlur={() => setMode(false)}
-                        key={type.id}
+                        key={category.id}
                     >
-                        {type.name}
 
-                    </ListGroup.Item>
+                        <div className={classes.icon}>
+                            {sidebarIcons[idx].icon}
+                        </div>
+                        {category.name}
+
+                    </li>
                 )}
-            </ListGroup>
+            </ul>
             {mode ?
                 <div
                     onMouseOver={() => setMode(true)}
@@ -64,6 +98,8 @@ const TypeBar = observer(() =>  {
                                 }}
                                 key={type.id}
                             >
+
+
                                 {type.name}
 
 

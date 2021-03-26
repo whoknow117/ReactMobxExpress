@@ -34,7 +34,7 @@ const Search = () => {
             <div className={classes.searchForm}>
                 <input
                     onChange={(e) => setValue(e.target.value)}
-
+                    placeholder="Поиск по товарам"
                     value={value}
                     className={classes.input} type="text"/>
                 <button className={classes.searchBtn}>

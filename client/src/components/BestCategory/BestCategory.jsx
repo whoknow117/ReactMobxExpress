@@ -25,7 +25,7 @@ const BestCategory = observer(( ) => {
                                <img src={process.env.REACT_APP_API_URL + p.img} alt="#"/>
                             </div>
                             <div className={classes.title}>
-                                {p.title}
+                                {p.name}
                                 <span className={classes.span}></span>
                             </div>
                         </div>
