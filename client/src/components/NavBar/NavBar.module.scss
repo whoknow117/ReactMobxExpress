@@ -4,12 +4,12 @@
 .navbar {
   z-index: 1001;
   position: relative;
+
   .container {
     max-width: 1400px;
 
     background: #fff;
     flex-direction: column;
-
 
 
     .dflex {
@@ -25,8 +25,8 @@
     width: 100%;
     display: flex;
     align-items: center;
-
-    height: 40px;
+    height: 50px;
+    position: relative;
 
     .catalogBtn {
       background: #000;
@@ -40,24 +40,46 @@
 
     }
 
-    .btn {
+    .btns {
       margin-left: auto;
-      align-items: center;
-      margin-right: 10px;
+
+
       outline: none;
+      height: 100%;
+      .btn {
+        display: flex;
+        flex-direction: column;
+
+        .icon{
+          flex-basis: 80%;
+
+          max-height: 27px;
+
+        }
+        .title {
+          flex-basis: 20%;
+          margin: 0;
+          font-size: 14px;
+
+          color: #000;
+
+        }
+      }
 
       button {
         background: transparent;
         display: block;
-
-        display: flex;
+        height: 100%  ;
         align-items: center;
-        height: 30px;
-        justify-content: center;
-        border: 1px solid silver;
+        margin-right: 20px;
+        margin-left: 20px;
+
+  border: none;
 
         svg {
           width: 24px;
+          height: 24px;
+
 
         }
       }

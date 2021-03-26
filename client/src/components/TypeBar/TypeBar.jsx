@@ -64,7 +64,10 @@ const TypeBar = observer(() =>  {
                                 }}
                                 key={type.id}
                             >
-                                {type.name}</div>
+                                {type.name}
+
+
+                            </div>
                         }
                     })}
                 </div>

@@ -4,6 +4,7 @@ import {Card, Col, Image} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {useHistory, useParams} from "react-router-dom";
 import {DEVICE_ROUTE} from "../../../utils/consts";
+import Heart from "../../../assets/Heart/Heart";
 
 const DeviceItem = observer(({dev}) => {
 
@@ -40,6 +41,9 @@ const DeviceItem = observer(({dev}) => {
                         {
                        sets(dev.unitId)
                         }
+                    </span>
+                    <span className={classes.heart}>
+                        <Heart/>
                     </span>
                 </div>
 

@@ -23,6 +23,15 @@ export const fetchInfos = async (typeId) => {
 //     return data
 // }
 
+export const deleteDescription = async (id) => {
+    const {data} = await $authHost.delete('api/infoDescription',{
+        params: {
+            id
+        }
+    })
+    return data
+}
+
 export const fetchInfoDescription = async (typeId,deviceId,deviceInfoId) => {
     const {data} = await $host.get('api/infoDescription',{
         params: {

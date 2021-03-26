@@ -1,7 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
-import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes, fetchUnits} from "../../http/deviceApi";
+import {
+    createDevice,
+    fetchAvailbale,
+    fetchBrands,
+    fetchCategories,
+    fetchDevices,
+    fetchTypes,
+    fetchUnits
+} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
 import {createInfoDescription, fetchInfos} from "../../http/categoryInfoApi";
 import {useParams} from "react-router-dom";
@@ -13,6 +21,9 @@ const CreateDevice = observer(({show, onHide}) => {
     const [infoDescription, setInfoDescription] = useState([])
     const [unit, setUnit] = useState([])
     const [name, setName] = useState('')
+    const [available, setAvailable] = useState('')
+    const [quantity, setQuantity] = useState('')
+    const [article, setArticle] = useState('')
     const [aliasName, setAliasName] = useState('')
     const [price, setPrice] = useState(0)
     const [clear, setClear] = useState(false)
@@ -22,17 +33,19 @@ const CreateDevice = observer(({show, onHide}) => {
 
 
     useEffect(() => {
+
         fetchTypes().then(data => device.setTypes(data))
         fetchBrands().then(data => device.setBrands(data))
+        fetchAvailbale().then(data => device.setAvailable(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchUnits().then(data => device.setUnit(data))
         fetchDevices().then(data => device.setDevices(data.rows))
-    }, [device.selectedType, device.selectedUnit])
+    }, [device.selectedType, device.selectedUnit,device.selectedAvailable  ])
 
 
     useEffect(() => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
-    }, [device.selectedType, device.selectedUnit])
+    }, [device.selectedType, device.selectedUnit,device.selectedAvailable ])
 
 
     const selectFile = (e) => {
@@ -48,6 +61,9 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('aliasName', aliasName)
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
+        formData.append('article', article)
+        formData.append('quantity', quantity)
+        formData.append('availableId', device.selectedAvailable.id)
         formData.append('typeId', device.selectedType.id)
         formData.append('unitId', device.selectedUnit.id)
         formData.append('categoryId', device.selectedCategory.id)
@@ -122,6 +138,28 @@ const CreateDevice = observer(({show, onHide}) => {
                             </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown className="mt-3">
+                            <Dropdown.Toggle>{device.selectedAvailable.name || "В наличии"}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {device.available.map(available =>
+                                    <Dropdown.Item
+                                        key={available.id}
+                                        onClick={() => device.setSelectedAvailable(available)}
+                                    >
+                                        {available.name}
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                        {/*{device.available.map(available =>*/}
+                        {/*    <Dropdown.Item*/}
+                        {/*        key={available.id}*/}
+                        {/*        onClick={() => device.setSelectedAvailable(available)}*/}
+                        {/*    >*/}
+                        {/*        {available.name}*/}
+                        {/*    </Dropdown.Item>*/}
+                        {/*)}*/}
+                        <Dropdown className="mt-3">
                             <Dropdown.Toggle> {device.selectedCategory.name || "Выберете категорию"} </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {device.categories.map(category =>
@@ -161,7 +199,22 @@ const CreateDevice = observer(({show, onHide}) => {
 
                         </Form.Control>
 
+                        <Form.Control
+                            onChange={(e) => setArticle(+e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите артикул"
+                            type="number"
+                        >
 
+                        </Form.Control>
+                        <Form.Control
+                            onChange={(e) => setQuantity(+e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите количество товара"
+                            type="number"
+                        >
+
+                        </Form.Control>
 
                         <Form.Control className="mt-3"
                                       onChange={selectFile}

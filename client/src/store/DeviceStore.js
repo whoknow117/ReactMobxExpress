@@ -8,6 +8,8 @@ export default class DeviceStore {
         this._devices = []
         this._device = []
         this._categories = []
+        this._available = []
+        this._selectedAvailable = []
         this._info = []
         this._arrayId = []
         this._value = ""
@@ -27,6 +29,21 @@ export default class DeviceStore {
         this._limit = 24
         makeAutoObservable(this)
     }
+
+
+
+
+
+
+    setSelectedAvailable (selectedAvailable) {
+        this._selectedAvailable = selectedAvailable
+    }
+
+    setAvailable (available) {
+        this._available = available
+    }
+
+
 
     setDevice(device) {
         this._device = device
@@ -110,6 +127,15 @@ export default class DeviceStore {
 
     setCategories(categories) {
         this._categories = categories
+    }
+
+
+    get selectedAvailable () {
+        return this._selectedAvailable
+    }
+
+    get available () {
+        return this._available
     }
 
     get device () {

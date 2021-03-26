@@ -11,3 +11,13 @@
    }
  }
 }
+
+.heart {
+  width: 24px;
+  svg {
+    width: 24px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
