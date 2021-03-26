@@ -4,13 +4,15 @@
 .searchForm {
   width: 50%;
   display: flex;
-  margin-left: 80px;
+  margin-left: 90px;
   position: relative;
 
   .input {
     width: 100%;
     border: none;
     border-bottom: 1px solid $mainTextColor;
+    outline: none;
+    padding-left: 10px;
   }
 
   .searchBtn {
