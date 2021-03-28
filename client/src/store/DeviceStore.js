@@ -14,7 +14,7 @@ export default class DeviceStore {
         this._arrayId = []
         this._value = ""
         this._filterName = ""
-
+        this._selectedDevice = {}
         this._infoDescription = []
         this._searchDevice = []
         this._selectedType = {}
@@ -33,7 +33,9 @@ export default class DeviceStore {
 
 
 
-
+    setSelectedDevice (selectedDevice) {
+        this._selectedDevice = selectedDevice
+    }
 
     setSelectedAvailable (selectedAvailable) {
         this._selectedAvailable = selectedAvailable
@@ -129,6 +131,11 @@ export default class DeviceStore {
         this._categories = categories
     }
 
+
+
+    get selectedDevice () {
+        return this._selectedDevice
+    }
 
     get selectedAvailable () {
         return this._selectedAvailable

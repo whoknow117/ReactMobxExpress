@@ -38,6 +38,11 @@ export const createDevice = async (device) => {
     return data
 }
 
+export const updateDevice = async (device) => {
+    const {data} = await $authHost.post('api/device', device)
+    return data
+}
+
 export const fetchInfosTypeKey = async (typeId) => {
     const {data} = await $host.get('api/info', {
         params: {

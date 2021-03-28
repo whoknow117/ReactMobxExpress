@@ -1,0 +1,26 @@
+
+
+
+.item {
+  display: flex;
+  border-bottom: 1px solid silver;
+  &:hover {
+    cursor: pointer;
+    background: rgba(0,0,0,.1);
+  }
+  &:first-child {
+    border-top: 1px solid silver;
+  }
+  .name {}
+  .btn {
+    display: block;
+    margin-left: auto;
+    border: none;
+    background: #a02b2b;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+
+  }
+}

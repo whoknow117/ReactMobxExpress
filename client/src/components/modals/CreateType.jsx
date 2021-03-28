@@ -22,7 +22,7 @@ const CreateType = ({show, onHide}) => {
 
     useEffect(() => {
 
-        console.log(file)
+
         fetchCategories().then(data => device.setCategories(data))
 
     },[device.setSelectedCategory,file])
