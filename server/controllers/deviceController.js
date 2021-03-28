@@ -43,7 +43,6 @@ class DeviceController {
                         typeId: typeId,
                         deviceInfoId: (info[idx1].id)
 
-
                     })
                 )
             }
@@ -55,6 +54,25 @@ class DeviceController {
         }
     }
 
+    async updateOne(req,res,next) {
+        try {
+            let {id,name,price,aliasName,article,quantity,availableId} = req.body
+
+
+
+            let updatedProduct = await Device.update({name,price,aliasName,article,quantity,availableId},{
+                returning: true,where:{id}});
+
+
+
+
+            return res.json(updatedProduct)
+
+        }
+        catch  (e) {
+            ApiError.badRequest(e.message)
+        }
+    }
 
 
     async getAll(req, res, next) {
@@ -78,6 +96,13 @@ class DeviceController {
             }
 
             if (name && !brandId && !typeId && !honey) {
+
+                // models.sequelize.query(
+                //     "SELECT * FROM tableName WHERE CONCAT(field1, '', field2, '', field3, '', field4 ) LIKE \"%" + keyword + "%\"",
+                //     {type: models.sequelize.QueryTypes.SELECT}).then(res => {
+                //
+                // })
+
                 devices = await Device.findAndCountAll({where: {
                     aliasName: {[Op.like]: "%" + name + "%"}
                     },limit,offset})
