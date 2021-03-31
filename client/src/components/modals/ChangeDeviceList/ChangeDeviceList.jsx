@@ -24,7 +24,7 @@ const ChangeDeviceList = observer(() => {
 
     return (
         <div   className={classes.productList}>
-             <div>123 </div>
+
             {device.devices.map(el =>{
                 return (
                     <ChangeProductItem  dev={el} id={el.id} name={el.name} />

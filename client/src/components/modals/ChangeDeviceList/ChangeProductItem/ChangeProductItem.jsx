@@ -1,15 +1,12 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext,  } from 'react';
 import {Context} from "../../../../index";
-import {deleteDescription, fetchInfoDescription} from "../../../../http/categoryInfoApi";
+import {deleteDescription,  } from "../../../../http/categoryInfoApi";
 import {deleteDevice} from "../../../../http/deviceApi";
 import classes from './ChangeProductItem.module.scss';
 const ChangeProductItem = ({dev,name,id}) => {
 
     const {device} = useContext(Context)
-    // useEffect(() => {
-    //
-    //     fetchInfoDescription(null,null,null).then(data => device.setInfoDescription(data))
-    // },[device.selectedDevice])
+
 
     const removeCallback = (productId) => {
         deleteDescription(id).then( data => device.setInfoDescription(data))
@@ -19,17 +16,16 @@ const ChangeProductItem = ({dev,name,id}) => {
 
     }
 
+
     return (
 
-            <div onClick={() => device.setSelectedDevice(dev)} className={classes.item}>
-
+            <div onClick={() => device.setSelectedDevice(dev)} className={`${classes.item} ${ device.selectedDevice === dev ? classes.active : ""}`}>
+                <div className={classes.img}>
+                    <img src={process.env.REACT_APP_API_URL + dev.img} alt=""/>
+                </div>
                 <div className={classes.name}>{name}</div>
                 <button className={classes.btn} onClick={()=> removeCallback(id) }>X</button>
-                {/*{device.infoDescription.map( el => el.deviceId === id ? <div>{el.title}*/}
-
-
-                {/*</div> : ""  )}*/}
-                {/*<button className={classes.btn} onClick={removeDescription}>X</button>*/}
+                
             </div>
 
 

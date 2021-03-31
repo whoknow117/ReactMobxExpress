@@ -5,7 +5,7 @@ import {
     fetchAvailbale,
     fetchCategories,
     fetchDevices,
-    fetchUnits, updateDevice
+    fetchUnits, updateDevice,
 } from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
 
@@ -16,6 +16,15 @@ const UpdateProduct = observer(({show, onHide}) => {
     let selDev = JSON.stringify(device.selectedDevice)
     let newDev = JSON.parse(selDev)
     let defaultName = newDev.aliasName
+    let defaultName2 = newDev.name
+    let oldPrice = newDev.price
+    let oldQuantity = newDev.quantity
+    let oldArticle = newDev.article
+    let oldBrandId = newDev.brandId
+    let oldTypeId = newDev.typeId
+    let oldUnitId = newDev.unitId
+    let oldCategoryId = newDev.categoryId
+    let oldImg = newDev.img
 
 
     const [name, setName] = useState('')
@@ -32,6 +41,10 @@ const UpdateProduct = observer(({show, onHide}) => {
 
 
     useEffect(() => {
+        setName(defaultName2)
+        setQuantity(oldQuantity)
+        setArticle(oldArticle)
+        setPrice(oldPrice)
         setNewAliasName(defaultName)
         fetchAvailbale().then(data => device.setAvailable(data))
         fetchCategories().then(data => device.setCategories(data))
@@ -48,16 +61,31 @@ const UpdateProduct = observer(({show, onHide}) => {
 
     const updateProduct = () => {
 
-        const formData = new FormData()
-        formData.append('name', name)
-        formData.append('id', device.selectedDevice.id)
-        formData.append('price', `${price}`)
-        formData.append('aliasName', newAliasName)
-        formData.append('article', article)
-        formData.append('quantity', quantity)
-        formData.append('availableId', device.selectedAvailable.id)
-        updateDevice(formData).then(data => data)
+        // const formData = new FormData()
+        // formData.append('name', name)
+        //
+        // formData.append('id', device.selectedDevice.id)
+        // formData.append('price', `${price}`)
+        // formData.append('aliasName', newAliasName)
+        // formData.append('article', article)
+        // // formData.append('typeId', oldTypeId)
+        // // formData.append('unitId', oldUnitId)
+        // // formData.append('brandId', oldBrandId)
+        // // formData.append('categoryId', oldCategoryId)
+        // formData.append('quantity',  quantity )
+        // formData.append('availableId', device.selectedAvailable.id)
+        // updateDevice(formData).then(data => data)
 
+        updateDevice({
+            id: device.selectedDevice.id,
+            name: name,
+            price: price,
+            aliasName: newAliasName,
+            article: article,
+            quantity: quantity,
+
+
+        }).then(data => data)
 
     }
 
@@ -78,10 +106,81 @@ const UpdateProduct = observer(({show, onHide}) => {
                 <Modal.Body>
                     <Form>
 
+                        {/*<Dropdown className="mt-3">*/}
+                        {/*    <Dropdown.Toggle>{device.selectedType.name || "Выберете тип"}</Dropdown.Toggle>*/}
+                        {/*    <Dropdown.Menu>*/}
+                        {/*        {device.types.map(type =>*/}
+                        {/*            <Dropdown.Item*/}
+                        {/*                key={type.id}*/}
+                        {/*                onClick={() => device.setSelectedType(type)}*/}
+                        {/*            >*/}
+                        {/*                {type.name}*/}
+                        {/*            </Dropdown.Item>*/}
+                        {/*        )}*/}
+                        {/*    </Dropdown.Menu>*/}
+                        {/*</Dropdown>*/}
+
+
+                        {/*<Dropdown className="mt-3">*/}
+                        {/*    <Dropdown.Toggle>{device.selectedBrand.name || "Выберете бренд"}</Dropdown.Toggle>*/}
+                        {/*    <Dropdown.Menu>*/}
+                        {/*        {device.brands.map(brand =>*/}
+                        {/*            <Dropdown.Item*/}
+                        {/*                key={brand.id}*/}
+                        {/*                onClick={() => device.setSelectedBrand(brand)}*/}
+                        {/*            >*/}
+                        {/*                {brand.name}*/}
+                        {/*            </Dropdown.Item>*/}
+                        {/*        )}*/}
+                        {/*    </Dropdown.Menu>*/}
+                        {/*</Dropdown>*/}
+
+                        {/*<Dropdown className="mt-3">*/}
+                        {/*    <Dropdown.Toggle>{device.selectedUnit.name || "Выберете способ измерения"}</Dropdown.Toggle>*/}
+                        {/*    <Dropdown.Menu>*/}
+                        {/*        {device.unit.map(unit =>*/}
+                        {/*            <Dropdown.Item*/}
+                        {/*                key={unit.id}*/}
+                        {/*                onClick={() => device.setSelectedUnit(unit)}*/}
+                        {/*            >*/}
+                        {/*                {unit.name}*/}
+                        {/*            </Dropdown.Item>*/}
+                        {/*        )}*/}
+                        {/*    </Dropdown.Menu>*/}
+                        {/*</Dropdown>*/}
+
+                        <Dropdown className="mt-3">
+                            <Dropdown.Toggle>{device.selectedAvailable.name || "В наличии"}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {device.available.map(available =>
+                                    <Dropdown.Item
+                                        key={available.id}
+                                        onClick={() => device.setSelectedAvailable(available)}
+                                    >
+                                        {available.name}
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                        <Dropdown className="mt-3">
+                            <Dropdown.Toggle> {device.selectedCategory.name || "Выберете категорию"} </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {device.categories.map(category =>
+                                    <Dropdown.Item
+                                        key={category.id}
+                                        onClick={() => device.setSelectedCategory(category)}
+                                    >
+                                        {category.name}
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+
                         <Form.Control
                             onChange={(e) => setName(e.target.value)}
                             className="mt-3"
-
+                        value={name}
                             placeholder="Введите название товара"
                             type="text"
                         >
@@ -92,9 +191,14 @@ const UpdateProduct = observer(({show, onHide}) => {
                             className="mt-3"
                             placeholder="Введите стоимость товара"
                             type="number"
+                            value={price}
                         >
 
                         </Form.Control>
+
+
+
+
 
 
                         <Form.Control

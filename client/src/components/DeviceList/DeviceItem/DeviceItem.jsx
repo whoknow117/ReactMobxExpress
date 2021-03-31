@@ -5,6 +5,7 @@ import {observer} from "mobx-react-lite";
 import {useHistory, useParams} from "react-router-dom";
 import {DEVICE_ROUTE} from "../../../utils/consts";
 import Heart from "../../../assets/Heart/Heart";
+import BasketButton from "../../BasketButton/BasketButton";
 
 const DeviceItem = observer(({dev}) => {
 
@@ -24,7 +25,7 @@ const DeviceItem = observer(({dev}) => {
     }
 
     return (
-        <Col md={3} className={classes.wrapper} onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)}>
+        <div md={3} className={classes.wrapper} onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)}>
             <Card className={classes.card}>
                 <Image className={classes.image} src={process.env.REACT_APP_API_URL + dev.img}/>
                 <div className="text-black-50">Samsung</div>
@@ -45,10 +46,11 @@ const DeviceItem = observer(({dev}) => {
                     <span className={classes.heart}>
                         <Heart/>
                     </span>
+                    <BasketButton/>
                 </div>
 
             </Card>
-        </Col>
+        </div>
     );
 });
 

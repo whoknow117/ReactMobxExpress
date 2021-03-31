@@ -1,7 +1,10 @@
 
 
 .devices {
-  display: flex;
+  display: grid;
+  margin-top: 40px;
   flex-wrap: wrap;
+  grid-template-columns: repeat(5, 1fr);
   overflow: hidden;
+  grid-gap: 20px;
 }

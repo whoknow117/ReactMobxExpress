@@ -8,6 +8,7 @@ import ChangeDeviceList from "../../components/modals/ChangeDeviceList/ChangeDev
 import {fetchBrands, fetchCategories, fetchDevice, fetchDevices, fetchTypes} from "../../http/deviceApi";
 import {Context} from "../../index";
 import UpdateProduct from "../../components/modals/UpdateProduct";
+import classes from './Admin.module.scss';
 
 const Admin = () => {
 
@@ -58,7 +59,7 @@ const Admin = () => {
 
 
     return (
-        <Container className="d-flex flex-column">
+        <div className={classes.container}>
             <Button onClick={showTypeModal} className="mt-2">Добавить тип</Button>
             <Button onClick={showBrandModal} className="mt-2">Добавить бренд</Button>
             <Button onClick={showDeviceModal} className="mt-2">Добавить товар</Button>
@@ -70,7 +71,7 @@ const Admin = () => {
             <CreateDevice show={deviceDevice} onHide={onHideDevice}/>
             <UpdateProduct   show={updated} onHide={onHideUpdated}/>
             <ChangeDeviceList/>
-        </Container>
+        </div>
     );
 };
 

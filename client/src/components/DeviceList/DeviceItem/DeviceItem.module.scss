@@ -1,9 +1,15 @@
 .wrapper {
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
  .card {
    margin: 10px;
    border: none;
+   max-width: 240px;
    padding: 10px;
+
    .image {
      width: 100px;
      height: 100px;
