@@ -27,11 +27,15 @@ export default class DeviceStore {
         this._page = 1
         this._totalCount = 0
         this._limit = 24
+        this._cart = []
+
         makeAutoObservable(this)
     }
 
 
-
+    setCart (cart) {
+        this._cart = cart
+    }
 
     setSelectedDevice (selectedDevice) {
         this._selectedDevice = selectedDevice
@@ -131,7 +135,9 @@ export default class DeviceStore {
         this._categories = categories
     }
 
-
+    get cart () {
+        return this._cart
+    }
 
     get selectedDevice () {
         return this._selectedDevice

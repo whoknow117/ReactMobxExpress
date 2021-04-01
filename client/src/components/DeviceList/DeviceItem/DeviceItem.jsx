@@ -25,9 +25,9 @@ const DeviceItem = observer(({dev}) => {
     }
 
     return (
-        <div md={3} className={classes.wrapper} onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)}>
-            <Card className={classes.card}>
-                <Image className={classes.image} src={process.env.REACT_APP_API_URL + dev.img}/>
+        <div md={3} className={classes.wrapper} >
+            <Card  className={classes.card}>
+                <Image  onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)} className={classes.image} src={process.env.REACT_APP_API_URL + dev.img}/>
                 <div className="text-black-50">Samsung</div>
                 <div>
                     <div>{dev.rating}</div>
@@ -46,7 +46,7 @@ const DeviceItem = observer(({dev}) => {
                     <span className={classes.heart}>
                         <Heart/>
                     </span>
-                    <BasketButton/>
+                    <BasketButton product={dev}/>
                 </div>
 
             </Card>
