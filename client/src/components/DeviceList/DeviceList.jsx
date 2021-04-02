@@ -7,7 +7,7 @@ import classes from './DeviceList.module.scss';
 import {fetchDevice, fetchDevices} from "../../http/deviceApi";
 
 
-const DeviceList = observer(() => {
+const DeviceList = observer(( ) => {
 
     const {device} = useContext(Context)
 

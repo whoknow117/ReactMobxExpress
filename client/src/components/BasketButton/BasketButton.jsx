@@ -2,42 +2,55 @@ import React, {useContext, useEffect, useState} from 'react';
 import classes from './BasketButton.module.scss';
 import {Context} from "../../index";
 import {login} from "../../http/userApi";
+import {observer} from "mobx-react-lite";
 
-const BasketButton = ({product}) => {
+const BasketButton = observer(({product}) => {
 
     const {device} = useContext(Context)
 
 
 
+// Вот при таком раскладе я все четко добавляю, при перезагрузке все остается в локалсторадже, но
+    //Сам массив device.cart который локальный он же обнуляется
+    //И при перезагрузке при первом нажатии на "В корзину" все что было в локалсторадже заменяется
+    //новым массивом, а там получается 1 элемент по которому нажали!
+
+        let newArray = []
+      useEffect(() => {
+          let updatedBasket = localStorage.getItem('cart')
+
+          if( updatedBasket) {
+              device.setStorageCart(JSON.parse(updatedBasket))
+          }
 
 
+      },[device.cart])
 
-    let updatedBasket =   localStorage.getItem('basketProduct')
-    let uB = JSON.parse(updatedBasket)
 
     const addProduct = () => {
 
-        const updatedCart = [...uB, product] // продукт - товар, прилетает из пропсов
-        device.setCart(updatedCart) // это Action, Mobx сеттер, запихиваем этот массив в стор.
-        localStorage.setItem('basketProduct', JSON.stringify(updatedCart)) // Сохраняем в локал сторадж
+        let updatedCart = [...device.storageCart  ,product] // если вместо device.cart поставить массив из локалстораджа, то при перезагрузке и нажатии
+        //продолжит заполнятся локалсторадж, но если мы полностью удалим локал, то при добавлении в пустой массив пишет, что не может
+        //итерировать null, я пробовал делать и условия и ||  &&  ? : :D получается замкнутый круг,
 
+
+        device.setCart(updatedCart)
+        let newCart = JSON.stringify(device.cart)
+        let parseCart = JSON.parse(newCart)
+
+        localStorage.setItem('cart', JSON.stringify(parseCart))
     }
-   // Я захожу в f12 и в локал сторадже криво добавляются товары, то добавляются то нет!
-    //Когда перезагружаю страницу, могут пропасть из локал стораджа,
-    // или если отсаются то при первом же клике добавить в корзину снова все пропадают.
 
+    let isDisabled = (newArray.some(el => el.id === product.id))
 
-    let isDisabled = uB.some( el =>  el.id === product.id)
-    console.log(product.id)
-    console.log(isDisabled)
-
+    // debugger
     return (
 
-        // сравнива id если есть в массиве в локале обьект с таким айди то дизейблим , но нихера не дизейблит :D
-        <button disabled={uB.some( el =>  el.id === product.id)} onClick={addProduct}  className={classes.btn}>
+        // сравнива id если есть в массиве в локале обьект с таким айди то дизейблим , но нихера не дизейблит :D disabled={uB.some( el =>  el.id === product.id)}
+        <button disabled={device.storageCart.some(el => el.id === product.id)}   onClick={addProduct}  className={classes.btn}>
             В корзину
         </button>
     );
-};
+})  ;
 
 export default BasketButton;

@@ -7,7 +7,7 @@ import {DEVICE_ROUTE} from "../../../utils/consts";
 import Heart from "../../../assets/Heart/Heart";
 import BasketButton from "../../BasketButton/BasketButton";
 
-const DeviceItem = observer(({dev}) => {
+const DeviceItem = observer(({dev,addProduct}) => {
 
     const history = useHistory()
     const {id} = useParams()
@@ -46,7 +46,9 @@ const DeviceItem = observer(({dev}) => {
                     <span className={classes.heart}>
                         <Heart/>
                     </span>
-                    <BasketButton product={dev}/>
+
+
+                    <BasketButton   product={dev}/>
                 </div>
 
             </Card>

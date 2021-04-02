@@ -49,12 +49,24 @@
       .btn {
         display: flex;
         flex-direction: column;
-
+        outline: none;
         .icon{
           flex-basis: 80%;
 
           max-height: 27px;
-
+        .span {
+          position: absolute;
+          background: $orangeBackgroundColor;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          right: 30px;
+          color: #fff;
+          bottom: 17px;
+        }
         }
         .title {
           flex-basis: 20%;

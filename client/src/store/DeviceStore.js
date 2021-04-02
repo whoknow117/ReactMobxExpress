@@ -13,6 +13,7 @@ export default class DeviceStore {
         this._info = []
         this._arrayId = []
         this._value = ""
+        this._cartCounter = ""
         this._filterName = ""
         this._selectedDevice = {}
         this._infoDescription = []
@@ -28,10 +29,19 @@ export default class DeviceStore {
         this._totalCount = 0
         this._limit = 24
         this._cart = []
+        this._storageCart = []
 
         makeAutoObservable(this)
     }
 
+
+    setStorageCart (storageCart) {
+        this._storageCart = storageCart
+    }
+
+    setCartCounter (cartCounter) {
+        this._cartCounter = cartCounter
+    }
 
     setCart (cart) {
         this._cart = cart
@@ -133,6 +143,14 @@ export default class DeviceStore {
 
     setCategories(categories) {
         this._categories = categories
+    }
+
+    get storageCart () {
+        return this._storageCart
+    }
+
+    get cartCounter () {
+        return this._cartCounter
     }
 
     get cart () {

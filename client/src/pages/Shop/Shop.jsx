@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
 import {Card, Col, Container, ListGroup, Row} from "react-bootstrap";
 import TypeBar from "../../components/TypeBar/TypeBar";
@@ -47,7 +47,7 @@ const Shop = observer(() => {
 
                     <BrandBar/>
 
-                    <DeviceList/>
+                    <DeviceList  />
                     <Pages/>
                 </Col>
 

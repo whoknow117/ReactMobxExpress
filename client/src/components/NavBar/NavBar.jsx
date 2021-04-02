@@ -1,4 +1,4 @@
-import React, {useContext,} from 'react';
+import React, {useContext, useEffect,} from 'react';
 import {Context} from "../../index";
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../../utils/consts";
@@ -51,6 +51,17 @@ const NavBar = observer(() => {
         history.push(BASKET_ROUTE)
     }
 
+    useEffect(() =>{
+
+        let count = localStorage.getItem('basketProduct')
+       if(count) {
+           let parseCount= JSON.parse(count)
+
+           if(parseCount.count) {
+               device.setCartCounter(parseCount.count)
+           }
+       }
+    },[])
 
     return (
 
@@ -96,6 +107,9 @@ const NavBar = observer(() => {
                             <button className={classes.btn} onClick={basketRoute}>
                                 <div className={classes.icon}>
                                     <Basket/>
+                                    <span className={classes.span}>
+                                        {device.storageCart && device.storageCart.length || 0}
+                                    </span>
                                 </div>
                                 <div className={classes.title}>
                                     Корзина
