@@ -5,7 +5,7 @@ import {Context} from "../../index";
 import {
     fetchBrands, fetchCategories,
     fetchDevices,
-    fetchInfosTypeKey,
+    fetchInfosTypeKey, fetchTypes,
 
 } from "../../http/deviceApi";
 import {Col, Row} from "react-bootstrap";
@@ -27,7 +27,7 @@ const SubCategoryPage = observer(() => {
 
     useEffect(() => {
         const strIdValue = JSON.stringify(idValue)
-
+fetchTypes(typeId).then(data => device.setTypes(data))
         fetchInfosTypeKey(typeId).then(data => {
 
             device.setInfo(data)
