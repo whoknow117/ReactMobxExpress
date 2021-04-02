@@ -48,6 +48,11 @@
       display: flex;
       align-items: center;
       padding-right: 10px;
+      cursor: pointer;
+      &:hover {
+        cursor: pointer;
+        background: #000;
+      }
       .icon {
         position: absolute;
         left: 0;
