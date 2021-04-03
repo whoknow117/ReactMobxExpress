@@ -4,102 +4,86 @@ import {Context} from "../../../index";
 
 import {observer} from "mobx-react-lite";
 
-const BasketInput = observer(({setCount,count,el}) => {
+const BasketInput = observer(({ el}) => {
 
     let localName = `localCount+${el.id}`
 
     const {device} = useContext(Context)
     let [countArray, setCountArray] = useState([])
-    // const [count, setCount] = useState(1)
+    const [count, setCount] = useState(1)
 
+
+    const cA = JSON.stringify(countArray)
+    let pA;
+    if(cA) {
+         pA = JSON.parse(cA)
+    }
+    let counts;
+    if(pA) {
+        counts = pA
+    }
+    let value =  counts
+
+
+
+    let [val,setVal] = useState(value[el.id])
     useEffect(() => {
-
         localName = JSON.parse(localStorage.getItem(`${el.id}`))
         if (localName) {
             setCountArray(localName)
-
+            device.setStorageCounter(localName[el.id])
         }
+        // console.log(localName[el.id])
+        // setCount(localName[el.id])
 
     }, [count])
 
-
     const incrementCount = () => {
-        setCount(count + 1)
-        // let dC = JSON.stringify(device.cart)
-        // let dC1 = JSON.parse(dC)
-        //
-        // let copyCart = [...dC1]
-        //
-        //
-        // copyCart.find( c => {
-        //     if(c.id === el.id) {
-        //         c.quantity = count;
-        //         return {...c}
-        //
-        //     }
-        //
-        // })
+        setCount(prevCount => prevCount + 1)
         let cart = {}
-        let newArray = []
-        cart[el.id] = count
 
+        cart[el.id] =  countArray[el.id]
         cart[el.id] = cart[el.id] + 1
 
-        newArray.push(cart)
-        localStorage.setItem(`${el.id}`, JSON.stringify(newArray))
-
-
+        localStorage.setItem(`${el.id}`, JSON.stringify(cart))
     }
-
     const decrementCount = () => {
-        setCount(count - 1)
-
+        setCount(prevCount => prevCount - 1)
         let cart = {}
-        let newArray = []
-        cart[el.id] = count
-
+        cart[el.id] =  countArray[el.id]
         cart[el.id] = cart[el.id] - 1
+        localStorage.setItem(`${el.id}`, JSON.stringify(cart))
 
-        newArray.push(cart)
-        localStorage.setItem(`${el.id}`, JSON.stringify(newArray))
-
-        // let cart = {}
-        // cart[el.id] = count
-        // let newArray = []
-        // cart[el.id] = cart[el.id] - 1
-        // let arr = [];
-        // if (!cart[el.id]) {
-        //     cart[el.id] = count
-        //
-        //
-        // }
-        // if (arr) {
-        //     cart[el.id] = count
-        // }
-        //
-        // localStorage.setItem(`${el.id}`, JSON.stringify(cart))
     }
 
-    const cA = JSON.stringify(countArray)
-    let pA = JSON.parse(cA)
-
-    let counts = pA[0]
-    let value = {...counts}
 
 
+    let sum = el.price * countArray[el.id]
+
+    console.log(sum)
 
     return (
-
+<div>
         <div className={classes.input}>
             <span onClick={decrementCount} className={classes.prev}> </span>
             <span onClick={incrementCount} className={classes.next}> </span>
 
             <div className={classes.insertField}>
-                {value[el.id] || 1}
+                <input onChange={(e) => setVal(e.target.value)} value={ value[el.id] || 1} type="number"/>
 
             </div>
         </div>
+    <div className={classes.price}>
+        <div className={classes.sum}>
+                {sum}грн
 
+        </div>
+
+        <div className={classes.quantity}>
+            { countArray[el.id] + "шт " + " x " + `${el.price}`+ "грн"  }
+        </div>
+    </div>
+</div>
     );
 });
 

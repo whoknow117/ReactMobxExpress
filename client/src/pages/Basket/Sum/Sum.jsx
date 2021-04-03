@@ -1,35 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from './Sum.module.scss';
+import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
 
-const Sum = ({el,value}) => {
+
+const Sum = observer(({el,value}) => {
 
     const [count, setCount] = useState([])
-
+    const {device} = useContext(Context);
 
     useEffect(() => {
 
 
         let getLocal = JSON.parse(localStorage.getItem(`${el.id}`))
-        setCount(getLocal[0])
+        setCount(getLocal)
 
 
     },[value])
 
     let units = JSON.stringify(el)
     let parseUnits = JSON.parse(units)
-    console.log(parseUnits)
+
 
     return (
         <div className={classes.price}>
             <div className={classes.sum}>
-                {el.price * count[el.id]}грн
+                {el.price}грн
             </div>
 
             <div className={classes.quantity}>
-                {parseUnits.unitId === 1 ? count[el.id] + "шт " + " x " + el.price +"грн": ""}
+                {/*{parseUnits.unitId === 1 ? count[el.id] + "шт " + " x " + el.price +"грн": ""}*/}
             </div>
         </div>
     );
-};
+});
 
 export default Sum;

@@ -10,15 +10,15 @@ const Basket = observer(() => {
     const {device} = useContext(Context);
 
 
-
-    const [count, setCount] = useState(1)
+    //
+    // const [count, setCount] = useState(1)
 
     useEffect(() => {
         let updatedBasket = localStorage.getItem('cart')
+
         if( updatedBasket) {
             device.setStorageCart(JSON.parse(updatedBasket))
         }
-
 
     },[device.cartCounter])
 
@@ -65,9 +65,9 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput setCount={setCount} count={count} el={el}/>
+                        <BasketInput el={el}/>
 
-                        <Sum value={count} el={el}/>
+
                         {/*<div className={classes.input}>*/}
                         {/*    <span onClick={decrementCount} className={classes.prev}>  </span>*/}
                         {/*    <span onClick={incrementCount} className={classes.next}> </span>*/}

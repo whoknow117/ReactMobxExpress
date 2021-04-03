@@ -3,14 +3,16 @@
 .input {
 
   left: 620px;
+  bottom: 20px;
   display: flex;
-  width: 80px;
+  width: 120px;
   height: 50px;
   border-radius: 40px;
   border: 1px solid silver;
   justify-content: center;
   align-items: center;
   margin-left: 50px;
+
   position: absolute;
   cursor: pointer;
   .next{
@@ -71,4 +73,22 @@
     }
   }
 
+}
+
+.price {
+  position: absolute;
+  width: 200px;
+  right: 20px;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+
+  .sum {
+
+  }
+  .quantity {
+display: flex;
+
+  }
 }
