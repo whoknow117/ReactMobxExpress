@@ -8,7 +8,7 @@ import Sum from "./Sum/Sum";
 const Basket = observer(() => {
 
     const {device} = useContext(Context);
-    let summm;
+    let summm = []
     let sumOffAllItems = null;
     let itemQuantityParse;
     let newArr = [];
@@ -32,7 +32,7 @@ const Basket = observer(() => {
 
 
     useEffect(() => {
-
+        setCount(device.sum)
 
         let updatedBasket = localStorage.getItem('cart')
 
@@ -40,10 +40,10 @@ const Basket = observer(() => {
         if (updatedBasket) {
             device.setStorageCart(JSON.parse(updatedBasket))
             console.log(device.sum)
-            setCount(device.sum)
+
         }
 
-    }, [device.cartCounter, click,count ])
+    }, [device.cartCounter, click,count,summm ])
 
 
     return (
@@ -82,7 +82,6 @@ const Basket = observer(() => {
 
                     >
 
-
                         <div className={classes.image}>
                             <img src={process.env.REACT_APP_API_URL + el.img} alt=""/>
                         </div>
@@ -95,7 +94,7 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput renderSum={count} el={el}/>
+                        <BasketInput setRenderSum={setCount} renderSum={count} el={el}/>
 
 
                     </div>
