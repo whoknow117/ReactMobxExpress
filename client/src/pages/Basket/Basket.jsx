@@ -8,76 +8,77 @@ import Sum from "./Sum/Sum";
 const Basket = observer(() => {
 
     const {device} = useContext(Context);
-
-    let newArr =[ ]
+    let summm;
+    let sumOffAllItems = null;
+    let itemQuantityParse;
+    let newArr = [];
     //
-    // const [count, setCount] = useState(1)
+        const [count, setCount] = useState(0)
 
 
-
-    const [click,setClick] = useState(false)
-    const [sumAllItems,setSumAllItems] = useState([])
+    const [click, setClick] = useState(false)
+    const [sumAllItems, setSumAllItems] = useState(null)
 
 
     const deleteCallback = (id) => {
 
         setClick(!click);
-        let newCart = device.storageCart.filter( cart => cart.id !== id)
-        localStorage.setItem('cart',JSON.stringify(newCart))
+        let newCart = device.storageCart.filter(cart => cart.id !== id)
+        localStorage.setItem('cart', JSON.stringify(newCart))
         localStorage.removeItem(`${id}`)
-
 
 
     }
 
-    useEffect(() => {
 
+    useEffect(() => {
 
 
         let updatedBasket = localStorage.getItem('cart')
 
 
-        if( updatedBasket) {
+        if (updatedBasket) {
             device.setStorageCart(JSON.parse(updatedBasket))
-
+            console.log(device.sum)
+            setCount(device.sum)
         }
 
-    },[device.cartCounter, click ])
+    }, [device.cartCounter, click,count ])
+
 
     return (
         <div className={classes.basketWrapper}>
-            <h1 className={classes.pageTitle}>Корзина заказов</h1>
-
-
-
-
+           <div className={classes.headerCart}>
+               <h1 className={classes.pageTitle}>Корзина заказов</h1>
+               <h2 className={classes.count}>{count} грн</h2>
+           </div>
 
             {device.storageCart.map(el => {
                 let storageCart = JSON.parse(JSON.stringify(device.storageCart))
                 let itemQuantity = localStorage.getItem(`${el.id}`)
-                let itemQuantityParse
-                if(itemQuantity) {
-                        itemQuantityParse  =  JSON.parse(itemQuantity)
+
+
+                if (itemQuantity) {
+                    itemQuantityParse = JSON.parse(itemQuantity)
 
                 }
 
 
-
-                let summm;
-                if(itemQuantityParse ) {
-                   summm =  el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
+                if (itemQuantityParse) {
+                    summm = el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
                     console.log(summm)
                     newArr.push(summm)
 
 
                 }
                 console.log(newArr)
-                let sumItem = newArr.reduce((acc, cur)=> acc + cur, 0)
+                let sumItem = newArr.reduce((acc, cur) => acc + cur, 0)
                 console.log(sumItem)
+                device.setSum(sumItem)
 
                 return (
                     <div className={classes.basketItem}
-                    key={el.id}
+                         key={el.id}
 
                     >
 
@@ -94,9 +95,7 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput   el={el}/>
-
-
+                        <BasketInput renderSum={count} el={el}/>
 
 
                     </div>

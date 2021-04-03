@@ -4,7 +4,16 @@
 .basketWrapper {
   max-width: 1400px;
   margin: 40px auto;
+.headerCart {
+  display: flex;
 
+  .count {
+    display: block;
+    margin-right: 160px;
+    margin-left: auto;
+    font-size: 3rem;
+  }
+}
   .pageTitle {
     margin-bottom: 40px;
   }
