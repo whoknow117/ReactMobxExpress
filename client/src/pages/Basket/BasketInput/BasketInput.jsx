@@ -4,14 +4,14 @@ import {Context} from "../../../index";
 
 import {observer} from "mobx-react-lite";
 
-const BasketInput = observer(({ el}) => {
+const BasketInput = observer(({ el  }) => {
 
     let localName = `localCount+${el.id}`
 
     const {device} = useContext(Context)
     let [countArray, setCountArray] = useState([])
     const [count, setCount] = useState(1)
-
+    const [sumItems, setSumItems] = useState([])
 
     const cA = JSON.stringify(countArray)
     let pA;
@@ -26,8 +26,13 @@ const BasketInput = observer(({ el}) => {
 
 
 
+
     let [val,setVal] = useState(value[el.id])
+
+
     useEffect(() => {
+
+
         localName = JSON.parse(localStorage.getItem(`${el.id}`))
         if (localName) {
             setCountArray(localName)
@@ -58,9 +63,8 @@ const BasketInput = observer(({ el}) => {
 
 
 
-    let sum = el.price * (countArray[el.id] ? countArray[el.id] : 1)
 
-    console.log(sum)
+    let sum =   el.price * (countArray[el.id] ? countArray[el.id] : 1)
 
     return (
 <div>

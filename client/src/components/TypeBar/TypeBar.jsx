@@ -1,9 +1,7 @@
 import  React, {useContext, useEffect, useState} from 'react';
 import classes from './TypeBar.module.scss';
 import {Context} from "../../index";
-import ListGroup from "react-bootstrap/ListGroup";
 import {observer} from "mobx-react-lite";
-import {NavLink} from "react-bootstrap";
 import {SUBCATEGORY_ROUTE} from "../../utils/consts";
 import {useHistory} from "react-router-dom";
 import {fetchCategories, fetchTypes} from "../../http/deviceApi";
@@ -50,8 +48,7 @@ const TypeBar = observer(() =>  {
         setMode(true)
     }
      useEffect(() => {
-         console.log(device.categories)
-         console.log(device.types)
+
          fetchTypes().then(data => device.setTypes(data))
          fetchCategories().then(data => device.setCategories(data))
      },[device.activeBar])

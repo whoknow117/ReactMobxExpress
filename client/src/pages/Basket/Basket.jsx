@@ -13,33 +13,35 @@ const Basket = observer(() => {
     //
     // const [count, setCount] = useState(1)
 
+
+
+    const [click,setClick] = useState(false)
+
+
+    const deleteCallback = (id) => {
+
+        setClick(!click);
+        let newCart = device.storageCart.filter( cart => cart.id !== id)
+        localStorage.setItem('cart',JSON.stringify(newCart))
+        localStorage.removeItem(`${id}`)
+
+
+
+    }
+
     useEffect(() => {
 
 
 
         let updatedBasket = localStorage.getItem('cart')
 
+
         if( updatedBasket) {
             device.setStorageCart(JSON.parse(updatedBasket))
-            // console.log( JSON.parse(updatedBasket))
+
         }
 
-    },[device.cartCounter,device.storageCart ])
-
-
-
-    const deleteCallback = (id) => {
-
-
-        let newCart = device.storageCart.filter( cart => cart.id !== id)
-        localStorage.setItem('cart',JSON.stringify(newCart))
-        localStorage.removeItem(`${id}`)
-        return  console.log(newCart)
-
-
-    }
-
-
+    },[device.cartCounter, click ])
 
     return (
         <div className={classes.basketWrapper}>
@@ -50,6 +52,23 @@ const Basket = observer(() => {
 
 
             {device.storageCart.map(el => {
+                let storageCart = JSON.parse(JSON.stringify(device.storageCart))
+                let itemQuantity = localStorage.getItem(`${el.id}`)
+                let itemQuantityParse
+                if(itemQuantity) {
+                        itemQuantityParse  =  JSON.parse(itemQuantity)
+
+                }
+
+
+
+
+                // if(itemQuantityParse ) {
+                //    summm =  el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
+                //     console.log(summm)
+                // }
+
+
                 return (
                     <div className={classes.basketItem}
                     key={el.id}
@@ -69,25 +88,9 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput el={el}/>
+                        <BasketInput   el={el}/>
 
 
-                        {/*<div className={classes.input}>*/}
-                        {/*    <span onClick={decrementCount} className={classes.prev}>  </span>*/}
-                        {/*    <span onClick={incrementCount} className={classes.next}> </span>*/}
-
-                        {/*    <div >*/}
-                        {/*        <span>{count}</span>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<div className={classes.price}>*/}
-                        {/*    <div className={classes.sum}>*/}
-                        {/*        {el.price}грн*/}
-                        {/*    </div>*/}
-                        {/*    <div className={classes.quantity}>*/}
-
-                        {/*    </div>*/}
-                        {/*</div>*/}
 
 
                     </div>

@@ -219,6 +219,7 @@ const CreateDevice = observer(({show, onHide}) => {
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
+                                      multiple
                         >
 
                         </Form.Control>

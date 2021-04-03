@@ -12,7 +12,6 @@ import CityAndPhone from "./CityAndPhone/CityAndPhone";
 import Search from "./Search/Search";
 import TypeBar from "../TypeBar/TypeBar";
 import Basket from "../../assets/Basket/Basket";
-import Electric from "../../assets/Electric/Electric";
 import TopNav from "./TopNav/TopNav";
 
 
@@ -30,7 +29,7 @@ const NavBar = observer(() => {
     }
 
     const menuActive = () => {
-        console.log(device.activeBar)
+
         if (device.activeBar === false) {
             device.setActive(true)
         } else {
