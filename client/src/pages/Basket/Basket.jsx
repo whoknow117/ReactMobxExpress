@@ -14,26 +14,30 @@ const Basket = observer(() => {
     // const [count, setCount] = useState(1)
 
     useEffect(() => {
+
+
+
         let updatedBasket = localStorage.getItem('cart')
 
         if( updatedBasket) {
             device.setStorageCart(JSON.parse(updatedBasket))
+            // console.log( JSON.parse(updatedBasket))
         }
 
-    },[device.cartCounter])
-
-    // const incrementCount = () => {
-    //
-    //     setCount(count + 1)
-    //
-    // }
-    //
-    // const decrementCount = () => {
-    //     setCount(count - 1)
-    // }
+    },[device.cartCounter,device.storageCart ])
 
 
 
+    const deleteCallback = (id) => {
+
+
+        let newCart = device.storageCart.filter( cart => cart.id !== id)
+        localStorage.setItem('cart',JSON.stringify(newCart))
+        localStorage.removeItem(`${id}`)
+        return  console.log(newCart)
+
+
+    }
 
 
 
@@ -59,7 +63,7 @@ const Basket = observer(() => {
                         <div className={classes.nameBlock}>
                             <div className={classes.name}>{el.name}</div>
                             <div className={classes.btnWrapper}>
-                                <button className={classes.btn}>
+                                <button onClick={() => deleteCallback(el.id)} className={classes.btn}>
                                     delete
                                 </button>
                             </div>

@@ -36,13 +36,13 @@ const BasketInput = observer(({ el}) => {
         // console.log(localName[el.id])
         // setCount(localName[el.id])
 
-    }, [count])
+    }, [count ])
 
     const incrementCount = () => {
         setCount(prevCount => prevCount + 1)
         let cart = {}
 
-        cart[el.id] =  countArray[el.id]
+        cart[el.id] =  (countArray[el.id] ? countArray[el.id] : 1)
         cart[el.id] = cart[el.id] + 1
 
         localStorage.setItem(`${el.id}`, JSON.stringify(cart))
@@ -58,7 +58,7 @@ const BasketInput = observer(({ el}) => {
 
 
 
-    let sum = el.price * countArray[el.id]
+    let sum = el.price * (countArray[el.id] ? countArray[el.id] : 1)
 
     console.log(sum)
 
@@ -80,7 +80,7 @@ const BasketInput = observer(({ el}) => {
         </div>
 
         <div className={classes.quantity}>
-            { countArray[el.id] + "шт " + " x " + `${el.price}`+ "грн"  }
+            { (countArray[el.id] ? countArray[el.id] : 1) + "шт " + " x " + `${el.price}`+ "грн"  }
         </div>
     </div>
 </div>

@@ -40,7 +40,7 @@ const SubCategoryPage = observer(() => {
 
 
     useEffect(() => {
-        console.log(device.value)
+
         let strValue = device.value
         let filteredArr = (arr, value) => {
             return arr.filter(el => el.title === value)
@@ -51,7 +51,7 @@ const SubCategoryPage = observer(() => {
 
 
         setIdValue(newArray)
-        console.log(JSON.stringify(newArray))
+
     }, [device.value])
 
 
