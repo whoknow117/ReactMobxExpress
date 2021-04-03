@@ -3,6 +3,7 @@ import classes from './Basket.module.scss';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import BasketInput from "./BasketInput/BasketInput";
+import Sum from "./Sum/Sum";
 
 const Basket = observer(() => {
 
@@ -10,7 +11,7 @@ const Basket = observer(() => {
 
 
 
-    // const [count, setCount] = useState(1)
+    const [count, setCount] = useState(1)
 
     useEffect(() => {
         let updatedBasket = localStorage.getItem('cart')
@@ -64,7 +65,9 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput el={el}/>
+                        <BasketInput setCount={setCount} count={count} el={el}/>
+
+                        <Sum value={count} el={el}/>
                         {/*<div className={classes.input}>*/}
                         {/*    <span onClick={decrementCount} className={classes.prev}>  </span>*/}
                         {/*    <span onClick={incrementCount} className={classes.next}> </span>*/}
@@ -73,14 +76,14 @@ const Basket = observer(() => {
                         {/*        <span>{count}</span>*/}
                         {/*    </div>*/}
                         {/*</div>*/}
-                        <div className={classes.price}>
-                            <div className={classes.sum}>
-                                {el.price}грн
-                            </div>
-                            <div className={classes.quantity}>
+                        {/*<div className={classes.price}>*/}
+                        {/*    <div className={classes.sum}>*/}
+                        {/*        {el.price}грн*/}
+                        {/*    </div>*/}
+                        {/*    <div className={classes.quantity}>*/}
 
-                            </div>
-                        </div>
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
 
                     </div>

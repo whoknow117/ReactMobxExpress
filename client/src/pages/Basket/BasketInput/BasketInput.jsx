@@ -4,34 +4,27 @@ import {Context} from "../../../index";
 
 import {observer} from "mobx-react-lite";
 
-const BasketInput = observer(({el}) => {
+const BasketInput = observer(({setCount,count,el}) => {
 
     let localName = `localCount+${el.id}`
 
     const {device} = useContext(Context)
     let [countArray, setCountArray] = useState([])
-    const [count, setCount] = useState(1)
+    // const [count, setCount] = useState(1)
 
     useEffect(() => {
 
-        let localName = JSON.parse(localStorage.getItem(`${el.id}`))
-
-
+        localName = JSON.parse(localStorage.getItem(`${el.id}`))
         if (localName) {
             setCountArray(localName)
 
         }
-        // if(basketItems) {
-        //         // copyItems = [...basketItems]
-        //
-        // }
-
 
     }, [count])
 
 
     const incrementCount = () => {
-        setCount(prevCount => prevCount + 1)
+        setCount(count + 1)
         // let dC = JSON.stringify(device.cart)
         // let dC1 = JSON.parse(dC)
         //
@@ -59,7 +52,7 @@ const BasketInput = observer(({el}) => {
     }
 
     const decrementCount = () => {
-        setCount(prevCount => prevCount - 1)
+        setCount(count - 1)
 
         let cart = {}
         let newArray = []
@@ -93,7 +86,7 @@ const BasketInput = observer(({el}) => {
     let counts = pA[0]
     let value = {...counts}
 
-    console.log(value)
+
 
     return (
 
@@ -102,7 +95,7 @@ const BasketInput = observer(({el}) => {
             <span onClick={incrementCount} className={classes.next}> </span>
 
             <div className={classes.insertField}>
-                {value[el.id]}
+                {value[el.id] || 1}
 
             </div>
         </div>
