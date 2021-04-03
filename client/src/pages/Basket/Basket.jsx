@@ -35,7 +35,7 @@ const Basket = observer(() => {
 
 
 
-    debugger;
+
     return (
         <div className={classes.basketWrapper}>
             <h1 className={classes.pageTitle}>Корзина заказов</h1>
@@ -64,7 +64,7 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput/>
+                        <BasketInput el={el}/>
                         {/*<div className={classes.input}>*/}
                         {/*    <span onClick={decrementCount} className={classes.prev}>  </span>*/}
                         {/*    <span onClick={incrementCount} className={classes.next}> </span>*/}

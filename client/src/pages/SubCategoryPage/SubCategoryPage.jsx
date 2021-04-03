@@ -20,56 +20,39 @@ const SubCategoryPage = observer(() => {
 
     const {device} = useContext(Context)
     const {typeId} = useParams()
-    const [value,setValue] = useState("")
-    const [idValue,setIdValue] = useState([])
-
+    const [value, setValue] = useState("")
+    const [idValue, setIdValue] = useState([])
 
 
     useEffect(() => {
         const strIdValue = JSON.stringify(idValue)
-fetchTypes(typeId).then(data => device.setTypes(data))
-        fetchInfosTypeKey(typeId).then(data => {
-
-            device.setInfo(data)
-
-        })
-
-        fetchInfoDescription(typeId, null, null).then(data => {
-            device.setInfoDescription(data)
-
-        })
-
+        fetchTypes(typeId).then(data => device.setTypes(data))
+        fetchInfosTypeKey(typeId).then(data => {device.setInfo(data)})
+        fetchInfoDescription(typeId, null, null).then(data => {device.setInfoDescription(data)})
         fetchCategories().then(data => device.setCategories(data))
-
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(typeId, null, null, strIdValue,null,  device.page,device.limit).then(data => {
+        fetchDevices(typeId, null, null, strIdValue, null, device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
 
         })
-    }, [   idValue, device.selectedCategory,typeId ,device.selectedType.id])
+    }, [idValue, device.selectedCategory, typeId, device.selectedType.id])
 
 
+    useEffect(() => {
+        console.log(device.value)
+        let strValue = device.value
+        let filteredArr = (arr, value) => {
+            return arr.filter(el => el.title === value)
+
+        }
+
+        let newArray = filteredArr(device.infoDescription, strValue).map(el => el.deviceId)
 
 
-
-
-
-useEffect(()=> {
-    console.log(device.value)
-    let strValue = device.value
-    let filteredArr = (arr,value  )=> {return arr.filter( el => el.title === value)
-
-    }
-
-    let newArray = filteredArr(device.infoDescription, strValue).map(el => el.deviceId)
-
-
-
-
-    setIdValue(newArray)
-    console.log(JSON.stringify(newArray ))
-}, [device.value])
+        setIdValue(newArray)
+        console.log(JSON.stringify(newArray))
+    }, [device.value])
 
 
     const filter = (arr) => {

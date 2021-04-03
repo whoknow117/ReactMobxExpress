@@ -54,6 +54,21 @@
     }
 
   }
-
+  .insertField {
+    border: none;
+    input {
+      width: 30px;
+      border: none;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      color: #000;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
 
 }

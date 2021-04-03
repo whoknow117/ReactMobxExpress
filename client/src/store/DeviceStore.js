@@ -30,11 +30,14 @@ export default class DeviceStore {
         this._limit = 24
         this._cart = []
         this._storageCart = []
+        this._storageCounter = []
 
         makeAutoObservable(this)
     }
 
-
+    setStorageCounter (storageCounter) {
+        this._storageCounter = storageCounter
+    }
     setStorageCart (storageCart) {
         this._storageCart = storageCart
     }
@@ -143,6 +146,10 @@ export default class DeviceStore {
 
     setCategories(categories) {
         this._categories = categories
+    }
+
+    get storageCounter () {
+        return this._storageCounter
     }
 
     get storageCart () {
