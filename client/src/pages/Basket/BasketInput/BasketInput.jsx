@@ -64,7 +64,7 @@ const BasketInput = observer(({ el  }) => {
 
 
 
-    let sum =   el.price * (countArray[el.id] ? countArray[el.id] : 1)
+        let sum =   el.price * (countArray[el.id] ? countArray[el.id] : 1)
 
     return (
 <div>

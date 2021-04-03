@@ -16,6 +16,7 @@ const Basket = observer(() => {
 
 
     const [click,setClick] = useState(false)
+    const [sumAllItems,setSumAllItems] = useState([])
 
 
     const deleteCallback = (id) => {
@@ -62,11 +63,12 @@ const Basket = observer(() => {
 
 
 
+                let summm;
+                if(itemQuantityParse ) {
+                   summm =  el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
+                    console.log(summm)
 
-                // if(itemQuantityParse ) {
-                //    summm =  el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
-                //     console.log(summm)
-                // }
+                }
 
 
                 return (
