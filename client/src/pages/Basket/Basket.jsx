@@ -9,7 +9,7 @@ const Basket = observer(() => {
 
     const {device} = useContext(Context);
 
-
+    let newArr =[ ]
     //
     // const [count, setCount] = useState(1)
 
@@ -67,9 +67,13 @@ const Basket = observer(() => {
                 if(itemQuantityParse ) {
                    summm =  el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
                     console.log(summm)
+                    newArr.push(summm)
+
 
                 }
-
+                console.log(newArr)
+                let sumItem = newArr.reduce((acc, cur)=> acc + cur, 0)
+                console.log(sumItem)
 
                 return (
                     <div className={classes.basketItem}
