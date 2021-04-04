@@ -7,19 +7,19 @@ class BasketController {
     async create( req, res,next) {
 
         try {
-            let {phone, items} = req.body
+            let {phone, items,strCounts} = req.body
 
             let basket = await Basket.create({phone})
-            if (items) {
+            if (items && strCounts) {
 
                 items = JSON.parse(items)
-                // strCounts = JSON.parse(strCounts)
+                strCounts = JSON.parse(strCounts)
 
-                items.forEach( i => {
+                items.forEach( (i,idx) => {
                     BasketDevice.create({
                         basketId: basket.id,
                         deviceId: i.id,
-                        count: 4
+                        count: strCounts[idx][i.id]
                     })
                 })
             }
