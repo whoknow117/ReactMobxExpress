@@ -19,7 +19,7 @@ class BasketController {
                     BasketDevice.create({
                         basketId: basket.id,
                         deviceId: i.id,
-                        count: strCounts[idx][i.id]
+                        count: strCounts[idx][i.id] == null ? 1 : strCounts[idx][i.id]
                     })
                 })
             }
