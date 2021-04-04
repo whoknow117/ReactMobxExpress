@@ -48,7 +48,7 @@ const DeviceItem = observer(({dev,addProduct}) => {
                     </span>
 
 
-                    <BasketButton   product={dev}/>
+                    <BasketButton  product={dev}/>
                 </div>
 
             </Card>

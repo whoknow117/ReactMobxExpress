@@ -4,8 +4,11 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import BasketInput from "./BasketInput/BasketInput";
 import Sum from "./Sum/Sum";
+import {useHistory} from "react-router-dom";
 
 const Basket = observer(() => {
+
+    const history = useHistory()
 
     const {device} = useContext(Context);
     let summm = []
@@ -15,7 +18,7 @@ const Basket = observer(() => {
     //
         const [count, setCount] = useState(0)
 
-
+    const [countClick,setCountClick] = useState(false)
     const [click, setClick] = useState(false)
     const [sumAllItems, setSumAllItems] = useState(null)
 
@@ -43,7 +46,7 @@ const Basket = observer(() => {
 
         }
 
-    }, [device.cartCounter, click,count,summm ])
+    }, [device.cartCounter, click,count,newArr ])
 
 
     return (
@@ -65,17 +68,25 @@ const Basket = observer(() => {
 
 
                 if (itemQuantityParse) {
+
                     summm = el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
                     console.log(summm)
-                    newArr.push(summm)
 
 
                 }
-                console.log(newArr)
-                let sumItem = newArr.reduce((acc, cur) => acc + cur, 0)
-                console.log(sumItem)
-                device.setSum(sumItem)
+                if (!itemQuantityParse) {
 
+                    summm = el.price * 1
+                    console.log(summm)
+
+
+                }
+                newArr.push(summm)
+
+                let sumItem = newArr.reduce((acc, cur) => acc + cur, 0)
+
+                device.setSum(sumItem)
+                debugger
                 return (
                     <div className={classes.basketItem}
                          key={el.id}
@@ -94,7 +105,7 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput setRenderSum={setCount} renderSum={count} el={el}/>
+                        <BasketInput countClick={countClick}  setCountClick={setCountClick } setRenderSum={setCount} renderSum={count} el={el}/>
 
 
                     </div>

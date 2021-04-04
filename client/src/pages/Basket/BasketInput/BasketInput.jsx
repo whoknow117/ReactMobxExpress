@@ -4,7 +4,7 @@ import {Context} from "../../../index";
 
 import {observer} from "mobx-react-lite";
 
-const BasketInput = observer(({ el,renderSum,setRenderSum  }) => {
+const BasketInput = observer(({ el,renderSum,setRenderSum,setCountClick,countClick  }) => {
 
     let localName = `localCount+${el.id}`
 
@@ -43,6 +43,7 @@ const BasketInput = observer(({ el,renderSum,setRenderSum  }) => {
     }, [count,renderSum  ])
 
     const incrementCount = () => {
+        setCountClick(!countClick)
         setCount(prevCount => prevCount + 1)
         let cart = {}
 
@@ -52,6 +53,7 @@ const BasketInput = observer(({ el,renderSum,setRenderSum  }) => {
         localStorage.setItem(`${el.id}`, JSON.stringify(cart))
     }
     const decrementCount = () => {
+        setCountClick(!countClick)
         setCount(prevCount => prevCount - 1)
         let cart = {}
         cart[el.id] =  countArray[el.id]
