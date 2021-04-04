@@ -52,7 +52,7 @@ const Basket = observer(() => {
 
         }
 
-    }, [device.cartCounter, click,count,  ])
+    }, [device.cartCounter, click,count,])
 
 
     let items = JSON.stringify(device.storageCart)
@@ -61,8 +61,7 @@ const Basket = observer(() => {
     const addCart = () => {
         createBasket({phone: 92131123,items,strCounts }).then(data => setValue(data))
     }
-    let arr = [{"42": 8},{"44": 10}]
-    let arr1 = JSON.stringify(arr)
+
 
 
 

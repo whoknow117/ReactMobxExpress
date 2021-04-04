@@ -33,7 +33,7 @@ const BasketInput = observer(({   el,renderSum,setRenderSum,setCountClick,countC
     useEffect(() => {
         setRenderSum(device.sum)
         localName = JSON.parse(localStorage.getItem(`${el.id}`))
-        allCounts.push(localName)
+        allCounts.push(localName || 1)
         if (localName) {
             setCountArray(localName)
             device.setStorageCounter(localName[el.id])
