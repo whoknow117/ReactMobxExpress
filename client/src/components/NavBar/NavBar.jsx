@@ -1,4 +1,4 @@
-import React, {useContext, useEffect,} from 'react';
+import React, {useContext, useEffect, useState,} from 'react';
 import {Context} from "../../index";
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../../utils/consts";
@@ -60,7 +60,8 @@ const NavBar = observer(() => {
                device.setCartCounter(parseCount.count)
            }
        }
-    },[])
+        console.log(JSON.parse(JSON.stringify(device.storageCart)))
+    },[ device.storageCart])
 
     return (
 

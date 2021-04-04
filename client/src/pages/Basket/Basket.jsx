@@ -46,7 +46,7 @@ const Basket = observer(() => {
         setCount(device.sum)
         // console.log(JSON.parse(JSON.stringify(device.storageCart)))
         let updatedBasket = localStorage.getItem('cart')
-        console.log(allCountsArray)
+
         setAllCount(allCountsArray)
         if (updatedBasket) {
             device.setStorageCart(JSON.parse(updatedBasket))
@@ -59,12 +59,10 @@ const Basket = observer(() => {
 
     let items = JSON.stringify(device.storageCart)
     let strCounts = JSON.stringify(allCount)
-    console.log( JSON.parse(JSON.stringify(device.storageCart)) )
+
 
 
     const addCart = () => {
-
-
             let cartItems = JSON.parse(JSON.stringify(device.storageCart))
 
 

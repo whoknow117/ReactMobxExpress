@@ -33,8 +33,11 @@ export default class DeviceStore {
         this._storageCounter = []
         this._sum = null
 
+
         makeAutoObservable(this)
     }
+
+
 
     setSum (sum) {
         this._sum = sum
@@ -152,6 +155,8 @@ export default class DeviceStore {
     setCategories(categories) {
         this._categories = categories
     }
+
+
 
     get sum () {
         return this._sum
