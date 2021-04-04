@@ -4,7 +4,7 @@ import {Context} from "../../../index";
 
 import {observer} from "mobx-react-lite";
 
-const BasketInput = observer(({ el,renderSum,setRenderSum,setCountClick,countClick  }) => {
+const BasketInput = observer(({   el,renderSum,setRenderSum,setCountClick,countClick,allCounts   }) => {
 
     let localName = `localCount+${el.id}`
 
@@ -32,8 +32,8 @@ const BasketInput = observer(({ el,renderSum,setRenderSum,setCountClick,countCli
 
     useEffect(() => {
         setRenderSum(device.sum)
-
         localName = JSON.parse(localStorage.getItem(`${el.id}`))
+        allCounts.push(localName)
         if (localName) {
             setCountArray(localName)
             device.setStorageCounter(localName[el.id])

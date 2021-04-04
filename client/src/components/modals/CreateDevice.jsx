@@ -151,14 +151,6 @@ const CreateDevice = observer(({show, onHide}) => {
                             </Dropdown.Menu>
                         </Dropdown>
 
-                        {/*{device.available.map(available =>*/}
-                        {/*    <Dropdown.Item*/}
-                        {/*        key={available.id}*/}
-                        {/*        onClick={() => device.setSelectedAvailable(available)}*/}
-                        {/*    >*/}
-                        {/*        {available.name}*/}
-                        {/*    </Dropdown.Item>*/}
-                        {/*)}*/}
                         <Dropdown className="mt-3">
                             <Dropdown.Toggle> {device.selectedCategory.name || "Выберете категорию"} </Dropdown.Toggle>
                             <Dropdown.Menu>
@@ -229,7 +221,7 @@ const CreateDevice = observer(({show, onHide}) => {
                             <div key={el.id}>
                                 {el.title}
                                 {el.id}
-                                {/*<input onBlur={changeInfoDescription} onChange={(e) =>setValue(e.target.value)} type="text"/>*/}
+
                                 <DescriptionInput
 
                                     changeDescription={changeInfoDescription}
