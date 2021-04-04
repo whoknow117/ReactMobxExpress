@@ -54,25 +54,26 @@ class DeviceController {
         }
     }
 
-    // async updateOne(req,res,next) {
-    //     try {
-    //         let {id,name,price,aliasName,article,quantity,availableId} = req.body
-    //
-    //
-    //
-    //         let updatedProduct = await Device.update({name,price,aliasName,article,quantity,availableId},{
-    //             returning: true,where:{id}});
-    //
-    //
-    //
-    //
-    //         return res.json(updatedProduct)
-    //
-    //     }
-    //     catch  (e) {
-    //         ApiError.badRequest(e.message)
-    //     }
-    // }
+    async updateOne(req,res,next) {
+        try {
+            let {id,name ,price,aliasName,article,quantity,availableId} = req.body
+
+
+
+
+            let updatedProduct = await Device.update({name, price,aliasName,article,quantity,availableId},{
+                returning: true ,where:{id}});
+
+
+
+
+            return res.json(updatedProduct)
+
+        }
+        catch  (e) {
+            ApiError.badRequest(e.message)
+        }
+    }
 
 
     async getAll(req, res, next) {
