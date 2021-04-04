@@ -6,10 +6,12 @@ import BasketInput from "./BasketInput/BasketInput";
 
 
 import {createBasket} from "../../http/basketApi";
+import {useHistory} from "react-router-dom";
+import {SHOP_ROUTE} from "../../utils/consts";
 
 const Basket = observer(() => {
 
-
+    const history = useHistory()
 
     const {device} = useContext(Context);
     let summm = []
@@ -57,12 +59,26 @@ const Basket = observer(() => {
 
     let items = JSON.stringify(device.storageCart)
     let strCounts = JSON.stringify(allCount)
-    console.log(allCount)
+    console.log( JSON.parse(JSON.stringify(device.storageCart)) )
+
+
     const addCart = () => {
+
+
+            let cartItems = JSON.parse(JSON.stringify(device.storageCart))
+
+
         createBasket({phone: 92131123,items,strCounts }).then(data => setValue(data))
+        localStorage.removeItem('cart')
+        cartItems.forEach( el => {
+            localStorage.removeItem(`${el.id}`)
+        })
+
+        createBasket({phone: 92131123,items,strCounts }).then(data => setValue(data))
+
+        history.push(SHOP_ROUTE)
+
     }
-
-
 
 
 
