@@ -7,23 +7,23 @@ class BasketController {
     async create( req, res,next) {
 
         try {
-            let {phone, items, strCounts} = req.body
+            let {phone, items} = req.body
 
             let basket = await Basket.create({phone})
             if (items) {
 
                 items = JSON.parse(items)
-                strCounts = JSON.parse(strCounts)
+                // strCounts = JSON.parse(strCounts)
 
                 items.forEach( i => {
                     BasketDevice.create({
                         basketId: basket.id,
                         deviceId: i.id,
-                        count: strCounts[0][i.id]
+                        count: 4
                     })
                 })
             }
-
+            res.json(basket)
         }
         catch (e) {
             ApiError.badRequest(e.message)
