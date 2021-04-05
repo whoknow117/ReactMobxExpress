@@ -1,11 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Button, Col, Dropdown, Form, Modal} from "react-bootstrap";
+import {Button, Dropdown, Form, Modal} from "react-bootstrap";
 import {Context} from "../../index";
 import {
-    fetchAvailbale,
-    fetchCategories,
-    fetchDevices,
-    fetchUnits, updateDevice,
+
+   updateDevice,
 } from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
 
@@ -20,11 +18,11 @@ const UpdateProduct = observer(({show, onHide}) => {
     let oldPrice = newDev.price
     let oldQuantity = newDev.quantity
     let oldArticle = newDev.article
-    let oldBrandId = newDev.brandId
-    let oldTypeId = newDev.typeId
-    let oldUnitId = newDev.unitId
-    let oldCategoryId = newDev.categoryId
-    let oldImg = newDev.img
+    // let oldBrandId = newDev.brandId
+    // let oldTypeId = newDev.typeId
+    // let oldUnitId = newDev.unitId
+    // let oldCategoryId = newDev.categoryId
+    // let oldImg = newDev.img
 
 
     const [name, setName] = useState('')
@@ -46,17 +44,17 @@ const UpdateProduct = observer(({show, onHide}) => {
         setArticle(oldArticle)
         setPrice(oldPrice)
         setNewAliasName(defaultName)
-        fetchAvailbale().then(data => device.setAvailable(data))
-        fetchCategories().then(data => device.setCategories(data))
-        fetchUnits().then(data => device.setUnit(data))
-        fetchDevices().then(data => device.setDevices(data.rows))
+        // fetchAvailbale().then(data => device.setAvailable(data))
+        // fetchCategories().then(data => device.setCategories(data))
+        // fetchUnits().then(data => device.setUnit(data))
+        // fetchDevices().then(data => device.setDevices(data.rows))
     }, [device.selectedDevice])
 
 
 
 
 
-    console.log(device.selectedDevice.id)
+
 
 
     const updateProduct = () => {
@@ -68,21 +66,15 @@ const UpdateProduct = observer(({show, onHide}) => {
         // formData.append('price', `${price}`)
         // formData.append('aliasName', newAliasName)
         // formData.append('article', article)
-        // // formData.append('typeId', oldTypeId)
-        // // formData.append('unitId', oldUnitId)
-        // // formData.append('brandId', oldBrandId)
-        // // formData.append('categoryId', oldCategoryId)
-        // formData.append('quantity',  quantity )
+        // formData.append('quantity',  `${quantity}` )
         // formData.append('availableId', device.selectedAvailable.id)
         // updateDevice(formData).then(data => data)
 
         updateDevice({
             id: device.selectedDevice.id,
-            name: name,
             price: price,
-            aliasName: newAliasName,
-            article: article,
             quantity: quantity,
+            available: device.selectedAvailable.id,
 
 
         }).then(data => data)
@@ -163,29 +155,16 @@ const UpdateProduct = observer(({show, onHide}) => {
                             </Dropdown.Menu>
                         </Dropdown>
 
-                        <Dropdown className="mt-3">
-                            <Dropdown.Toggle> {device.selectedCategory.name || "Выберете категорию"} </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                {device.categories.map(category =>
-                                    <Dropdown.Item
-                                        key={category.id}
-                                        onClick={() => device.setSelectedCategory(category)}
-                                    >
-                                        {category.name}
-                                    </Dropdown.Item>
-                                )}
-                            </Dropdown.Menu>
-                        </Dropdown>
 
-                        <Form.Control
-                            onChange={(e) => setName(e.target.value)}
-                            className="mt-3"
-                        value={name}
-                            placeholder="Введите название товара"
-                            type="text"
-                        >
+                        {/*<Form.Control*/}
+                        {/*    onChange={(e) => setName(e.target.value)}*/}
+                        {/*    className="mt-3"*/}
+                        {/*value={name}*/}
+                        {/*    placeholder="Введите название товара"*/}
+                        {/*    type="text"*/}
+                        {/*>*/}
 
-                        </Form.Control>
+                        {/*</Form.Control>*/}
                         <Form.Control
                             onChange={(e) => setPrice(+e.target.value)}
                             className="mt-3"
@@ -201,24 +180,24 @@ const UpdateProduct = observer(({show, onHide}) => {
 
 
 
-                        <Form.Control
-                            onChange={(e) => setNewAliasName(e.target.value.toLowerCase())}
-                            className="mt-3"
-                            value={newAliasName}
-                            placeholder="Введите название для поля поиска"
-                            type="text"
-                        >
+                        {/*<Form.Control*/}
+                        {/*    onChange={(e) => setNewAliasName(e.target.value.toLowerCase())}*/}
+                        {/*    className="mt-3"*/}
+                        {/*    value={newAliasName}*/}
+                        {/*    placeholder="Введите название для поля поиска"*/}
+                        {/*    type="text"*/}
+                        {/*>*/}
 
-                        </Form.Control>
+                        {/*</Form.Control>*/}
 
-                        <Form.Control
-                            onChange={(e) => setArticle(e.target.value)}
-                            className="mt-3"
-                            placeholder="Введите артикул"
-                            type="number"
-                        >
+                        {/*<Form.Control*/}
+                        {/*    onChange={(e) => setArticle(e.target.value)}*/}
+                        {/*    className="mt-3"*/}
+                        {/*    placeholder="Введите артикул"*/}
+                        {/*    type="number"*/}
+                        {/*>*/}
 
-                        </Form.Control>
+                        {/*</Form.Control>*/}
                         <Form.Control
                             onChange={(e) => setQuantity(e.target.value)}
                             className="mt-3"

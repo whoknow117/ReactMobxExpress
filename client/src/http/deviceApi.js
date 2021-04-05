@@ -38,10 +38,8 @@ export const createDevice = async (device) => {
     return data
 }
 
-export const updateDevice = async ({id, name,price, aliasName,quantity, article}) => {
-    const {data} = await $authHost.patch('api/device', {
-        id, name,price, aliasName,quantity, article
-    })
+export const updateDevice = async (device) => {
+    const {data} = await $authHost.put('api/device', device)
     return data
 }
 

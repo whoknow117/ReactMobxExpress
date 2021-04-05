@@ -39,7 +39,7 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchAvailbale().then(data => device.setAvailable(data))
         fetchCategories().then(data => device.setCategories(data))
         fetchUnits().then(data => device.setUnit(data))
-        fetchDevices().then(data => device.setDevices(data.rows))
+        // fetchDevices().then(data => device.setDevices(data.rows))
     }, [device.selectedType, device.selectedUnit,device.selectedAvailable  ])
 
 
@@ -211,7 +211,7 @@ const CreateDevice = observer(({show, onHide}) => {
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
-                                      multiple
+
                         >
 
                         </Form.Control>

@@ -59,7 +59,7 @@ const NavBar = observer(() => {
                 device.setCartCounter(parseCount.count)
             }
         }
-        console.log(JSON.parse(JSON.stringify(device.storageCart)))
+
     }, [device.storageCart])
 
     return (
