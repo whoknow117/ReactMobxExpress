@@ -20,13 +20,13 @@ const Basket = observer(() => {
     let itemQuantityParse;
     let newArr = [];
 
-        const [count, setCount] = useState(0)
-        const [value, setValue] = useState("")
+    const [count, setCount] = useState(0)
+    const [value, setValue] = useState("")
 
-    const [countClick,setCountClick] = useState(false)
+    const [countClick, setCountClick] = useState(false)
     const [click, setClick] = useState(false)
     const [allCount, setAllCount] = useState([])
-    const [addClick,setAddClick] = useState(false)
+    const [addClick, setAddClick] = useState(false)
 
 
     const deleteCallback = (id) => {
@@ -38,8 +38,6 @@ const Basket = observer(() => {
 
 
     }
-
-
 
 
     useEffect(() => {
@@ -54,38 +52,35 @@ const Basket = observer(() => {
 
         }
 
-    }, [device.cartCounter, click,count,])
+    }, [device.cartCounter, click, count,])
 
 
     let items = JSON.stringify(device.storageCart)
     let strCounts = JSON.stringify(allCount)
 
 
-
     const addCart = () => {
-            let cartItems = JSON.parse(JSON.stringify(device.storageCart))
 
 
-        createBasket({phone: 92131123,items,strCounts }).then(data => setValue(data))
+        let cartItems = JSON.parse(JSON.stringify(device.storageCart))
+        createBasket({phone: 92131123, items, strCounts}).then(data => setValue(data))
         localStorage.removeItem('cart')
-        cartItems.forEach( el => {
+        cartItems.forEach(el => {
             localStorage.removeItem(`${el.id}`)
         })
 
-        createBasket({phone: 92131123,items,strCounts }).then(data => setValue(data))
-
+        device.setStorageCart([])
         history.push(SHOP_ROUTE)
 
     }
 
 
-
     return (
         <div className={classes.basketWrapper}>
-           <div className={classes.headerCart}>
-               <h1 className={classes.pageTitle}>Корзина заказов</h1>
-               <h2 className={classes.count}>{count} грн</h2>
-           </div>
+            <div className={classes.headerCart}>
+                <h1 className={classes.pageTitle}>Корзина заказов</h1>
+                <h2 className={classes.count}>{count} грн</h2>
+            </div>
 
             {device.storageCart.map(el => {
                 let storageCart = JSON.parse(JSON.stringify(device.storageCart))
@@ -103,12 +98,10 @@ const Basket = observer(() => {
                     summm = el.price * (itemQuantityParse[el.id] ? itemQuantityParse[el.id] : 1)
 
 
-
                 }
                 if (!itemQuantityParse) {
 
                     summm = el.price * 1
-
 
 
                 }
@@ -136,13 +129,14 @@ const Basket = observer(() => {
                             </div>
                         </div>
 
-                        <BasketInput  allCounts={allCountsArray}   countClick={countClick}  setCountClick={setCountClick } setRenderSum={setCount} renderSum={count} el={el}/>
+                        <BasketInput allCounts={allCountsArray} countClick={countClick} setCountClick={setCountClick}
+                                     setRenderSum={setCount} renderSum={count} el={el}/>
 
 
                     </div>
                 )
             })}
-            <button onClick={addCart}>add </button>
+            <button onClick={addCart}>add</button>
         </div>
     );
 });

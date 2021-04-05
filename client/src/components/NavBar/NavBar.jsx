@@ -50,18 +50,17 @@ const NavBar = observer(() => {
         history.push(BASKET_ROUTE)
     }
 
-    useEffect(() =>{
+    useEffect(() => {
 
         let count = localStorage.getItem('basketProduct')
-       if(count) {
-           let parseCount= JSON.parse(count)
-
-           if(parseCount.count) {
-               device.setCartCounter(parseCount.count)
-           }
-       }
+        if (count) {
+            let parseCount = JSON.parse(count)
+            if (parseCount.count) {
+                device.setCartCounter(parseCount.count)
+            }
+        }
         console.log(JSON.parse(JSON.stringify(device.storageCart)))
-    },[ device.storageCart])
+    }, [device.storageCart])
 
     return (
 
