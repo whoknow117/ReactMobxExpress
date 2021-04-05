@@ -26,7 +26,7 @@ const Basket = observer(() => {
     const [countClick, setCountClick] = useState(false)
     const [click, setClick] = useState(false)
     const [allCount, setAllCount] = useState([])
-    const [addClick, setAddClick] = useState(false)
+
 
 
     const deleteCallback = (id) => {
@@ -42,9 +42,9 @@ const Basket = observer(() => {
 
     useEffect(() => {
         setCount(device.sum)
-        // console.log(JSON.parse(JSON.stringify(device.storageCart)))
-        let updatedBasket = localStorage.getItem('cart')
 
+        let updatedBasket = localStorage.getItem('cart')
+        console.log(device.sum)
         setAllCount(allCountsArray)
         if (updatedBasket) {
             device.setStorageCart(JSON.parse(updatedBasket))
@@ -52,7 +52,7 @@ const Basket = observer(() => {
 
         }
 
-    }, [device.cartCounter, click, count,])
+    }, [device.cartCounter, click,  ])
 
 
     let items = JSON.stringify(device.storageCart)

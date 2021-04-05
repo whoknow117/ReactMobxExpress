@@ -40,7 +40,7 @@ const BasketInput = observer(({   el,renderSum,setRenderSum,setCountClick,countC
         }
 
 
-    }, [count,renderSum  ])
+    }, [count,renderSum   ])
 
     const incrementCount = () => {
         setCountClick(!countClick)
