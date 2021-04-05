@@ -69,11 +69,15 @@ class DeviceController {
 
     async updateOne(req, res, next) {
         try {
-            let {id, name, price, aliasName, article, quantity, availableId} = req.body
+            let {id,price,quantity, availableId} = req.body
 
 
             let updatedProduct = await Device.update({price, quantity, availableId}, {
-                returning: true, where: {id}
+                  where: {id},
+
+
+
+
             });
 
 
