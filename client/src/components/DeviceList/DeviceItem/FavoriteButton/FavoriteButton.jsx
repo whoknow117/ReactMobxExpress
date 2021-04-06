@@ -33,22 +33,19 @@ const FavoriteButton = observer(({favorite,fArray}) => {
 
     const addFavorite = () => {
 
-        let updatedFavorite = [...device.storageFavorite, {...favorite}] // если вместо device.cart поставить массив из локалстораджа, то при перезагрузке и нажатии
-        //продолжит заполнятся локалсторадж, но если мы полностью удалим локал, то при добавлении в пустой массив пишет, что не может
-        //итерировать null, я пробовал делать и условия и ||  &&  ? : :D получается замкнутый круг,
 
+            let updatedFavorite = [...device.storageFavorite, {...favorite}]
+            device.setFavorite(updatedFavorite)
+            let newFavorite = JSON.stringify(device.favorite)
+            let parseFavorite = JSON.parse(newFavorite)
+            localStorage.setItem('favorite', JSON.stringify(parseFavorite))
 
-        device.setFavorite(updatedFavorite)
-        let newFavorite = JSON.stringify(device.favorite)
-        let parseFavorite = JSON.parse(newFavorite)
-
-        localStorage.setItem('favorite', JSON.stringify(parseFavorite))
     }
 
     return (
 
         // сравнива id если есть в массиве в локале обьект с таким айди то дизейблим , но нихера не дизейблит :D disabled={uB.some( el =>  el.id === product.id)}
-        <button className={classes.btn}
+        <button disabled={device.storageFavorite.some(el => el.id === favorite.id)} className={classes.btn}
 
                 onClick={addFavorite}
         >
