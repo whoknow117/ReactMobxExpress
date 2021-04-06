@@ -32,12 +32,21 @@ export default class DeviceStore {
         this._storageCart = []
         this._storageCounter = []
         this._sum = null
+        this._favorite = []
+        this._storageFavorite = []
 
 
         makeAutoObservable(this)
     }
 
+    setStorageFavorite (storageFavorite) {
+        this._storageFavorite = storageFavorite
+    }
 
+
+    setFavorite (favorite) {
+        this._favorite = favorite
+    }
 
     setSum (sum) {
         this._sum = sum
@@ -157,6 +166,13 @@ export default class DeviceStore {
     }
 
 
+    get storageFavorite () {
+        return this._storageFavorite
+    }
+
+    get favorite () {
+        return this._favorite
+    }
 
     get sum () {
         return this._sum

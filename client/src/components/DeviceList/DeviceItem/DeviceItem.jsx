@@ -6,11 +6,13 @@ import {useHistory, useParams} from "react-router-dom";
 import {DEVICE_ROUTE} from "../../../utils/consts";
 import Heart from "../../../assets/Heart/Heart";
 import BasketButton from "../../BasketButton/BasketButton";
+import FavoriteButton from "./FavoriteButton/FavoriteButton";
 
 const DeviceItem = observer(({dev,addProduct}) => {
 
     const history = useHistory()
     const {id} = useParams()
+    let fArray = []
     const sets = (id) => {
         if(id === 1) {
             return <div>шт</div>
@@ -43,10 +45,10 @@ const DeviceItem = observer(({dev,addProduct}) => {
                        sets(dev.unitId)
                         }
                     </span>
-                    <span className={classes.heart}>
-                        <Heart/>
-                    </span>
-
+                    {/*<span className={classes.heart}>*/}
+                    {/*   */}
+                    {/*</span>*/}
+                    <FavoriteButton fArray={fArray} favorite={dev}/>
 
                     <BasketButton  product={dev}/>
                 </div>
