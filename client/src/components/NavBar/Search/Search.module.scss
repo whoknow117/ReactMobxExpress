@@ -70,7 +70,20 @@
         margin-left: auto;
         margin-right: 20px;
         button {
-
+          box-shadow: 0 2px 4px rgba(0,0,0,.1);
+          display: flex;
+          align-items: center;
+          width: 44px;
+          height: 38px;
+          justify-content: center;
+          &:hover {
+            cursor: pointer;
+            background: #3c91d0;
+          }
+          svg {
+            width: 22px;
+            fill: #fff;
+          }
         }
       }
       .wrapper {

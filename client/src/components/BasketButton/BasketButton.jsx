@@ -3,6 +3,7 @@ import classes from './BasketButton.module.scss';
 import {Context} from "../../index";
 
 import {observer} from "mobx-react-lite";
+import Basket2 from "../../assets/Basket2/Basket2";
 
 const   BasketButton = observer(({product, icon}) => {
 
@@ -48,7 +49,7 @@ const   BasketButton = observer(({product, icon}) => {
         // сравнива id если есть в массиве в локале обьект с таким айди то дизейблим , но нихера не дизейблит :D disabled={uB.some( el =>  el.id === product.id)}
         <button disabled={device.storageCart.some(el => el.id === product.id)} onClick={addProduct}
                 className={classes.btn}>
-            В корзину
+            {icon ? <Basket2/> : "В корзину"}
         </button>
     );
 });

@@ -23,12 +23,12 @@ const Search = () => {
 
     },[value ])
 
-    // console.log(JSON.stringify(device.searchDevice))
 
 const productRoute = (id) => {
     history.push(DEVICE_ROUTE + '/' + id)
 }
-
+    console.log(value.trim() === "")
+    console.log(value )
 
 
 
@@ -43,10 +43,9 @@ const productRoute = (id) => {
                 <button className={classes.searchBtn}>
                     <SearchIcon/>
                 </button>
+                <div className={`${classes.searchList} ${device.searchDevice.length !== 0 && value.trim() !== "" ? classes.activeList : ""}`}>
 
-                <div className={`${classes.searchList} ${value ? classes.activeList : ""}`}>
-
-                    {device.searchDevice.map((el, idx) => <div onClick={() => changeInput(el.id)} className={`${classes.searchItem} ${ value ? classes.active :""}`}>
+                    {device.searchDevice.map((el, idx) => <div onClick={() => changeInput(el.id)} className={`${classes.searchItem} ${ device.searchDevice.length !== 0 ? classes.active :""}`}>
 
                         <div onClick={() => {productRoute(el.id)} } className={classes.wrapper}>
                             <div className={classes.image}>
