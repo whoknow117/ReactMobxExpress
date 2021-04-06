@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState,} from 'react';
 import {Context} from "../../index";
 import {Container, Nav, Navbar} from "react-bootstrap";
-import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../../utils/consts";
+import {ADMIN_ROUTE, BASKET_ROUTE, FAVORITE_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../../utils/consts";
 import {observer} from "mobx-react-lite";
 import {useHistory} from 'react-router-dom'
 import classes from './NavBar.module.scss';
@@ -13,6 +13,8 @@ import Search from "./Search/Search";
 import TypeBar from "../TypeBar/TypeBar";
 import Basket from "../../assets/Basket/Basket";
 import TopNav from "./TopNav/TopNav";
+import Heart from "../../assets/Heart/Heart";
+import User from "../../assets/User/User";
 
 
 const NavBar = observer(() => {
@@ -40,6 +42,10 @@ const NavBar = observer(() => {
     const admineRoute = () => {
         history.push(ADMIN_ROUTE)
 
+    }
+
+    const favoriteRoute = () => {
+        history.push(FAVORITE_ROUTE)
     }
 
 
@@ -85,6 +91,15 @@ const NavBar = observer(() => {
                     <Search/>
                     {user.isAuth === true ?
                         <Nav className={classes.btns}>
+                            <button className={classes.btn} onClick={favoriteRoute} style={{marginRight: '10px'}}>
+
+                                <div className={classes.icon}>
+                                    <Heart/>
+                                </div>
+                                <div className={classes.title}>
+                                    Избранное
+                                </div>
+                            </button>
 
                             <button className={classes.btn} onClick={admineRoute} style={{marginRight: '10px'}}>
 
@@ -118,10 +133,36 @@ const NavBar = observer(() => {
 
                         </Nav>
                         :
-                        <Nav className={classes.btn}>
-                            <button onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</button>
+                        <Nav className={classes.btns}>
+                            <button className={classes.btn} onClick={favoriteRoute} style={{marginRight: '10px'}}>
 
+                                <div className={classes.icon}>
+                                    <Heart/>
+                                </div>
+                                <div className={classes.title}>
+                                    Избранное
+                                </div>
+                            </button>
+                            <button onClick={() => history.push(LOGIN_ROUTE)}>
+                                <div className={classes.icon}>
+                                    <User/>
+                                </div>
+                                <div className={classes.title}>
+                                    Войти
+                                </div>
+                            </button>
 
+                            <button className={classes.btn} onClick={basketRoute}>
+                                <div className={classes.icon}>
+                                    <Basket/>
+                                    <span className={classes.span}>
+                                        {device.storageCart && device.storageCart.length || 0}
+                                    </span>
+                                </div>
+                                <div className={classes.title}>
+                                    Корзина
+                                </div>
+                            </button>
                         </Nav>
                     }
 

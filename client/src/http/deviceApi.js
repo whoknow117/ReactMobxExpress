@@ -39,7 +39,7 @@ export const createDevice = async (device) => {
 }
 
 export const updateDevice = async (device) => {
-    const {data} = await $authHost.put('api/device', device)
+    const {data} = await $host.put('api/device', device)
     return data
 }
 
