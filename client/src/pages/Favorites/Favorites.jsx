@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import classes from './Favorites.module.scss';
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
-import {fetchDevices} from "../../http/deviceApi";
+import {fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
 
 
 const Favorites = observer(() => {
@@ -19,8 +19,8 @@ const Favorites = observer(() => {
 
 
 
-    }, [ favoriteCount])
-    console.log(favoriteCount)
+    }, [ favoriteCount,device.storageFavorite,device.cartCounter, device.sum, device.storageCart ])
+    console.log(JSON.stringify(device.storageFavorite)  )
 
     return (
         <div className={classes.container}>

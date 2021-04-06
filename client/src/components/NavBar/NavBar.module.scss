@@ -3,13 +3,17 @@
 
 .navbar {
   z-index: 1001;
-  position: relative;
-  margin-bottom: 20px;
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 100%;
+
+  marging: 0 auto;
   .container {
-    max-width: 1400px;
+    width: 100%;
+    flex-grow: 1;
 
     background: #fff;
-    flex-direction: column;
+
 
 
     .dflex {
@@ -26,8 +30,9 @@
     display: flex;
     align-items: center;
     height: 50px;
-    position: relative;
+    transition: .4s ease;
 
+    top: 0;
     .catalogBtn {
       background: #000;
       padding: 10px 20px;
@@ -194,4 +199,14 @@
     }
   }
 
+}
+
+.collapsed {
+  position: fixed;
+  top: 0;
+  left: calc(50% - 700px);
+  height: 180px;
+  max-width: 1400px;
+  background: #fff;
+  z-index: 9999;
 }

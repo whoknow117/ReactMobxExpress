@@ -39,6 +39,14 @@ const NavBar = observer(() => {
         }
     }
 
+    const [headerCollapsed, setHeaderCollapsed] = useState (false);
+
+
+    window.addEventListener('scroll', (event) => {
+        (window.pageYOffset >= 22 ? setHeaderCollapsed(true) : setHeaderCollapsed(false))
+
+    })
+    console.log(window.pageYOffset)
     const admineRoute = () => {
         history.push(ADMIN_ROUTE)
 
@@ -66,12 +74,13 @@ const NavBar = observer(() => {
             }
         }
 
-    }, [device.storageCart,device.storageFavorite])
+    }, [device.storageFavorite,device.cartCounter, device.sum, device.storageCart ])
+    console.log(headerCollapsed)
 
     return (
 
-        <Navbar className={classes.navbar}>
-            <Container className={classes.container}>
+        <div className={classes.navbar}>
+            <div className={classes.container}>
                 <div className={classes.dflex}>
                     <div onClick={shopRoute}>
                         <NavBarLogo/>
@@ -79,7 +88,7 @@ const NavBar = observer(() => {
                     <CityAndPhone/>
                     <TopNav/>
                 </div>
-                <div className={classes.bottomBar}>
+                <div className={`${classes.bottomBar} ${headerCollapsed ? classes.collapsed : ""}`}>
 
                     <button onClick={menuActive} className={classes.goodsBtn}><span className={classes.span}></span>Каталог
                         товаров
@@ -169,10 +178,10 @@ const NavBar = observer(() => {
                     }
 
                 </div>
-            </Container>
+            </div>
 
 
-        </Navbar>
+        </div>
 
     );
 });
