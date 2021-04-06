@@ -53,6 +53,22 @@
           flex-basis: 80%;
 
           max-height: 27px;
+          position: relative;
+          .favoriteCounter {
+            width: 18px;
+            height: 18px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #8992e0;
+            position: absolute;
+            right: -4px;
+
+            color: #fff;
+            bottom: -7px
+          }
         .span {
           position: absolute;
           background: $orangeBackgroundColor;
@@ -62,9 +78,10 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          right: 30px;
+          right: -3px;
+
           color: #fff;
-          bottom: 17px;
+          bottom: -7px;
         }
         }
         .title {

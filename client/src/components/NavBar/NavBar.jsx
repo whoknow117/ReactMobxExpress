@@ -138,6 +138,9 @@ const NavBar = observer(() => {
 
                                 <div className={classes.icon}>
                                     <Heart/>
+                                    <span className={classes.favoriteCounter}>
+                                        {device.storageFavorite && device.storageFavorite.length || 0}
+                                    </span>
                                 </div>
                                 <div className={classes.title}>
                                     Избранное

@@ -30,6 +30,14 @@ const FavoriteButton = observer(({favorite,fArray}) => {
     }
 
     let count = 0;
+    const removeFavorite = () => {
+
+
+        let updatedFavorite = device.storageFavorite.filter( el => el.id !== favorite.id)
+
+        localStorage.setItem('favorite', JSON.stringify(updatedFavorite))
+
+    }
 
     const addFavorite = () => {
 
@@ -41,6 +49,7 @@ const FavoriteButton = observer(({favorite,fArray}) => {
             localStorage.setItem('favorite', JSON.stringify(parseFavorite))
 
     }
+
 
     return (
 
