@@ -99,7 +99,7 @@ const NavBar = observer(() => {
                         </div> : ""}
                     <Search/>
                     {user.isAuth === true ?
-                        <Nav className={classes.btns}>
+                        <div className={classes.btns}>
                             <button className={classes.btn} onClick={favoriteRoute} style={{marginRight: '10px'}}>
 
                                 <div className={classes.icon}>
@@ -140,9 +140,9 @@ const NavBar = observer(() => {
                             </button>
 
 
-                        </Nav>
+                        </div>
                         :
-                        <Nav className={classes.btns}>
+                        <div className={classes.btns}>
                             <button className={classes.btn} onClick={favoriteRoute} style={{marginRight: '10px'}}>
 
                                 <div className={classes.icon}>
@@ -174,7 +174,7 @@ const NavBar = observer(() => {
                                     Корзина
                                 </div>
                             </button>
-                        </Nav>
+                        </div>
                     }
 
                 </div>
