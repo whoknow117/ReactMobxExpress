@@ -12,7 +12,7 @@ const FavoriteButton = observer(({favorite,fArray}) => {
     const {device} = useContext(Context);
 
     const [favor, setFavor] = useState([])
-    const [favoritItem, setFavoritItem] = useState([])
+
     useEffect(() => {
 
         let updatedFavorite = localStorage.getItem('favorite')
@@ -23,21 +23,10 @@ const FavoriteButton = observer(({favorite,fArray}) => {
 
     }, [device.favorite])
 
-    let favorParse = JSON.stringify(favor)
-    let favorParse1
-    if (favorParse) {
-        favorParse1 = JSON.parse(favorParse)
-    }
-
-    let count = 0;
-    const removeFavorite = () => {
 
 
-        let updatedFavorite = device.storageFavorite.filter( el => el.id !== favorite.id)
 
-        localStorage.setItem('favorite', JSON.stringify(updatedFavorite))
 
-    }
 
     const addFavorite = () => {
 

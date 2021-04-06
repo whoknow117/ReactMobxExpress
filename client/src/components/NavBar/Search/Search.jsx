@@ -5,12 +5,13 @@ import {fetchDevices} from "../../../http/deviceApi";
 import {Context} from "../../../index";
 import {useHistory} from "react-router-dom";
 import {DEVICE_ROUTE} from "../../../utils/consts";
+import BasketButton from "../../BasketButton/BasketButton";
 
 const Search = () => {
 
     const changeInput = (id) => {
         setValue("")
-        history.push(DEVICE_ROUTE + '/' + id)
+
     }
     const [value,setValue] = useState("")
 
@@ -24,7 +25,9 @@ const Search = () => {
 
     // console.log(JSON.stringify(device.searchDevice))
 
-
+const productRoute = (id) => {
+    history.push(DEVICE_ROUTE + '/' + id)
+}
 
 
 
@@ -43,7 +46,20 @@ const Search = () => {
 
                 <div className={`${classes.searchList} ${value ? classes.activeList : ""}`}>
 
-                    {device.searchDevice.map((el, idx) => <div onClick={() => changeInput(el.id)} className={`${classes.searchItem} ${ value ? classes.active :""}`}>{el.name}</div>)}
+                    {device.searchDevice.map((el, idx) => <div onClick={() => changeInput(el.id)} className={`${classes.searchItem} ${ value ? classes.active :""}`}>
+
+                        <div onClick={() => {productRoute(el.id)} } className={classes.wrapper}>
+                            <div className={classes.image}>
+                                <img src={process.env.REACT_APP_API_URL + el.img} alt=""/>
+                            </div>
+                            <div className={classes.name}>{el.name}</div>
+                        </div>
+                        <div></div>
+                       <div className={classes.btnWrapper}>
+                           <BasketButton icon product={el}/>
+                       </div>
+
+                    </div>)}
 
                 </div>
             </div>

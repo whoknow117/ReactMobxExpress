@@ -4,7 +4,7 @@ import {Context} from "../../index";
 
 import {observer} from "mobx-react-lite";
 
-const   BasketButton = observer(({product}) => {
+const   BasketButton = observer(({product, icon}) => {
 
     const {device} = useContext(Context)
 

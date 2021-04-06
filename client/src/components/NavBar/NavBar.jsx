@@ -55,9 +55,9 @@ const NavBar = observer(() => {
     const basketRoute = () => {
         history.push(BASKET_ROUTE)
     }
-
+    const [favoriteCount, setFavoriteCount] = useState(null)
     useEffect(() => {
-
+        setFavoriteCount(device.storageFavorite.length)
         let count = localStorage.getItem('basketProduct')
         if (count) {
             let parseCount = JSON.parse(count)
@@ -66,7 +66,7 @@ const NavBar = observer(() => {
             }
         }
 
-    }, [device.storageCart])
+    }, [device.storageCart,device.storageFavorite])
 
     return (
 
@@ -137,9 +137,8 @@ const NavBar = observer(() => {
                             <button className={classes.btn} onClick={favoriteRoute} style={{marginRight: '10px'}}>
 
                                 <div className={classes.icon}>
-                                    <Heart/>
-                                    <span className={classes.favoriteCounter}>
-                                        {device.storageFavorite && device.storageFavorite.length || 0}
+                                    <Heart/>                                    <span className={classes.favoriteCounter}>
+                                        {favoriteCount && favoriteCount || 0}
                                     </span>
                                 </div>
                                 <div className={classes.title}>

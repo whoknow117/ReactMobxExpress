@@ -11,7 +11,7 @@ import {Spinner} from "react-bootstrap";
 
 const App = observer(()  =>{
 
-    const {user} = useContext(Context)
+    const {user, device} = useContext(Context)
     // const [loading,setLoading] = useState(true)
 
 
@@ -27,7 +27,6 @@ const App = observer(()  =>{
 
 
     },[])
-
 
 
 
