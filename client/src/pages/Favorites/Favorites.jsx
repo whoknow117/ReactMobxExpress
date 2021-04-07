@@ -20,7 +20,7 @@ const Favorites = observer(() => {
 
 
     }, [ favoriteCount,device.storageFavorite, ])
-    console.log(JSON.stringify(device.storageFavorite)  )
+
 
     return (
         <div className={classes.container}>

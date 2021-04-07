@@ -56,6 +56,15 @@ const NavBar = observer(() => {
         history.push(FAVORITE_ROUTE)
     }
 
+    const checkNull = () => {
+        if(device.storageFavorite.length !==0) {
+            history.push(FAVORITE_ROUTE)
+        }
+        else {
+            alert('Нет избранных товаров!')
+        }
+    }
+
 
     const shopRoute = () => {
         history.push(SHOP_ROUTE)
@@ -103,7 +112,7 @@ const NavBar = observer(() => {
                     <Search/>
                     {user.isAuth === true ?
                         <div className={classes.btns}>
-                            <button className={classes.btn} onClick={favoriteRoute} style={{marginRight: '10px'}}>
+                            <button className={classes.btn} onClick={checkNull} style={{marginRight: '10px'}}>
 
                                 <div className={classes.icon}>
                                     <Heart/>
@@ -146,7 +155,7 @@ const NavBar = observer(() => {
                         </div>
                         :
                         <div className={classes.btns}>
-                            <button className={classes.btn} onClick={favoriteRoute} style={{marginRight: '10px'}}>
+                            <button className={classes.btn} onClick={checkNull} style={{marginRight: '10px'}}>
 
                                 <div className={classes.icon}>
                                     <Heart/>                                    <span className={classes.favoriteCounter}>
