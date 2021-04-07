@@ -2,21 +2,20 @@
 
 
 .wrapper {
-
   position: relative;
-
   max-width: 240px;
+  height: 390px;
+  border: 1px solid rgba(164,144,142,.1);
+  &:hover {
 
-  height: 420px;
-
-  border: 1px solid rgba(0,0,0,.1);
-
-
+box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  }
   .image {
     display: block;
     width: 180px;
     height: 180px;
-    margin: 0 auto;
+    margin: 20px auto;
+    cursor: pointer;
 
     img {
       width: 100%;
@@ -53,12 +52,40 @@
           display: flex;
         }
       }
+
     }
 
   }
 }
 
-
+.available {
+display: flex;
+  margin-top: 10px;
+  .isAvailable {
+    color: $isAvailabale;
+    font-size: 0.8rem;
+  }
+  .quantity {
+    margin-left:10px;
+    font-size: 0.8rem;
+    display: flex;
+  }
+}
+.articleWrapper {
+  display: flex;
+  margin-top: 10px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  .articleName {
+    color: $articleColor;
+    font-size: 0.7rem;
+  }
+  .article {
+    color: $articleColor;
+    font-size: 0.7rem;
+  }
+}
 .heart {
   width:11px;
   border: none;

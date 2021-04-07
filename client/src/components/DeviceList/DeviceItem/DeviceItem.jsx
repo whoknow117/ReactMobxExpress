@@ -60,8 +60,16 @@ const DeviceItem = observer(({dev, addProduct}) => {
                    <BasketButton product={dev}/>
                </div>
 
-
-
+                <div className={classes.available}>
+                    <span className={classes.isAvailable}>В наличии:</span>
+                    <span className={classes.quantity}>{dev.quantity}{
+                        sets(dev.unitId)
+                    }  </span>
+                </div>
+                <div className={classes.articleWrapper}>
+                    <span className={classes.articleName}>артикул:</span>
+                    <span className={classes.article}>{dev.article} </span>
+                </div>
 
             </div>
 
