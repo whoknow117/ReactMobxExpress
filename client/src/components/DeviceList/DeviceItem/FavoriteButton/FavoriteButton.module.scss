@@ -19,4 +19,11 @@
       fill: $hoverFavoriteIcon;
     }
   }
+
+}
+
+.activeFavorite {
+  svg {
+    fill: $orangeBackgroundColor;
+  }
 }

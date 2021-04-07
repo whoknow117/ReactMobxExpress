@@ -52,10 +52,12 @@ const FavoriteButton = observer(({favorite,fArray}) => {
     }
 
 
+
     return (
 
         // сравнива id если есть в массиве в локале обьект с таким айди то дизейблим , но нихера не дизейблит :D disabled={uB.some( el =>  el.id === product.id)}
-        <button disabled={device.storageFavorite.some(el => el.id === favorite.id)} className={classes.btn}
+        <button disabled={device.storageFavorite.some(el => el.id === favorite.id)}
+                className={`${classes.btn} ${device.storageFavorite.some(el => el.id === favorite.id) ? classes.activeFavorite : ""}`}
 
                 onClick={addFavorite}
         >
