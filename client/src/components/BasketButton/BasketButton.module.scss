@@ -1,11 +1,10 @@
-
-
+@import "src/variables/variables";
 
 .btn {
   display: block;
   margin-left: auto;
   border: none;
-  background: #fd7d5a;
+  background: $basketButtonColor;
   padding: 4px 20px;
   color: #fff;
   border-radius: 4px;

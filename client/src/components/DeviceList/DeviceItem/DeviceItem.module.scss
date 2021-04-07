@@ -1,27 +1,58 @@
+@import "src/variables/variables";
+
+
 .wrapper {
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  margin: 10px;
 
- .card {
-   margin: 10px;
-   border: none;
-   max-width: 240px;
-   padding: 10px;
+  max-width: 240px;
+  padding: 10px;
 
-   .image {
-     width: 100px;
-     height: 100px;
-     margin: 0 auto;
-   }
- }
+  .image {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .productInfo {
+    height: 120px;
+
+    .productName {
+      height: 44px;
+      font-size: 1.2rem;
+      overflow: hidden;
+    }
+    .wrapperPriceBlock {
+      display: flex;
+      .price {
+        font-size: 1.3rem;
+        display: flex;
+        color: $price;
+        .units {
+          margin-left: 10px;
+
+        }
+      }
+    }
+
+  }
 }
+
 
 .heart {
   width: 24px;
+  border: none;
+  background: transparent;
   svg {
     width: 24px;
+
     &:hover {
       cursor: pointer;
     }

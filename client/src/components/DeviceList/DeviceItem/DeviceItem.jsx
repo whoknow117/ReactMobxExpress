@@ -8,52 +8,54 @@ import Heart from "../../../assets/Heart/Heart";
 import BasketButton from "../../BasketButton/BasketButton";
 import FavoriteButton from "./FavoriteButton/FavoriteButton";
 
-const DeviceItem = observer(({dev,addProduct}) => {
+const DeviceItem = observer(({dev, addProduct}) => {
 
     const history = useHistory()
     const {id} = useParams()
     let fArray = []
     const sets = (id) => {
-        if(id === 1) {
+        if (id === 1) {
             return <div>шт</div>
         }
-        if(id === 2) {
+        if (id === 2) {
             return <div>м\п</div>
         }
-        if(id === 3) {
+        if (id === 3) {
             return <div>кг</div>
         }
         return
     }
 
     return (
-        <div md={3} className={classes.wrapper} >
-            <Card  className={classes.card}>
-                <Image  onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)} className={classes.image} src={process.env.REACT_APP_API_URL + dev.img}/>
-                <div className="text-black-50">Samsung</div>
-                <div>
-                    <div>{dev.rating}</div>
-                </div>
-                <div>
-                    <div>
+        <div className={classes.wrapper}>
 
-                        {dev.name}
-                    </div>
-                    <span>
-                        price: {dev.price}
-                        {
-                       sets(dev.unitId)
-                        }
+            <Image onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)} className={classes.image}
+                   src={process.env.REACT_APP_API_URL + dev.img}/>
+            <div className="text-black-50">{dev.brandId}</div>
+
+            <div className={classes.productInfo}>
+                <h3 className={classes.productName}>
+                    {dev.name}
+                </h3>
+
+
+                <FavoriteButton fArray={fArray} favorite={dev}/>
+               <div className={classes.wrapperPriceBlock}>
+                    <span className={classes.price}>
+                         {dev.price}
+
+                        <span className={classes.units}>
+
+                       {
+                           sets(dev.unitId)
+                       }
+                   </span>
                     </span>
-                    {/*<span className={classes.heart}>*/}
-                    {/*   */}
-                    {/*</span>*/}
-                    <FavoriteButton fArray={fArray} favorite={dev}/>
+                   <BasketButton product={dev}/>
+               </div>
+            </div>
 
-                    <BasketButton  product={dev}/>
-                </div>
 
-            </Card>
         </div>
     );
 });

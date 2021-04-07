@@ -46,7 +46,7 @@ const NavBar = observer(() => {
         (window.pageYOffset >= 22 ? setHeaderCollapsed(true) : setHeaderCollapsed(false))
 
     })
-    console.log(window.pageYOffset)
+
     const admineRoute = () => {
         history.push(ADMIN_ROUTE)
 
@@ -75,7 +75,10 @@ const NavBar = observer(() => {
         }
 
     }, [device.storageFavorite,device.cartCounter, device.sum, device.storageCart ])
-    console.log(headerCollapsed)
+
+
+
+
 
     return (
 

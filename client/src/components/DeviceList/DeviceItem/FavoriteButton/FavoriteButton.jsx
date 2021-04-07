@@ -5,10 +5,16 @@ import classes from './FavoriteButton.module.scss';
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../../index";
 import Heart from "../../../../assets/Heart/Heart";
+import {updateAllDevice} from "../../../../http/deviceApi";
+import {stringify} from "uuid";
 
 const FavoriteButton = observer(({favorite,fArray}) => {
 
 
+    let testArray = [{"article": 432123, "price": 2134, "quantity":14},
+        {"article": 231555, "price": 1134, "quantity":44},
+        {"article": 2315111, "price": 2131, "quantity":1134},]
+    console.log(testArray)
     const {device} = useContext(Context);
 
     const [favor, setFavor] = useState([])
@@ -29,13 +35,19 @@ const FavoriteButton = observer(({favorite,fArray}) => {
 
 
     const addFavorite = () => {
+        let updatedFavorite =[]
+            if(device.storageFavorite) {
+            updatedFavorite = [...device.storageFavorite, {...favorite}]
+        }
 
 
-            let updatedFavorite = [...device.storageFavorite, {...favorite}]
-            device.setFavorite(updatedFavorite)
-            let newFavorite = JSON.stringify(device.favorite)
-            let parseFavorite = JSON.parse(newFavorite)
-            localStorage.setItem('favorite', JSON.stringify(parseFavorite))
+            if(updatedFavorite){
+                device.setFavorite(updatedFavorite)
+                let newFavorite = JSON.stringify(device.favorite)
+                let parseFavorite = JSON.parse(newFavorite)
+                localStorage.setItem('favorite', JSON.stringify(parseFavorite))
+            }
+
 
     }
 

@@ -19,7 +19,7 @@ const Favorites = observer(() => {
 
 
 
-    }, [ favoriteCount,device.storageFavorite,device.cartCounter, device.sum, device.storageCart ])
+    }, [ favoriteCount,device.storageFavorite, ])
     console.log(JSON.stringify(device.storageFavorite)  )
 
     return (
@@ -27,7 +27,7 @@ const Favorites = observer(() => {
             <div>
                 <h1 className={classes.favoriteTitle}>Избранное</h1>
                 <div className={classes.favoriteBlock}>
-                    {storFavorite.map(el => {
+                    {device.storageFavorite.map(el => {
                         return (
                             <div className={classes.favoriteItem}>
                                 <div className={classes.image}>
