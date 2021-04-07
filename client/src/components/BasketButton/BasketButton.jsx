@@ -49,7 +49,7 @@ const   BasketButton = observer(({product, icon}) => {
         // сравнива id если есть в массиве в локале обьект с таким айди то дизейблим , но нихера не дизейблит :D disabled={uB.some( el =>  el.id === product.id)}
         <button disabled={device.storageCart.some(el => el.id === product.id)} onClick={addProduct}
                 className={classes.btn}>
-            {icon ? <Basket2/> : "В корзину"}
+            <Basket2/>
         </button>
     );
 });

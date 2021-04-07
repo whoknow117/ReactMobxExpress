@@ -10,20 +10,23 @@
   right: 8px;
   top: 8px;
   transition: .2s ease;
+  outline: none;
   svg {
     fill: $favoriteIcon;
   }
   &:hover {
     cursor: pointer;
     svg {
-      fill: $hoverFavoriteIcon;
+      fill: $orangeBackgroundColor;
     }
   }
 
 }
 
 .activeFavorite {
+
   svg {
     fill: $orangeBackgroundColor;
+    cursor: default;
   }
 }

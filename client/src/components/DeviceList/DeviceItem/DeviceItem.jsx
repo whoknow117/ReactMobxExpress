@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './DeviceItem.module.scss';
 import {Card, Col, Image} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
@@ -7,11 +7,17 @@ import {DEVICE_ROUTE} from "../../../utils/consts";
 import Heart from "../../../assets/Heart/Heart";
 import BasketButton from "../../BasketButton/BasketButton";
 import FavoriteButton from "./FavoriteButton/FavoriteButton";
+import Rating from "../../Rating/Rating";
+import Star from "../../Rating/Star/Star";
+import StarIcon from "../../../assets/StarIcon/StarIcon";
 
 const DeviceItem = observer(({dev, addProduct}) => {
 
     const history = useHistory()
     const {id} = useParams()
+
+    const [value, setValue] = useState(5);
+
     let fArray = []
     const sets = (id) => {
         if (id === 1) {
@@ -53,6 +59,10 @@ const DeviceItem = observer(({dev, addProduct}) => {
                     </span>
                    <BasketButton product={dev}/>
                </div>
+                <div className={classes.rating}>
+                <Rating onClick={setValue} value={value}/>
+                </div>
+
             </div>
 
 

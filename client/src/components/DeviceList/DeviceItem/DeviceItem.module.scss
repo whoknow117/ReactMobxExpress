@@ -4,10 +4,13 @@
 .wrapper {
 
   position: relative;
-  margin: 10px;
 
-  max-width: 240px;
-  padding: 10px;
+  max-width: 220px;
+
+  height: 420px;
+
+  border: 1px solid rgba(0,0,0,.1);
+
 
   .image {
     display: block;
@@ -23,10 +26,11 @@
 
   .productInfo {
     height: 120px;
-
+    padding: 10px;
     .productName {
-      height: 44px;
-      font-size: 1.2rem;
+      height: 39px;
+      font-size: 0.99rem;
+      font-weight: 700;
       overflow: hidden;
     }
     .wrapperPriceBlock {

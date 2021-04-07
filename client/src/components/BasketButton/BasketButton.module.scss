@@ -4,9 +4,11 @@
   display: block;
   margin-left: auto;
   border: none;
-  background: $basketButtonColor;
-  padding: 4px 20px;
+  background: transparent;
+  margin-right: 10px;
   color: #fff;
   border-radius: 4px;
-
+  svg {
+    fill: $basketButtonColor;
+  }
 }
