@@ -37,31 +37,31 @@ const DeviceItem = observer(({dev, addProduct}) => {
 
             <Image onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)} className={classes.image}
                    src={process.env.REACT_APP_API_URL + dev.img}/>
-            <div className="text-black-50">{dev.brandId}</div>
+            <div className="text-black-50"> </div>
 
             <div className={classes.productInfo}>
                 <h3 className={classes.productName}>
                     {dev.name}
                 </h3>
 
-
+                <Rating onClick={setValue} value={value}/>
                 <FavoriteButton fArray={fArray} favorite={dev}/>
                <div className={classes.wrapperPriceBlock}>
                     <span className={classes.price}>
                          {dev.price}
 
                         <span className={classes.units}>
-
-                       {
-                           sets(dev.unitId)
-                       }
+₴
+                       {/*{*/}
+                       {/*    sets(dev.unitId)*/}
+                       {/*}*/}
                    </span>
                     </span>
                    <BasketButton product={dev}/>
                </div>
-                <div className={classes.rating}>
-                <Rating onClick={setValue} value={value}/>
-                </div>
+
+
+
 
             </div>
 

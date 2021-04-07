@@ -5,7 +5,7 @@
 
   position: relative;
 
-  max-width: 220px;
+  max-width: 240px;
 
   height: 420px;
 
@@ -26,22 +26,31 @@
 
   .productInfo {
     height: 120px;
-    padding: 10px;
+    padding: 0 20px;
     .productName {
       height: 39px;
       font-size: 0.99rem;
       font-weight: 700;
       overflow: hidden;
+      margin: 0;
+      padding:0;
     }
     .wrapperPriceBlock {
       display: flex;
+
       .price {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         display: flex;
         color: $price;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
         .units {
           margin-left: 10px;
-
+          font-size: 1.6rem;
+          font-weight: 500;
+          color: $units;
+          display: flex;
         }
       }
     }
@@ -51,11 +60,12 @@
 
 
 .heart {
-  width: 24px;
+  width:11px;
   border: none;
   background: transparent;
+  outline: none;
   svg {
-    width: 24px;
+    width: 11px;
 
     &:hover {
       cursor: pointer;
