@@ -1,7 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
-import {createDevice, fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
+import {
+    createDevice,
+    fetchAvailbale,
+    fetchBrands,
+    fetchCategories,
+    fetchDevices,
+    fetchTypes,
+    fetchUnits
+} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
 import {createInfoDescription, fetchInfos} from "../../http/categoryInfoApi";
 import {useParams} from "react-router-dom";
@@ -11,48 +19,34 @@ const CreateDevice = observer(({show, onHide}) => {
 
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
-    const [info, setInfo] = useState([])
-    const [value, setValue] = useState("")
-    const [productType, setProductType] = useState('')
+    const [unit, setUnit] = useState([])
     const [name, setName] = useState('')
+    const [available, setAvailable] = useState('')
+    const [quantity, setQuantity] = useState('')
+    const [article, setArticle] = useState('')
+    const [aliasName, setAliasName] = useState('')
     const [price, setPrice] = useState(0)
-    const [clear,setClear] = useState(false)
+    const [clear, setClear] = useState(false)
     const [file, setFile] = useState(null)
 
     const params = useParams()
 
 
     useEffect(() => {
+
         fetchTypes().then(data => device.setTypes(data))
         fetchBrands().then(data => device.setBrands(data))
+        fetchAvailbale().then(data => device.setAvailable(data))
         fetchCategories().then(data => device.setCategories(data))
-        fetchDevices().then(data => device.setDevices(data.rows))
-    }, [ ])
+        fetchUnits().then(data => device.setUnit(data))
+        // fetchDevices().then(data => device.setDevices(data.rows))
+    }, [device.selectedType, device.selectedUnit,device.selectedAvailable  ])
 
 
     useEffect(() => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
-    }, [device.selectedType,])
+    }, [device.selectedType, device.selectedUnit,device.selectedAvailable ])
 
-
-    // const addInfo = () => {
-    //     setInfo([...info, {title: '', description: '', number: Date.now()}])
-    // }
-    // const removeInfo = (number) => {
-    //     setInfo(info.filter(i => i.number !== number))
-    // }
-
-    // const changeInfo = (key, value, number) => {
-    //     setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
-    // }
-
-    // const changeInfoDescription = () => {
-    //     setInfoDescription([...infoDescription,{
-    //         title: value,
-    //
-    //     } ])
-    //     setValue("")
-    // }
 
     const selectFile = (e) => {
         setFile(e.target.files[0])
@@ -64,9 +58,14 @@ const CreateDevice = observer(({show, onHide}) => {
         const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)
+        formData.append('aliasName', aliasName)
         formData.append('img', file)
         formData.append('brandId', device.selectedBrand.id)
+        formData.append('article', article)
+        formData.append('quantity', quantity)
+        formData.append('availableId', device.selectedAvailable.id)
         formData.append('typeId', device.selectedType.id)
+        formData.append('unitId', device.selectedUnit.id)
         formData.append('categoryId', device.selectedCategory.id)
         formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
@@ -77,10 +76,10 @@ const CreateDevice = observer(({show, onHide}) => {
     }
 
     const changeInfoDescription = (value) => {
-        setInfoDescription([...infoDescription,{
+        setInfoDescription([...infoDescription, {
             'title': value,
 
-        } ])
+        }])
 
     }
 
@@ -126,6 +125,33 @@ const CreateDevice = observer(({show, onHide}) => {
                             </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown className="mt-3">
+                            <Dropdown.Toggle>{device.selectedUnit.name || "Выберете способ измерения"}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {device.unit.map(unit =>
+                                    <Dropdown.Item
+                                        key={unit.id}
+                                        onClick={() => device.setSelectedUnit(unit)}
+                                    >
+                                        {unit.name}
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Dropdown className="mt-3">
+                            <Dropdown.Toggle>{device.selectedAvailable.name || "В наличии"}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {device.available.map(available =>
+                                    <Dropdown.Item
+                                        key={available.id}
+                                        onClick={() => device.setSelectedAvailable(available)}
+                                    >
+                                        {available.name}
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                        <Dropdown className="mt-3">
                             <Dropdown.Toggle> {device.selectedCategory.name || "Выберете категорию"} </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {device.categories.map(category =>
@@ -156,23 +182,50 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Form.Control>
 
 
+                        <Form.Control
+                            onChange={(e) => setAliasName(e.target.value.toLowerCase())}
+                            className="mt-3"
+                            placeholder="Введите название для поля поиска"
+                            type="text"
+                        >
+
+                        </Form.Control>
+
+                        <Form.Control
+                            onChange={(e) => setArticle(+e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите артикул"
+                            type="number"
+                        >
+
+                        </Form.Control>
+                        <Form.Control
+                            onChange={(e) => setQuantity(+e.target.value)}
+                            className="mt-3"
+                            placeholder="Введите количество товара"
+                            type="number"
+                        >
+
+                        </Form.Control>
+
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
+
                         >
 
                         </Form.Control>
                         <hr/>
 
-                        {device.info.map((el,idx) => <div>
+                        {device.info.map((el, idx) => <div>
                             <div key={el.id}>
                                 {el.title}
                                 {el.id}
-                                {/*<input onBlur={changeInfoDescription} onChange={(e) =>setValue(e.target.value)} type="text"/>*/}
-                             <DescriptionInput
 
-                                 changeDescription={changeInfoDescription}
-                             />
+                                <DescriptionInput
+
+                                    changeDescription={changeInfoDescription}
+                                />
 
 
                             </div>

@@ -2,13 +2,14 @@ import React, {useContext} from 'react';
 import {Context} from "../../index";
 import {Card, Row} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
+import classes from './BrandBar.module.scss';
 
 const BrandBar = observer(() => {
 
     const {device} =  useContext(Context)
 
        return (
-           <Row className="d-flex">
+           <div className="d-flex">
                {device.brands.map(brand =>
                    <Card
                        style={{cursor: 'pointer'}}
@@ -21,7 +22,7 @@ const BrandBar = observer(() => {
                        {brand.name}
                    </Card>
                )}
-           </Row>
+           </div>
        )
 
 });

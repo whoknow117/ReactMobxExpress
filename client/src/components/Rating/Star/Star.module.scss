@@ -1,0 +1,22 @@
+
+
+.common {
+  cursor: pointer;
+  svg {
+    width: 14px;
+    font-size: 14px;
+    fill: #c1c1c1;
+    transition: .3s ease-in-out;
+  }
+}
+
+.active {
+  color: #61dafb;
+  svg {
+    stroke:none;
+    font-size: 14px;
+    fill: #ff3c00;
+    transition: .3s ease-in-out;
+
+  }
+}

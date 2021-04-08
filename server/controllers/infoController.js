@@ -32,7 +32,7 @@ class InfoController {
         if (typeId) {
             info = await DeviceInfo.findAll(
                 {where: {typeId},
-                    include:[{model: DeviceInfoDescription }]
+
 
             })
 

@@ -1,0 +1,49 @@
+
+
+
+.item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid silver;
+  height: 40px;
+  border-right: 1px solid silver;
+  border-left: 1px solid silver;
+  .img {
+    width: 40px;
+    height:38px;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    img {
+      width: 80%;
+      object-fit: cover;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    background: rgba(0,0,0,.1);
+  }
+  &:first-child {
+    border-top: 1px solid silver;
+  }
+  .name {
+    margin-left: 20px;
+  }
+  .btn {
+    display: block;
+    margin-left: auto;
+    border: none;
+    background: #a02b2b;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+
+  }
+}
+
+.active {
+  background: #000;
+}

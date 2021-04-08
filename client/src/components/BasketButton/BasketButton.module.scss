@@ -1,0 +1,24 @@
+@import "src/variables/variables";
+
+.btn {
+  display: block;
+  margin-left: auto;
+  border: none;
+  max-width: 100px;
+  height: auto;
+  background: transparent;
+  margin-right: 10px;
+  color: #fff;
+  border-radius: 4px;
+  outline: none;
+  svg {
+    fill: $basketButtonColor;
+  }
+}
+
+.activeBasketTitle {
+  display: block;
+
+   
+ color: #000;
+}

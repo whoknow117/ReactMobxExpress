@@ -1,0 +1,14 @@
+@import "src/variables/variables";
+
+
+.phoneCity {
+  width: 280px;
+  display: flex;
+  margin-left: 44px;
+  justify-content: space-between;
+  .city {}
+  .phone {
+    border-bottom: 1px dotted  #000;
+  }
+}
+

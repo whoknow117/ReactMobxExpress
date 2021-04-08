@@ -3,109 +3,56 @@ import classes from './SubCategoryPage.module.scss'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {
-
+    fetchBrands, fetchCategories,
     fetchDevices,
-    fetchInfosTypeKey,
+    fetchInfosTypeKey, fetchTypes,
 
 } from "../../http/deviceApi";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import DeviceItem from "../../components/DeviceList/DeviceItem/DeviceItem";
 import {useParams} from "react-router-dom";
-import {v1} from "uuid";
-import Filter from "./Filter/Filter";
+
 import {fetchInfoDescription} from "../../http/categoryInfoApi";
+import TypeBar from "../../components/TypeBar/TypeBar";
+
 
 const SubCategoryPage = observer(() => {
 
     const {device} = useContext(Context)
     const {typeId} = useParams()
-
-    const [value,setValue] = useState("")
-    const [idValue,setIdValue] = useState([])
-    const strIdValue = JSON.stringify(idValue)
+    const [value, setValue] = useState("")
+    const [idValue, setIdValue] = useState([])
 
 
     useEffect(() => {
-
-        fetchInfosTypeKey(typeId).then(data => {
-
-            device.setInfo(data)
-
-        })
-
-        fetchInfoDescription(typeId, null, null).then(data => {
-            device.setInfoDescription(data)
-
-        })
-        fetchDevices(typeId, null, null,strIdValue && strIdValue, device.page, device.limit).then(data => {
+        const strIdValue = JSON.stringify(idValue)
+        fetchTypes(typeId).then(data => device.setTypes(data))
+        fetchInfosTypeKey(typeId).then(data => {device.setInfo(data)})
+        fetchInfoDescription(typeId, null, null).then(data => {device.setInfoDescription(data)})
+        fetchCategories().then(data => device.setCategories(data))
+        fetchBrands().then(data => device.setBrands(data))
+        fetchDevices(typeId, null, null, strIdValue, null, device.page, device.limit).then(data => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
 
         })
-    }, [ typeId, device.selectedType, typeId, device.selectedType.id, device.value, idValue])
+    }, [idValue, device.selectedCategory, typeId, device.selectedType.id])
 
 
+    useEffect(() => {
 
-    const filters = (arr) => {
-        const cash = {}
-        const filtered = []
-        arr.forEach( el => {
-            if(!cash[el.title]){
-                filtered.push(el)
-            }
-        })
-        return filtered
-    }
+        let strValue = device.value
+        let filteredArr = (arr, value) => {
+            return arr.filter(el => el.title === value)
 
-    let filteredArray;
+        }
+
+        let newArray = filteredArr(device.infoDescription, strValue).map(el => el.deviceId)
 
 
+        setIdValue(newArray)
 
-
-
-
-
-
-
-
-
-console.log(idValue)
-
-useEffect(()=> {
-
-
-    let strValue = value
-    let filteredArr = (arr,value )=>{
-        return arr.filter( el => el.title === value)
-    }
-    let newArray = filteredArr(device.infoDescription, strValue).map(i => i.deviceId)
-
-
-
-    console.log(newArray)
-  // for (let i = 0; i < strValue.length; i++) {
-  //       newArray = [...newArray,filteredArr(device.infoDescription, strValue[i] ).map(el =>{
-  //
-  //           return el.deviceId
-  //       } )]
-  // }
-    // const filter = (arr) => {
-    //     const cash = {}
-    //     const filtered = []
-    //     arr.forEach((el, idx) => {
-    //         if (!cash[el.title]) {
-    //             cash[el.title] = el;
-    //             filtered.push(el)
-    //         }
-    //     })
-    //     return filtered
-    // }
-    //
-    // let newArr = filter(device.infoDescription)
-    setIdValue(newArray)
-
-
-}, [value])
+    }, [device.value])
 
 
     const filter = (arr) => {
@@ -125,7 +72,9 @@ useEffect(()=> {
 
     return (
         <div className={classes.container}>
+
             <Row className={classes.itemBar}>
+
                 <Col md={9} className={classes.devices}>
                     <div className={classes.separate}>
                         <div className={classes.itemCount}>
@@ -143,7 +92,7 @@ useEffect(()=> {
                         </div>
                     </div>
                 </Col>
-                {/*<Filter  />*/}
+
                 <Col md={3}>
 
                     {device.info.map(i => {
@@ -155,7 +104,7 @@ useEffect(()=> {
                                 {newArr.map(el => el.deviceInfoId === i.id ?
                                     <div
                                         key={el.id}
-                                        onClick={() => setValue(el.title)}
+                                        onClick={() => device.setValue(el.title)}
                                     >{el.title}
 
 

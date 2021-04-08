@@ -8,18 +8,18 @@
   width: 240px;
   z-index: 140;
   height: 80px;
-  margin-bottom: 8px;
+
   cursor: pointer;
   text-decoration: none;
-  margin-top: 12px;
+
   &__icon {
     position: absolute;
     z-index: 120;
     left: 0;
-    top: 0;
+    top: 1px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     width: 70px;
     flex-basis: 70%;
     height: 70px;
@@ -31,7 +31,7 @@
       width: 30px;
       height: 18px;
       background: #fff;
-      right: -10px;
+      right: 00px;
       bottom: 38%;
     }
     .image {
@@ -39,7 +39,7 @@
       position: absolute;
       transform: rotate(-435deg);
       top: 0px;
-      left: 4px;
+      left: -20px;
       height: 30px;
       img {
         width: 100%;
@@ -61,9 +61,12 @@
     color: #242424;
     font-weight: 500;
     font-size: 1.2rem;
-    margin-left: 50px;
+    margin-left: 30px;
+
     .txt {
-      margin-left:5px;
+      margin-left: 4px;
+      font-weight: 500;
+      font-family: Monserrat, sans-serif;
     }
     .eSpan{
       display: block;
@@ -71,8 +74,8 @@
       width: 12px;
       height: 2px;
       background:orangered;
-      top: calc(43% - 1px);
-      left:calc(50% - 2px);
+      top: calc(44% - 1px);
+      left:calc(42% - 2px);
       &::before,
       &::after{
         content: '';

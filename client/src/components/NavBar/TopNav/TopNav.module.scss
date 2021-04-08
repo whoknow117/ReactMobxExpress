@@ -1,0 +1,23 @@
+
+
+.list {
+  display: flex;
+  list-style: none;
+  margin-left: auto;
+  max-width: 400px;
+  flex-grow: 1;
+  text-align: center;
+  height: 80px;
+  line-height: 90px;
+
+  .item {
+    flex-grow: 1;
+    font-family: 'PT Root UI';
+    font-weight: 300;
+    font-size: 14px;
+    .itemBtn {
+      border: none;
+      background: transparent;
+    }
+  }
+}

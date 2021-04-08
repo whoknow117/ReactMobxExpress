@@ -1,8 +1,9 @@
 import Admin from "./pages/Admin/Admin";
 import {
+    ABOUT_ROUTE,
     ADMIN_ROUTE,
     BASKET_ROUTE,
-    DEVICE_ROUTE,
+    DEVICE_ROUTE, FAVORITE_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
     SHOP_ROUTE,
@@ -13,6 +14,8 @@ import Shop from "./pages/Shop/Shop";
 import Auth from "./pages/Auth/Auth";
 import DevicePage from "./pages/DevicePage/DevicePage";
 import SubCategoryPage from "./pages/SubCategoryPage/SubCategoryPage";
+import About from "./pages/About/About";
+import Favorites from "./pages/Favorites/Favorites";
 
 
 export const authRoutes = [
@@ -20,16 +23,22 @@ export const authRoutes = [
         path:ADMIN_ROUTE,
         Component: Admin
     },
-    {
-        path:BASKET_ROUTE,
-        Component: Basket
-    }
+
 ]
 
 export const publicRoutes = [
+
+    {
+        path:BASKET_ROUTE,
+        Component: Basket
+    },
     {
         path: SHOP_ROUTE ,
         Component: Shop
+    },
+    {
+        path: ABOUT_ROUTE,
+        Component: About
     },
     {
         path: SUBCATEGORY_ROUTE + '/:typeId',
@@ -46,5 +55,9 @@ export const publicRoutes = [
     {
         path: DEVICE_ROUTE + '/:id' ,
         Component: DevicePage
+    },
+    {
+        path: FAVORITE_ROUTE ,
+        Component: Favorites
     }
 ]

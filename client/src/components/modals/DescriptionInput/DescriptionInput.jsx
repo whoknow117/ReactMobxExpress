@@ -16,7 +16,7 @@ const DescriptionInput = ({changeDescription, clear}) => {
     }
     return (
         <div>
-            <input value={value} onBlur={changeCallback} onChange={(e) =>setValue(e.target.value)} type="text"/>
+                    <input value={value} onBlur={changeCallback} onChange={(e) =>setValue(e.target.value)} type="text"/>
 
         </div>
     );

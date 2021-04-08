@@ -9,21 +9,39 @@ const CreateType = ({show, onHide}) => {
     const [value, setValue] = useState('')
 
 
-    useEffect(() => {
-        fetchCategories().then(data => device.setCategories(data))
-    },[device.selectedCategory])
 
+
+
+     const [file,setFile] = useState(null)
+
+    const selectFile = (e) => {
+        setFile(e.target.files[0])
+    }
+
+
+
+    useEffect(() => {
+
+
+        fetchCategories().then(data => device.setCategories(data))
+
+    },[device.setSelectedCategory,file])
 
 
     const addType = () => {
         if(value.trim() !== "") {
-            createType({name: value, categoryId: device.selectedCategory.id}).then(data => setValue(data))
+            let formData = new FormData()
 
+            formData.append('name', value)
+            formData.append('categoryId', device.selectedCategory.id)
+            formData.append('img', file)
 
+            // createType({name: value, categoryId: device.selectedCategory.id,file}).then(data => setValue(data))
+
+            createType(formData).then(data => data)
 
         }
     }
-
 
     return (
         <Modal
@@ -40,7 +58,7 @@ const CreateType = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Dropdown className="mt-3">
-                        <Dropdown.Toggle> {"Выберете тип"} </Dropdown.Toggle>
+                        <Dropdown.Toggle> {device.selectedCategory.name || "Выберете категорию"} </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {device.categories.map(category =>
                                 <Dropdown.Item
@@ -52,6 +70,12 @@ const CreateType = ({show, onHide}) => {
                             )}
                         </Dropdown.Menu>
                     </Dropdown>
+                    <Form.Control className="mt-3"
+                                  onChange={selectFile}
+                                  type="file"
+                    >
+
+                    </Form.Control>
                     <Form.Control
                         value={value}
                         onChange={(e) => setValue(e.target.value)}

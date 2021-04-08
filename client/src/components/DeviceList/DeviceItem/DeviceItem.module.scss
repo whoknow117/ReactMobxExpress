@@ -1,13 +1,101 @@
-.wrapper {
+@import "src/variables/variables";
 
- .card {
-   margin: 10px;
-   border: none;
-   padding: 10px;
-   .image {
-     width: 100px;
-     height: 100px;
-     margin: 0 auto;
-   }
- }
+
+.wrapper {
+  position: relative;
+  max-width: 240px;
+  height: 390px;
+  border: 1px solid rgba(164,144,142,.1);
+  &:hover {
+
+box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  }
+  .image {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .productInfo {
+    height: 120px;
+    padding: 0 20px;
+    .productName {
+      height: 39px;
+      font-size: 0.99rem;
+      font-weight: 700;
+      overflow: hidden;
+      margin: 0;
+      padding:0;
+    }
+    .wrapperPriceBlock {
+      display: flex;
+
+      .price {
+        font-size: 1.5rem;
+        display: flex;
+        color: $price;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        .units {
+          margin-left: 10px;
+          font-size: 1.6rem;
+          font-weight: 500;
+          color: $units;
+          display: flex;
+        }
+      }
+
+    }
+
+  }
+}
+
+.available {
+display: flex;
+  margin-top: 10px;
+  .isAvailable {
+    color: $isAvailabale;
+    font-size: 0.8rem;
+  }
+  .quantity {
+    margin-left:10px;
+    font-size: 0.8rem;
+    display: flex;
+  }
+}
+.articleWrapper {
+  display: flex;
+  margin-top: 10px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  .articleName {
+    color: $articleColor;
+    font-size: 0.7rem;
+  }
+  .article {
+    color: $articleColor;
+    font-size: 0.7rem;
+  }
+}
+.heart {
+  width:11px;
+  border: none;
+  background: transparent;
+  outline: none;
+  svg {
+    width: 11px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

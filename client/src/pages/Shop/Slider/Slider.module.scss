@@ -1,0 +1,136 @@
+.slideShow {
+  width: 100%;
+  height: 360px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  border: 1px solid #eeeeee;
+  z-index: 10;
+  &::before,
+  &::after{
+    content:'';
+
+    display: block;
+    position: absolute;
+    width: 6px;
+    height:92%;
+    right: -11px;
+    top: 9px;
+    background: #acacac;
+  }
+
+  &::after{
+    right: -6px;
+    background: #6b6a6a;
+    z-index: -1;
+
+  }
+  &::before{
+    top: 14px;
+    z-index: -1;
+  }
+  .slide {
+    width: 100%;
+    height: 100%;
+
+  }
+  .btns {
+
+
+    .spanWrapper {
+      position: absolute;
+      right: 110px;
+      bottom: 40px;
+      width: 30px;
+      height: 22px;
+      background: rgba(0,0,0,.1);
+      display: flex;
+      .span {
+        display: block;
+        color: #fff;
+        font-size: 20px;
+      }
+    }
+    .sliderLength {
+      width: 80px;
+      height: 2px;
+      background: #d2d2d2;
+      position: absolute;
+      box-shadow: 0 2px 2px rgba(0,0,0,.6);
+      bottom: 20px;
+      right: 104px;
+      .lengthSpan {
+
+      }
+    }
+    .btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      outline: none;
+      position: absolute;
+      cursor: pointer;
+      background: rgba(0,0,0,.3);
+      bottom: 18px;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.67);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        width: 20px;
+        fill: #fff;
+
+      }
+      @media (max-width: 420px) {
+        top: 65px;
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+      }
+      &:last-child {
+        right: 60px;
+      }
+      &:first-child {
+        right: 190px;
+      }
+      z-index: 101;
+
+    }
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+}
+.active {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+  position: absolute;
+  transform: scale(1);
+  transition: .3s ease;
+
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+}
+
+.slide {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s ease;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

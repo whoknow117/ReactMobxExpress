@@ -1,0 +1,141 @@
+@import 'src/variables/variables';
+
+
+.searchForm {
+  width: 50%;
+  display: flex;
+  margin-left: 90px;
+  position: relative;
+
+  .input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $mainTextColor;
+    outline: none;
+
+    padding-left: 10px;
+
+    &::placeholder {
+      font-size: 15px;
+      font-weight: 700;
+      color: #6b6b6b;
+    }
+  }
+
+  .searchBtn {
+    border: none;
+    background: transparent;
+
+    svg {
+      width: 24px;
+    }
+  }
+
+  .searchList {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: #efefef;
+    top: 50px;
+    z-index: 1001;
+    left: 0;
+    width: 900px;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 0;
+    opacity: 0;
+    transition: .1500s ease;
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(100, 100, 100, 0.3);
+      opacity: .4;
+
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      position: absolute;
+      width: 6px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+
+    }
+
+    .searchItem {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      min-height: 80px;
+      opacity: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, .2);
+      background: #fafafa;
+
+      .btnWrapper {
+        margin-left: auto;
+        margin-right: 20px;
+
+        button {
+          box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+          display: flex;
+          align-items: center;
+          width: 44px;
+          height: 38px;
+          justify-content: center;
+
+          &:hover {
+            cursor: pointer;
+            background: #3c91d0;
+          }
+
+          svg {
+            width: 22px;
+            fill: #fff;
+          }
+        }
+      }
+
+      .wrapper {
+        display: flex;
+        position: relative;
+        align-items: center;
+
+        .image {
+          height: 80px;
+          width: 80px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 80%;
+            object-fit: cover;
+          }
+        }
+
+        .name {
+
+        }
+      }
+
+
+    }
+
+    .active {
+      width: 900px;
+      z-index: 1001;
+
+      opacity: 1;
+    }
+  }
+
+  .activeList {
+    opacity: 1;
+    width: 900px;
+    height: 240px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+  }
+
+}

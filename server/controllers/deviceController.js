@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const {Device, DeviceInfo ,DeviceInfoDescription   } = require('../models/models')
+const {Device, DeviceInfo, DeviceInfoDescription} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
@@ -9,17 +9,33 @@ const path = require('path')
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId , categoryId,color,made, infoDescription,info} = req.body
+            let {
+                name,
+                price,
+                aliasName,
+                brandId,
+                quantity,
+                availableId,
+                article,
+                typeId,
+                unitId,
+                categoryId,
+                infoDescription,
+                info
+            } = req.body
             const {img} = req.files
             let fileName = uuid.v4() + '.jpg'
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
             const device = await Device.create({
                 name,
                 price,
+                aliasName,
+                article,
+                availableId,
+                quantity,
                 brandId,
                 typeId,
-                color,
-                made,
+                unitId,
                 categoryId,
                 img: fileName,
                 infoDescription,
@@ -32,14 +48,13 @@ class DeviceController {
                 info = JSON.parse(info)
                 infoDescription = JSON.parse(infoDescription)
 
-                infoDescription.forEach((i,idx1) =>
+                infoDescription.forEach((i, idx1) =>
                     DeviceInfoDescription.create({
-                        key:{idx1},
+                        key: {idx1},
                         title: i.title,
                         deviceId: device.id,
                         typeId: typeId,
                         deviceInfoId: (info[idx1].id)
-
 
                     })
                 )
@@ -52,92 +67,152 @@ class DeviceController {
         }
     }
 
+    async updateOne(req, res, next) {
+        try {
+            let {id,price,quantity, availableId} = req.body
+
+
+            let updatedProduct = await Device.update({price, quantity, availableId}, {
+                  where: {id},
+
+
+
+
+            });
+
+
+            return res.json(updatedProduct)
+
+        } catch (e) {
+            ApiError.badRequest(e.message)
+        }
+    }
+    async updateAll(req, res, next) {
+        try {
+            let {array} = req.body
+
+            if(array) {
+
+                array = JSON.parse(array)
+
+                array.forEach( el => {
+                    Device.update({
+                        price: el.price,
+                        quantity: el.quantity
+                    },{
+                        where: {
+                            article: el.article
+                        }
+                    })
+                })
+
+            }
+
+        }
+        catch (e) {
+            ApiError.badRequest(e.message)
+        }
+
+    }
 
 
     async getAll(req, res, next) {
 
-        try{
-            let {brandId,typeId,categoryId,honey, limit, page} = req.query
+        try {
+            let {brandId, typeId, categoryId, honey, name, limit, page} = req.query
 
             let offset = page * limit - limit
             let devices;
 
 
-
-
-
-
-            if (!brandId && !typeId && !honey) {
-                devices = await Device.findAndCountAll({where: {
-
-                    },limit,offset})
-            }
-            if(!brandId  && !categoryId   && typeId &&  honey) {
+            if (honey) {
                 honey = JSON.parse(honey)
+            }
 
-                devices = await Device.findAndCountAll({where: {
-                        typeId,
-                        id: {
-                            [Op.or] : honey
-                        }
+            if (!name && !categoryId && !brandId && !typeId && !honey) {
+                devices = await Device.findAndCountAll(
+                    {limit, offset})
+            }
+
+            if (name && !brandId && !typeId && !honey) {
+
+
+                devices = await Device.findAndCountAll({
+                    where: {
+                        aliasName: {[Op.like]: "%" + name + "%"}
+                    }, limit, offset
+                })
+            }
+            if (!categoryId && !brandId && typeId && honey) {
+                devices = await Device.findAndCountAll({
+                        where: {
+                            typeId,
+                            id: {
+                                [Op.or]: honey
+                            },
+
+                        },
+
+                        limit, offset
                     }
-                    ,limit,offset})
-            }
-            if( categoryId   && typeId && brandId && honey) {
-                honey = JSON.parse(honey)
-
-                devices = await Device.findAndCountAll({where: {
-                        typeId,
-                        brandId,
-                        id: {
-                            [Op.and] : honey
-                        }
-                    }
-                    ,limit,offset})
-            }
-
-            if (brandId && !typeId && !categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId},
-
-                    limit, offset})
+                )
 
             }
-            if (!brandId && typeId && !categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {typeId},
 
-                    limit, offset})
+            if (brandId && !typeId & !categoryId && !honey) {
+                devices = await Device.findAndCountAll({
+                    where: {brandId},
+
+                    limit, offset
+                })
+
             }
-            if (typeId && brandId && !categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {typeId, brandId},
-
-                    limit, offset})
+            if (!brandId && typeId && !categoryId && !honey) {
+                devices = await Device.findAndCountAll({
+                    where: {typeId},
+                    // include:[{model: DeviceInfoDescription,raw: true}],
+                    limit, offset
+                })
             }
-            if (!brandId && !typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {categoryId},
-
-                    limit, offset})
+            if (brandId && typeId && !categoryId && !honey) {
+                devices = await Device.findAndCountAll({
+                    where: {brandId, typeId},
+                    // include:[{model: DeviceInfoDescription,raw: true}],
+                    limit, offset
+                })
             }
-            if (!brandId && typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {typeId,categoryId},
+            if (!brandId && !typeId && categoryId && !honey) {
+                devices = await Device.findAndCountAll({
+                    where: {categoryId},
 
-                    limit, offset})
+                    limit, offset
+                })
             }
-            if (brandId && !typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId,categoryId},
+            if (!brandId && typeId && categoryId && !honey) {
+                devices = await Device.findAndCountAll({
+                    where: {typeId, categoryId},
 
-                    limit, offset})
+                    limit, offset
+                })
             }
-            if (brandId && typeId && categoryId && !honey ) {
-                devices = await Device.findAndCountAll({where: {brandId,typeId,categoryId},
+            if (brandId && !typeId && categoryId && !honey) {
+                devices = await Device.findAndCountAll({
+                    where: {brandId, categoryId},
 
-                    limit, offset})
+                    limit, offset
+                })
             }
+            if (brandId && typeId && categoryId && !honey) {
+                devices = await Device.findAndCountAll({
+                    where: {brandId, typeId, categoryId},
 
+                    limit, offset
+                })
+            }
 
 
             return res.json(devices)
-        }
-        catch (e) {
+        } catch (e) {
             ApiError.badRequest(e.message)
         }
     }
@@ -151,6 +226,23 @@ class DeviceController {
 
             }
         )
+        return res.json(device)
+    }
+
+
+    async deleteOne(req, res) {
+
+        const {id} = req.query
+        const device = await Device.destroy({
+            where: {
+                id: id,
+
+            },
+
+
+        },)
+
+
         return res.json(device)
     }
 }

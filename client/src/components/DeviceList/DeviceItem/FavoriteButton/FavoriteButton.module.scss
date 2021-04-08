@@ -1,0 +1,32 @@
+@import "src/variables/variables";
+
+
+.btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  transition: .2s ease;
+  outline: none;
+  svg {
+    fill: $favoriteIcon;
+  }
+  &:hover {
+    cursor: pointer;
+    svg {
+      fill: $orangeBackgroundColor;
+    }
+  }
+
+}
+
+.activeFavorite {
+
+  svg {
+    fill: $orangeBackgroundColor;
+    cursor: default;
+  }
+}
