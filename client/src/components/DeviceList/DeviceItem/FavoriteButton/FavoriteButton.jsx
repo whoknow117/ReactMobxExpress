@@ -25,7 +25,7 @@ const FavoriteButton = observer(({favorite,fArray}) => {
             device.setStorageFavorite(JSON.parse(updatedFavorite))
         }
 
-    }, [device.favorite])
+    }, [device.favorite,device.storageCounter])
 
 
 

@@ -20,7 +20,7 @@ import Fasteners from "../../assets/Fasteners/Fasteners";
 
 
 
-const TypeBar = observer(() =>  {
+const TypeBar = observer(({collapse}) =>  {
 
 
     const sidebarIcons = [
@@ -54,7 +54,7 @@ const TypeBar = observer(() =>  {
      },[device.activeBar])
 
     return (
-        <div className={classes.menu}>
+        <div className={`${classes.menu} ${collapse ? classes.offsetMode  : ""}`}>
 
             <ul className={classes.list}>
                 {device.categories.map((category,idx) =>

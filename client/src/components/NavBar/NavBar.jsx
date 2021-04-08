@@ -39,7 +39,7 @@ const NavBar = observer(() => {
         }
     }
 
-    const [headerCollapsed, setHeaderCollapsed] = useState (false);
+    const [headerCollapsed, setHeaderCollapsed] = useState(false);
 
 
     window.addEventListener('scroll', (event) => {
@@ -57,10 +57,9 @@ const NavBar = observer(() => {
     }
 
     const checkNull = () => {
-        if(device.storageFavorite.length !==0) {
+        if (device.storageFavorite.length !== 0) {
             history.push(FAVORITE_ROUTE)
-        }
-        else {
+        } else {
             alert('Нет избранных товаров!')
         }
     }
@@ -75,7 +74,6 @@ const NavBar = observer(() => {
     const [favoriteCount, setFavoriteCount] = useState(null)
 
 
-
     useEffect(() => {
 
 
@@ -83,6 +81,7 @@ const NavBar = observer(() => {
         let count = localStorage.getItem('basketProduct')
         let favor = JSON.parse(localStorage.getItem('favoriteCounter'))
         setFavoriteCount(favor)
+
         if (count) {
             let parseCount = JSON.parse(count)
             if (parseCount.count) {
@@ -90,9 +89,8 @@ const NavBar = observer(() => {
             }
         }
         // device.sum, device.storageCart, favoriteCount
-    }, [device.storageFavorite,device.cartCounter, device.storageCounter,])
+    }, [device.storageFavorite, device.cartCounter, device.storageCounter, ])
 
-    console.log(favoriteCount)
 
 
 
@@ -114,7 +112,7 @@ const NavBar = observer(() => {
                     </button>
                     {device.activeBar ?
                         <div className={classes.typebar}>
-                            <TypeBar/>
+                            <TypeBar collapse={headerCollapsed}/>
                         </div> : ""}
                     <Search/>
                     {user.isAuth === true ?
@@ -165,7 +163,8 @@ const NavBar = observer(() => {
                             <button className={classes.btn} onClick={checkNull} style={{marginRight: '10px'}}>
 
                                 <div className={classes.icon}>
-                                    <Heart/> <span className={`${ classes.favoriteCounter} ${device.storageFavorite.length === 0 ? classes.notActive : ""}`}>
+                                    <Heart/> <span
+                                    className={`${classes.favoriteCounter} ${device.storageFavorite.length === 0 ? classes.notActive : ""}`}>
                                         {favoriteCount && favoriteCount || 0}
                                     </span>
                                 </div>

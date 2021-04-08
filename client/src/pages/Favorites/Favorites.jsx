@@ -21,6 +21,11 @@ const Favorites = observer(() => {
     useEffect(() => {
         setFavoriteCount(device.storageFavorite.length)
         let favoriteStore =  localStorage.getItem('favorite')
+        let favoriteCounts =  JSON.parse(localStorage.getItem('favoriteCounter'))
+
+        setFavoriteCount(favoriteCounts)
+
+
 
         if (favoriteStore) {
             setStorFavorite(JSON.parse(favoriteStore))
@@ -32,12 +37,13 @@ const Favorites = observer(() => {
         }
 
 
-    }, [device.cartCounter, favoriteCount, click, ])
+    }, [     ])
 
     const removeAllFavorite = () => {
+        setClick(!click)
         localStorage.removeItem('favoriteCounter')
         localStorage.removeItem('favorite')
-        setClick(!click)
+
         history.push(SHOP_ROUTE)
     }
 

@@ -28,7 +28,7 @@
   position: fixed;
   width: 320px;
   min-height: 300px;
-  left:80px;
+  left:70px;
   top: 150px;
   z-index:1001;
   border-radius: 10px;
@@ -75,4 +75,8 @@
 }
 .active {
   color:$orangeBackgroundColor;
+}
+
+.offsetMode {
+  top:  80px;
 }
