@@ -14,22 +14,21 @@ const Favorites = observer(() => {
     useEffect(() => {
         setFavoriteCount(device.storageFavorite.length)
         let favoriteStore = JSON.parse(localStorage.getItem('favorite'))
-        setStorFavorite(favoriteStore)
+        if (favoriteStore) {
+            setStorFavorite(favoriteStore)
+        }
+
+
+    }, [device.storageFavorite, storFavorite])
 
 
 
-
-    }, [ favoriteCount,device.storageFavorite, ])
-
-    useEffect(() => {
-
-    }, [])
     return (
         <div className={classes.container}>
             <div>
                 <h1 className={classes.favoriteTitle}>Избранное</h1>
                 <div className={classes.favoriteBlock}>
-                    {device.storageFavorite.map(el => {
+                    {storFavorite.map(el => {
                         return (
                             <div className={classes.favoriteItem}>
                                 <div className={classes.image}>
