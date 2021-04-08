@@ -14,12 +14,14 @@ const Favorites = observer(() => {
     useEffect(() => {
         setFavoriteCount(device.storageFavorite.length)
         let favoriteStore = JSON.parse(localStorage.getItem('favorite'))
+
         if (favoriteStore) {
             setStorFavorite(favoriteStore)
+            device.setStorageCounter(favoriteStore.length)
         }
 
 
-    }, [device.storageFavorite, storFavorite])
+    }, [ ])
 
 
 

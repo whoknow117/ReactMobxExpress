@@ -11,10 +11,7 @@ import {stringify} from "uuid";
 const FavoriteButton = observer(({favorite,fArray}) => {
 
 
-    let testArray = [{"article": 432123, "price": 2134, "quantity":14},
-        {"article": 231555, "price": 1134, "quantity":44},
-        {"article": 2315111, "price": 2131, "quantity":1134},]
-    console.log(testArray)
+
     const {device} = useContext(Context);
 
     const [favor, setFavor] = useState([])

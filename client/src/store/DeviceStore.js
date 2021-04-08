@@ -34,6 +34,7 @@ export default class DeviceStore {
         this._sum = null
         this._favorite = []
         this._storageFavorite = []
+         
 
 
         makeAutoObservable(this)

@@ -75,6 +75,8 @@ const NavBar = observer(() => {
     const [favoriteCount, setFavoriteCount] = useState(null)
     useEffect(() => {
         setFavoriteCount(device.storageFavorite.length)
+
+        device.setStorageCounter(favoriteCount)
         let count = localStorage.getItem('basketProduct')
         if (count) {
             let parseCount = JSON.parse(count)
@@ -83,7 +85,7 @@ const NavBar = observer(() => {
             }
         }
 
-    }, [device.storageFavorite,device.cartCounter, device.sum, device.storageCart ])
+    }, [device.storageFavorite,device.cartCounter, device.sum, device.storageCart, favoriteCount ])
 
 
 

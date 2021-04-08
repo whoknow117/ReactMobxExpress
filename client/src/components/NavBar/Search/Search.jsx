@@ -27,8 +27,7 @@ const Search = () => {
 const productRoute = (id) => {
     history.push(DEVICE_ROUTE + '/' + id)
 }
-    console.log(value.trim() === "")
-    console.log(value )
+
 
 
 
