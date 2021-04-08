@@ -30,12 +30,10 @@ export default class DeviceStore {
         this._limit = 24
         this._cart = []
         this._storageCart = []
-        this._storageCounter = []
+        this._storageCounter = null
         this._sum = null
         this._favorite = []
         this._storageFavorite = []
-         
-
 
         makeAutoObservable(this)
     }

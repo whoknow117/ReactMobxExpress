@@ -14,18 +14,18 @@ const FavoriteButton = observer(({favorite,fArray}) => {
 
     const {device} = useContext(Context);
 
-    const [favor, setFavor] = useState([])
+
 
     useEffect(() => {
 
         let updatedFavorite = localStorage.getItem('favorite')
+
 
         if (updatedFavorite) {
             device.setStorageFavorite(JSON.parse(updatedFavorite))
         }
 
     }, [device.favorite])
-
 
 
 
@@ -43,6 +43,9 @@ const FavoriteButton = observer(({favorite,fArray}) => {
                 let newFavorite = JSON.stringify(device.favorite)
                 let parseFavorite = JSON.parse(newFavorite)
                 localStorage.setItem('favorite', JSON.stringify(parseFavorite))
+
+
+                localStorage.setItem('favoriteCounter', JSON.stringify(parseFavorite.length))
             }
 
 

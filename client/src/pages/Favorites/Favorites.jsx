@@ -2,8 +2,9 @@ import React, {useContext, useEffect, useState} from 'react';
 import classes from './Favorites.module.scss';
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
-import {fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
 import {useHistory} from "react-router-dom";
+import {SHOP_ROUTE} from "../../utils/consts";
+
 
 
 const Favorites = observer(() => {
@@ -11,28 +12,38 @@ const Favorites = observer(() => {
     const [storFavorite, setStorFavorite] = useState([])
     const [favoriteCount, setFavoriteCount] = useState(null)
 
+    const [click,setClick] = useState(false)
 
     const history = useHistory()
 
 
 
-
     useEffect(() => {
         setFavoriteCount(device.storageFavorite.length)
-        let favoriteStore = JSON.parse(localStorage.getItem('favorite'))
+        let favoriteStore =  localStorage.getItem('favorite')
 
         if (favoriteStore) {
-            setStorFavorite(favoriteStore)
-            device.setStorageCounter(favoriteStore.length)
+            setStorFavorite(JSON.parse(favoriteStore))
+
+
+
+
+
         }
 
 
-    }, [])
+    }, [device.cartCounter, favoriteCount, click, ])
 
-
+    const removeAllFavorite = () => {
+        localStorage.removeItem('favoriteCounter')
+        localStorage.removeItem('favorite')
+        setClick(!click)
+        history.push(SHOP_ROUTE)
+    }
 
     return (
         <div className={classes.container}>
+            <button onClick={removeAllFavorite} >del</button>
             <div>
                 <h1 className={classes.favoriteTitle}>Избранное</h1>
                 <div className={classes.favoriteBlock}>
