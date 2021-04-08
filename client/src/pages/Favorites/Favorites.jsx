@@ -21,7 +21,9 @@ const Favorites = observer(() => {
 
     }, [ favoriteCount,device.storageFavorite, ])
 
+    useEffect(() => {
 
+    }, [])
     return (
         <div className={classes.container}>
             <div>
