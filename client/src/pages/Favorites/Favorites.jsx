@@ -3,12 +3,18 @@ import classes from './Favorites.module.scss';
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {fetchBrands, fetchCategories, fetchDevices, fetchTypes} from "../../http/deviceApi";
+import {useHistory} from "react-router-dom";
 
 
 const Favorites = observer(() => {
     const {device} = useContext(Context)
     const [storFavorite, setStorFavorite] = useState([])
     const [favoriteCount, setFavoriteCount] = useState(null)
+
+
+    const history = useHistory()
+
+
 
 
     useEffect(() => {
@@ -21,7 +27,7 @@ const Favorites = observer(() => {
         }
 
 
-    }, [ ])
+    }, [])
 
 
 

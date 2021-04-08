@@ -7,7 +7,7 @@
   max-width: 1400px;
   width: 100%;
 
-  marging: 0 auto;
+  margin: 0 auto 40px auto;
 
   .container {
     width: 100%;
@@ -22,6 +22,7 @@
       width: 100%;
       align-items: center;
 
+      height: 80px;
     }
 
   }
@@ -30,7 +31,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    height: 80px;
+
 
     .catalogBtn {
       background: #000;
@@ -82,6 +83,7 @@
             color: #fff;
             bottom: -7px
           }
+
         .span {
           position: absolute;
           background: $orangeBackgroundColor;
@@ -213,10 +215,11 @@
   top: 0;
   left: 0;
   height: 80px;
-  height: 180px;
+  height:  80px;
   max-width: 100%;
   padding: 0 80px;
   background: #fff;
   z-index: 9999;
   box-shadow: 0 2px 4px rgba(0,0,0,.2);
 }
+

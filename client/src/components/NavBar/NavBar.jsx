@@ -160,7 +160,7 @@ const NavBar = observer(() => {
                             <button className={classes.btn} onClick={checkNull} style={{marginRight: '10px'}}>
 
                                 <div className={classes.icon}>
-                                    <Heart/>                                    <span className={classes.favoriteCounter}>
+                                    <Heart/> <span className={`${ classes.favoriteCounter} ${device.storageFavorite.length === 0 ? classes.notActive : ""}`}>
                                         {favoriteCount && favoriteCount || 0}
                                     </span>
                                 </div>
