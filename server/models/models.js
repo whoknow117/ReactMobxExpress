@@ -39,9 +39,6 @@ const Device = sequelize.define('device', {
     quantity: {type: DataTypes.STRING, allowNull: true},
     price: {type: DataTypes.INTEGER, allowNull: false},
     rating: {type: DataTypes.INTEGER, defaultValue: 0},
-    color: {type: DataTypes.STRING },
-    made: {type: DataTypes.STRING },
-
     img: {type: DataTypes.STRING, allowNull: false},
 
 })

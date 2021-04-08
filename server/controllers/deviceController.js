@@ -87,33 +87,33 @@ class DeviceController {
             ApiError.badRequest(e.message)
         }
     }
-    async updateAll(req, res, next) {
-        try {
-            let {array} = req.body
-
-            if(array) {
-
-                array = JSON.parse(array)
-
-                array.forEach( el => {
-                    Device.update({
-                        price: el.price,
-                        quantity: el.quantity
-                    },{
-                        where: {
-                            article: el.article
-                        }
-                    })
-                })
-
-            }
-
-        }
-        catch (e) {
-            ApiError.badRequest(e.message)
-        }
-
-    }
+    // async updateAll(req, res, next) {
+    //     try {
+    //         let {array} = req.body
+    //
+    //         if(array) {
+    //
+    //             array = JSON.parse(array)
+    //
+    //             array.forEach( el => {
+    //                 Device.update({
+    //                     price: el.price,
+    //                     quantity: el.quantity
+    //                 },{
+    //                     where: {
+    //                         article: el.article
+    //                     }
+    //                 })
+    //             })
+    //
+    //         }
+    //
+    //     }
+    //     catch (e) {
+    //         ApiError.badRequest(e.message)
+    //     }
+    //
+    // }
 
 
     async getAll(req, res, next) {
@@ -159,7 +159,7 @@ class DeviceController {
 
             }
 
-            if (brandId && !typeId & !categoryId && !honey) {
+            if (brandId && !typeId && !categoryId && !honey) {
                 devices = await Device.findAndCountAll({
                     where: {brandId},
 
