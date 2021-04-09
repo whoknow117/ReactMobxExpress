@@ -1,4 +1,4 @@
-import  React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from './TypeBar.module.scss';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
@@ -18,9 +18,7 @@ import Carts from "../../assets/Carts/Carts";
 import Fasteners from "../../assets/Fasteners/Fasteners";
 
 
-
-
-const TypeBar = observer(({collapse}) =>  {
+const TypeBar = observer(({collapse}) => {
 
 
     const sidebarIcons = [
@@ -47,20 +45,20 @@ const TypeBar = observer(({collapse}) =>  {
         device.selectedCategory(type)
         setMode(true)
     }
-     useEffect(() => {
+    useEffect(() => {
 
-         fetchTypes().then(data => device.setTypes(data))
-         fetchCategories().then(data => device.setCategories(data))
-     },[device.activeBar])
+        fetchTypes().then(data => device.setTypes(data))
+        fetchCategories().then(data => device.setCategories(data))
+    }, [device.activeBar])
 
     return (
-        <div className={`${classes.menu} ${collapse ? classes.offsetMode  : ""}`}>
+        <div className={`${classes.menu} ${collapse ? classes.offsetMode : ""}`}>
 
             <ul className={classes.list}>
-                {device.categories.map((category,idx) =>
+                {device.categories.map((category, idx) =>
                     <li
 
-                        className={`${classes.item} ${ category.id === device.selectedCategory.id ? classes.active :""}`}
+                        className={`${classes.item} ${category.id === device.selectedCategory.id ? classes.active : ""}`}
                         // onClick={() => device.setSelectedCategory(category)}
                         style={{cursor: 'pointer', textAlign: 'left'}}
                         onMouseOver={() => {
@@ -83,22 +81,25 @@ const TypeBar = observer(({collapse}) =>  {
                 <div
                     onMouseOver={() => setMode(true)}
                     onMouseLeave={() => setMode(false)}
-                    className={classes.dropdown}
+                    className={`${classes.dropdown} ${collapse ? classes.offsetDrop : ""}`}
                 >
                     {device.types.map(type => {
                         if (type.categoryId === device.selectedCategory.id) {
                             return <div
+                                className={classes.subcategoryItem}
                                 onClick={() => {
                                     device.setValue("")
-                                    history.push(SUBCATEGORY_ROUTE + '/' +  type.id)
+                                    history.push(SUBCATEGORY_ROUTE + '/' + type.id)
                                     device.setSelectedType(type)
                                 }}
                                 key={type.id}
                             >
 
 
-                                {type.name}
-
+                                <h5 className={classes.subcategoryName}>{type.name}</h5>
+                                {/*<div className={classes.image}>*/}
+                                {/*    <img src={process.env.REACT_APP_API_URL + type.img} alt=""/>*/}
+                                {/*</div>*/}
 
                             </div>
                         }

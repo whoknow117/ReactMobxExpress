@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
+import {Button,   Dropdown, Form, Modal} from "react-bootstrap";
 import {Context} from "../../index";
 import {
     createDevice,
@@ -11,7 +11,7 @@ import {
     fetchUnits
 } from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
-import {createInfoDescription, fetchInfos} from "../../http/categoryInfoApi";
+import { fetchInfos} from "../../http/categoryInfoApi";
 import {useParams} from "react-router-dom";
 import DescriptionInput from "./DescriptionInput/DescriptionInput";
 
@@ -19,9 +19,9 @@ const CreateDevice = observer(({show, onHide}) => {
 
     const {device} = useContext(Context)
     const [infoDescription, setInfoDescription] = useState([])
-    const [unit, setUnit] = useState([])
+
     const [name, setName] = useState('')
-    const [available, setAvailable] = useState('')
+
     const [quantity, setQuantity] = useState('')
     const [article, setArticle] = useState('')
     const [aliasName, setAliasName] = useState('')
@@ -29,7 +29,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const [clear, setClear] = useState(false)
     const [file, setFile] = useState(null)
 
-    const params = useParams()
+
 
 
     useEffect(() => {
@@ -49,17 +49,20 @@ const CreateDevice = observer(({show, onHide}) => {
 
 
     const selectFile = (e) => {
-        setFile(e.target.files[0])
+        setFile(e.target.files)
     }
 
-
+    console.log(file)
     const addDevice = () => {
 
         const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)
         formData.append('aliasName', aliasName)
-        formData.append('img', file)
+        // formData.append('img', file)
+
+            formData.append('img', file )
+
         formData.append('brandId', device.selectedBrand.id)
         formData.append('article', article)
         formData.append('quantity', quantity)
@@ -211,7 +214,7 @@ const CreateDevice = observer(({show, onHide}) => {
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
-
+                                      multiple
                         >
 
                         </Form.Control>

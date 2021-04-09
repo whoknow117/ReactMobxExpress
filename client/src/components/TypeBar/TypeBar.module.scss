@@ -28,7 +28,7 @@
   position: fixed;
   width: 320px;
   min-height: 300px;
-  left:70px;
+  left: 66px;
   top: 150px;
   z-index:1001;
   border-radius: 10px;
@@ -42,7 +42,6 @@
     .item {
       height: 40px;
       font-size: 0.94rem;
-
       padding-left: 65px;
       display: flex;
       align-items: center;
@@ -58,6 +57,7 @@
         align-items: center;
         justify-content: center;
         svg {
+          fill: $orangeBackgroundColor;
           width: 24px;
         }
 
@@ -65,13 +65,43 @@
     }
   }
   .dropdown {
-    width: 300px;
+    width: 600px;
+    height: 100%;
     position: fixed;
-    top:170px;
-    left: 400px;
+    top:150px;
+    left: 386px;
+    border: 1px solid silver;
     z-index: 1001;
-    background: #f5f5f5;
+    background: #fff;
+    height: 441px;
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
   }
+  .offsetDrop {
+    top: 80px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+  }
+  .subcategoryItem {
+    display: flex;
+   border: 1px solid silver;
+    max-height: 140px;
+    justify-content: center;
+    position: relative;
+    .subcategoryName {
+      position: absolute;
+      top: 70px;
+    }
+    .image {
+      width: 60px;
+      height: 60px;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
 }
 .active {
   color:$orangeBackgroundColor;
@@ -80,3 +110,5 @@
 .offsetMode {
   top:  80px;
 }
+
+

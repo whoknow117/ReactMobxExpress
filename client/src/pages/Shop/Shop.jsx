@@ -46,7 +46,6 @@ const Shop = observer(() => {
                     <BestCategory/>
 
                     <BrandBar/>
-
                     <DeviceList  />
                     <Pages/>
                 </Col>
