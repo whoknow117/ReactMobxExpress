@@ -17,12 +17,19 @@ const DeviceList = observer(( ) => {
     return (
         <Row className="d-flex">
             <Col className={classes.devices} md={12}>
-                {device.devices.map(dev =>
-                    <DeviceItem
-                        key={dev.id}
-                        dev={dev}
+                {device.devices.map(dev =>{
 
-                    />
+
+                    return (
+                        <DeviceItem
+                            key={dev.id}
+                            dev={dev}
+
+                        />
+                    )
+                    }
+
+
 
                 )}
             </Col>

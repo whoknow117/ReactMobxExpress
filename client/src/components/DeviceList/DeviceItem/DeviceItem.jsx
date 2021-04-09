@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './DeviceItem.module.scss';
 import {Card, Col, Image} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
@@ -10,13 +10,19 @@ import FavoriteButton from "./FavoriteButton/FavoriteButton";
 import Rating from "../../Rating/Rating";
 import Star from "../../Rating/Star/Star";
 import StarIcon from "../../../assets/StarIcon/StarIcon";
+import {login} from "../../../http/userApi";
 
 const DeviceItem = observer(({dev, addProduct}) => {
 
     const history = useHistory()
     const {id} = useParams()
 
-    const [value, setValue] = useState(5);
+
+    const [value, setValue] = useState(4);
+    let [ image, setImage] = useState([])
+
+    let img = JSON.stringify(dev.img)
+    console.log(dev.img)
 
     let fArray = []
     const sets = (id) => {
@@ -32,11 +38,14 @@ const DeviceItem = observer(({dev, addProduct}) => {
         return
     }
 
+    console.log(JSON.parse(dev.img))
+    let imgs = JSON.parse(dev.img)
+
     return (
         <div className={classes.wrapper}>
 
             <Image onClick={() => history.push(DEVICE_ROUTE + '/' + dev.id)} className={classes.image}
-                   src={process.env.REACT_APP_API_URL + dev.img}/>
+                   src={process.env.REACT_APP_API_URL +  imgs[1] }/>
             <div className="text-black-50"> </div>
 
             <div className={classes.productInfo}>

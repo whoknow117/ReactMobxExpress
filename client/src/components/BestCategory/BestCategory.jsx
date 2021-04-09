@@ -16,13 +16,12 @@ const BestCategory = observer(( ) => {
             <div className={classes.popular}>
 
                 {device.types.map( p => {
-
-
+                     let img = JSON.parse(p.img)
 
                     return  (
                         <div className={classes.wrap}>
                             <div className={classes.image}>
-                               <img src={process.env.REACT_APP_API_URL + p.img} alt="#"/>
+                               <img src={process.env.REACT_APP_API_URL + img[0]} alt="#"/>
                             </div>
                             <div className={classes.title}>
                                 {p.name}

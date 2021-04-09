@@ -40,26 +40,29 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchCategories().then(data => device.setCategories(data))
         fetchUnits().then(data => device.setUnit(data))
         // fetchDevices().then(data => device.setDevices(data.rows))
-    }, [device.selectedType, device.selectedUnit,device.selectedAvailable  ])
+    }, [device.selectedType, device.selectedUnit, device.selectedAvailable])
 
 
     useEffect(() => {
         fetchInfos(device.selectedType.id).then(data => device.setInfo(data))
-    }, [device.selectedType, device.selectedUnit,device.selectedAvailable ])
+    }, [device.selectedType, device.selectedUnit, device.selectedAvailable])
 
 
     const selectFile = (e) => {
-        setFile(e.target.files[0])
+        setFile(e.target.files)
     }
 
-
+    console.log(file)
     const addDevice = () => {
 
         const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)
         formData.append('aliasName', aliasName)
-        formData.append('img', file)
+        // formData.append('img', file)
+        for (let i = 0; i < file.length; i++) {
+            formData.append('img', file[i])
+        }
         formData.append('brandId', device.selectedBrand.id)
         formData.append('article', article)
         formData.append('quantity', quantity)
@@ -69,7 +72,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('categoryId', device.selectedCategory.id)
         formData.append('info', JSON.stringify(device.info))
         formData.append('infoDescription', JSON.stringify(infoDescription))
-        console.log(JSON.stringify(infoDescription))
+
         createDevice(formData).then(data => data)
         setInfoDescription([])
         setClear(true)
@@ -211,7 +214,7 @@ const CreateDevice = observer(({show, onHide}) => {
                         <Form.Control className="mt-3"
                                       onChange={selectFile}
                                       type="file"
-
+                                      multiple
                         >
 
                         </Form.Control>

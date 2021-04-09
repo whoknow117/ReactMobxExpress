@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Button, Dropdown, Form, Modal} from "react-bootstrap";
 import {createType, fetchCategories} from "../../http/deviceApi";
 import {Context} from "../../index";
+import {login} from "../../http/userApi";
 
 const CreateType = ({show, onHide}) => {
 
@@ -15,10 +16,10 @@ const CreateType = ({show, onHide}) => {
      const [file,setFile] = useState(null)
 
     const selectFile = (e) => {
-        setFile(e.target.files[0])
+        setFile(e.target.files )
     }
 
-
+    console.log(file)
 
     useEffect(() => {
 
@@ -34,8 +35,10 @@ const CreateType = ({show, onHide}) => {
 
             formData.append('name', value)
             formData.append('categoryId', device.selectedCategory.id)
-            formData.append('img', file)
-
+            // formData.append('img', file)
+            for(let i=0; i < file.length; i++){
+                formData.append('img',  file[i])
+            }
             // createType({name: value, categoryId: device.selectedCategory.id,file}).then(data => setValue(data))
 
             createType(formData).then(data => data)
@@ -73,6 +76,7 @@ const CreateType = ({show, onHide}) => {
                     <Form.Control className="mt-3"
                                   onChange={selectFile}
                                   type="file"
+                                  multiple
                     >
 
                     </Form.Control>
