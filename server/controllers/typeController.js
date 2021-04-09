@@ -15,14 +15,16 @@ class TypeController {
 
             let promises = []
             let fileName = '';
+            let newArray = []
             img.forEach(file => {
                 fileName = uuid.v4() + '.jpg'
                 promises.push(file.mv(path.resolve(__dirname, '..', 'static', fileName)))
+                newArray.push(fileName)
             })
             await Promise.all(promises)
+            console.log(newArray)
+            const type = await Type.create({name, categoryId, img: JSON.stringify(newArray),})
 
-            const type = await Type.create({name, categoryId, img: fileName,})
-            console.log(fileName)
             return res.json(type)
         } catch (e) {
             ApiError.badRequest(e.message)
