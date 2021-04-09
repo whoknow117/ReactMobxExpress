@@ -24,8 +24,17 @@ class DeviceController {
                 info
             } = req.body
             const {img} = req.files
-            let fileName = uuid.v4() + '.jpg'
-            await img.mv(path.resolve(__dirname, '..', 'static', fileName))
+            let promises = []
+            let fileName = '';
+            console.log(img)
+            let newArray = []
+            img.forEach(file => {
+                fileName = uuid.v4() + '.jpg'
+                promises.push(file.mv(path.resolve(__dirname, '..', 'static', fileName)))
+                newArray.push(fileName)
+            })
+            await Promise.all(promises)
+            console.log(newArray)
             const device = await Device.create({
                 name,
                 price,
@@ -37,7 +46,7 @@ class DeviceController {
                 typeId,
                 unitId,
                 categoryId,
-                img: fileName,
+                img: JSON.stringify(newArray),
                 infoDescription,
                 info
 

@@ -22,7 +22,7 @@ class TypeController {
                 newArray.push(fileName)
             })
             await Promise.all(promises)
-            console.log(newArray)
+
             const type = await Type.create({name, categoryId, img: JSON.stringify(newArray),})
 
             return res.json(type)
