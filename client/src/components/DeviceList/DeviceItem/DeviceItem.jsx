@@ -21,8 +21,8 @@ const DeviceItem = observer(({dev, addProduct}) => {
     const [value, setValue] = useState(4);
     let [ image, setImage] = useState([])
 
-    let img = JSON.stringify(dev.img)
-    console.log(dev.img)
+
+
 
     let fArray = []
     const sets = (id) => {
@@ -38,7 +38,7 @@ const DeviceItem = observer(({dev, addProduct}) => {
         return
     }
 
-    console.log(JSON.parse(dev.img))
+
     let imgs = JSON.parse(dev.img)
 
     return (

@@ -23,12 +23,15 @@ const DevicePage  = () => {
     //     fetchDevice(id).then(data => device.setDevice(data))
     // },[device.searchDevice,    ])
 
+
+    let img = JSON.parse(device.img)
+
     return (
         <Container className="mt-3  ">
 
             <Row>
             <Col md={4}>
-                <Image width={300} height={300} src={process.env.REACT_APP_API_URL +  device.img}/>
+                <Image width={300} height={300} src={process.env.REACT_APP_API_URL +  img[1]}/>
             </Col>
             <Col md={4}>
                 <Row>
