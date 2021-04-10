@@ -29,7 +29,7 @@
   width: 320px;
   min-height: 300px;
   left:66px;
-  top: 150px;
+  top: 145px;
   z-index:1001;
   border-radius: 10px;
   .list {
@@ -68,13 +68,12 @@
   .dropdown {
     max-width: 900px;
     position: fixed;
-    top:150px;
-    left: 385px;
-
+    top:145px;
+    left: 386px;
     z-index: 1001;
     background: #faf9e1;
-    min-height: 480px;
-    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    min-height: 520px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
     .DropItem {
       box-shadow: 0 2px 4px rgba(0,0,0,.1);
       padding: 10px 30px 10px 10px;

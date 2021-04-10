@@ -35,6 +35,7 @@ const TypeBar = observer(({collapse}) => {
         {id: '10', icon: <Carts/>},
         {id: '11', icon: <Fasteners/>},
         {id: '12', icon: <Fasteners/>},
+        {id: '13', icon: <Carts/>},
 
     ]
 

@@ -1,18 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
-import classes from './DevicePage.module.scss';
+import React, {  useEffect, useState} from 'react';
+
 import {Card, Col, Container, Image, Row} from "react-bootstrap";
 import {useParams} from 'react-router-dom'
-import {fetchDevice, fetchDevices} from "../../http/deviceApi";
-import TypeBar from "../../components/TypeBar/TypeBar";
-import {Context} from "../../index";
+import {fetchDevice } from "../../http/deviceApi";
+
+
 import {observer} from "mobx-react-lite";
 
 const DevicePage  = observer(() => {
 
-    const [device, setDevice] = useState([])
-
-    // const {device} = useContext(Context);
-
+    const [device, setDevice] = useState({img: '[]'})
     const {id} = useParams()
 
 
@@ -24,19 +21,20 @@ const DevicePage  = observer(() => {
 
 
     let images = device.img
-    let img = JSON.stringify(images)
+    let img = JSON.parse(images)
+    console.log(img)
     return (
         <Container className="mt-3  ">
 
             <Row>
             <Col md={4}>
-                <Image width={300} height={300} src={process.env.REACT_APP_API_URL  }/>
+                <Image width={300} height={300} src={process.env.REACT_APP_API_URL + img[0]  }/>
             </Col>
             <Col md={4}>
                 <Row>
                     <h2>{ device.name}</h2>
                     <div className="d-flex align-items-center justify-content-center">
-                        { device.rating}
+
                     </div>
                 </Row>
             </Col>
