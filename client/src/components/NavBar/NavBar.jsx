@@ -15,12 +15,34 @@ import Basket from "../../assets/Basket/Basket";
 import TopNav from "./TopNav/TopNav";
 import Heart from "../../assets/Heart/Heart";
 import User from "../../assets/User/User";
+import {createType, updateAllDevice} from "../../http/deviceApi";
+import {stringify} from "uuid";
 
 
 const NavBar = observer(() => {
     const history = useHistory()
     const {user, device} = useContext(Context)
 
+
+    const updates = [
+        {article: 411123,price:1234, quantity: 2},
+        {article: 215112,price: 403, quantity: 1},
+        {article: 411124,price: 1230, quantity: 33},
+    ]
+    const updateAllProducts = () => {
+        let formData = new FormData()
+
+
+
+        for(let i=0; i < updates.length; i++){
+            formData.append('article',  JSON.stringify(updates[i]))
+            formData.append('price',  JSON.stringify(updates[i]))
+            formData.append('quantity',   JSON.stringify(updates[i]))
+        }
+        // createType({name: value, categoryId: device.selectedCategory.id,file}).then(data => setValue(data))
+
+        updateAllDevice(formData).then(data => data)
+    }
 
     const logOut = () => {
         localStorage.removeItem('token')
@@ -52,9 +74,7 @@ const NavBar = observer(() => {
 
     }
 
-    const favoriteRoute = () => {
-        history.push(FAVORITE_ROUTE)
-    }
+
 
     const checkNull = () => {
         if (device.storageFavorite.length !== 0) {
@@ -69,6 +89,7 @@ const NavBar = observer(() => {
         history.push(SHOP_ROUTE)
     }
     const basketRoute = () => {
+        updateAllProducts()
         history.push(BASKET_ROUTE)
     }
     const [favoriteCount, setFavoriteCount] = useState(null)

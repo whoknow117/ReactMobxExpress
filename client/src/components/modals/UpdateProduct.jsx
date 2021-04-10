@@ -59,16 +59,7 @@ const UpdateProduct = observer(({show, onHide}) => {
 
     const updateProduct = () => {
 
-        // const formData = new FormData()
-        // formData.append('name', name)
-        //
-        // formData.append('id', device.selectedDevice.id)
-        // formData.append('price', `${price}`)
-        // formData.append('aliasName', newAliasName)
-        // formData.append('article', article)
-        // formData.append('quantity',  `${quantity}` )
-        // formData.append('availableId', device.selectedAvailable.id)
-        // updateDevice(formData).then(data => data)
+
 
         updateDevice({
             id: device.selectedDevice.id,

@@ -15,24 +15,22 @@ const DevicePage  = observer(() => {
 
     const {id} = useParams()
 
+
+
     useEffect( () => {
 
         fetchDevice(id).then(data => setDevice(data))
-    },[id ])
-    // useEffect( () => {
-    //     console.log(JSON.stringify(device.device))
-    //     fetchDevice(id).then(data => device.setDevice(data))
-    // },[device.searchDevice,    ])
+    },[id])
+
 
     let images = device.img
-    let img = JSON.parse(images)
-    console.log(img)
+    let img = JSON.stringify(images)
     return (
         <Container className="mt-3  ">
 
             <Row>
             <Col md={4}>
-                <Image width={300} height={300} src={process.env.REACT_APP_API_URL +  img[1]}/>
+                <Image width={300} height={300} src={process.env.REACT_APP_API_URL  }/>
             </Col>
             <Col md={4}>
                 <Row>

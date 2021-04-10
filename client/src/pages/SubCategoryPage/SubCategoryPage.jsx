@@ -104,6 +104,7 @@ const SubCategoryPage = observer(() => {
                                <div className={classes.description}>
                                    {newArr.map(el => el.deviceInfoId === i.id ?
                                        <div
+                                           className={classes.item}
                                            key={el.id}
                                            onClick={() => device.setValue(el.title)}
                                        >{el.title}

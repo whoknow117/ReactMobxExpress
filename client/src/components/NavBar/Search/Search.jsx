@@ -6,8 +6,10 @@ import {Context} from "../../../index";
 import {useHistory} from "react-router-dom";
 import {DEVICE_ROUTE} from "../../../utils/consts";
 import BasketButton from "../../BasketButton/BasketButton";
+import {observer} from "mobx-react-lite";
 
-const Search = () => {
+
+const Search =  observer(() => {
 
     const changeInput = (id) => {
         setValue("")
@@ -44,11 +46,15 @@ const productRoute = (id) => {
                 </button>
                 <div className={`${classes.searchList} ${device.searchDevice.length !== 0 && value.trim() !== "" ? classes.activeList : ""}`}>
 
-                    {device.searchDevice.map((el, idx) => <div onClick={() => changeInput(el.id)} className={`${classes.searchItem} ${ device.searchDevice.length !== 0 ? classes.active :""}`}>
+                    {device.searchDevice.map((el, idx) => {
+                        let images = el.img
+                        let img = JSON.parse(images)
+                        return (
+                            <div onClick={() => changeInput(el.id)} className={`${classes.searchItem} ${ device.searchDevice.length !== 0 ? classes.active :""}`}>
 
                         <div onClick={() => {productRoute(el.id)} } className={classes.wrapper}>
                             <div className={classes.image}>
-                                <img src={process.env.REACT_APP_API_URL + el.img} alt=""/>
+                                <img src={process.env.REACT_APP_API_URL + img[0]} alt=""/>
                             </div>
                             <div className={classes.name}>{el.name}</div>
                         </div>
@@ -57,12 +63,12 @@ const productRoute = (id) => {
                            <BasketButton icon product={el}/>
                        </div>
 
-                    </div>)}
+                    </div>)}) }
 
                 </div>
             </div>
 
     );
-};
+});
 
 export default Search;

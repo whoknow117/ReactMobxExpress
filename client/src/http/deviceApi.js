@@ -42,10 +42,10 @@ export const updateDevice = async (device) => {
     const {data} = await $authHost.patch('api/device', device)
         return data
     }
-// export const updateAllDevice = async (device) => {
-//     const {data} = await $host.put('api/device', device)
-//     return data
-// }
+export const updateAllDevice = async (device) => {
+    const {data} = await $host.put('api/device', device)
+    return data
+}
 
 export const fetchInfosTypeKey = async (typeId) => {
     const {data} = await $host.get('api/info', {

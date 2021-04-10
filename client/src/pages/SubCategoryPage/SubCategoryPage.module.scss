@@ -53,21 +53,37 @@
     padding: 20px;
     .wrapp {
       display: flex;
-
+      flex-direction: column;
+      justify-content: center;
       .title {
-
+        margin-bottom: 4px;
 
       }
       .description {
         margin-left: 10px;
-        border: 1px solid silver;
-        padding: 4px 10px;
-        border-radius: 20px;
+        border:none;
         color: darkgray;
-        &:hover {
-          cursor: pointer;
-          background: #fff;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 10px;
+
+        .item {
+          display: block;
+          background: #fffeeb;
+          border: 1px solid silver;
+          padding: 4px 10px;
+          border-radius: 20px;
+          margin: 2px;
+          display: flex;
+          align-items: center;
+          &:hover {
+            cursor: pointer;
+            background: #fff5e9;
+          }
         }
+
       }
     }
   }

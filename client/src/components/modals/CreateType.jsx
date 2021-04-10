@@ -16,10 +16,10 @@ const CreateType = ({show, onHide}) => {
      const [file,setFile] = useState(null)
 
     const selectFile = (e) => {
-        setFile(e.target.files )
+        setFile(e.target.files[0] )
     }
 
-    console.log(file)
+
 
     useEffect(() => {
 
@@ -35,10 +35,10 @@ const CreateType = ({show, onHide}) => {
 
             formData.append('name', value)
             formData.append('categoryId', device.selectedCategory.id)
-            // formData.append('img', file)
-            for(let i=0; i < file.length; i++){
-                formData.append('img',  file[i])
-            }
+            formData.append('img', file)
+            // for(let i=0; i < file.length; i++){
+            //     formData.append('img',  file[i])
+            // }
             // createType({name: value, categoryId: device.selectedCategory.id,file}).then(data => setValue(data))
 
             createType(formData).then(data => data)

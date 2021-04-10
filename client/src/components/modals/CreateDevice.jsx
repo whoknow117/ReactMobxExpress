@@ -52,7 +52,6 @@ const CreateDevice = observer(({show, onHide}) => {
         setFile(e.target.files)
     }
 
-    console.log(file)
     const addDevice = () => {
 
         const formData = new FormData()
