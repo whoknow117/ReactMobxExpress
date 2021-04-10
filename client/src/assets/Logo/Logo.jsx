@@ -5,7 +5,7 @@ import React from 'react'
 
 const Logo  = () => {
     const electricStyles = {
-        width: '34px',
+
     }
     return <div style={electricStyles}>
 

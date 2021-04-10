@@ -16,6 +16,7 @@ import Pump from "../../assets/Pump/Pump";
 import Ventilation from "../../assets/Ventilation/Ventilation";
 import Carts from "../../assets/Carts/Carts";
 import Fasteners from "../../assets/Fasteners/Fasteners";
+import Logo from "../../assets/Logo/Logo";
 
 
 const TypeBar = observer(({collapse}) => {
@@ -41,6 +42,7 @@ const TypeBar = observer(({collapse}) => {
 
     const {device} = useContext(Context)
     const [mode, setMode] = useState(false)
+    const [gear,setGear] = useState(false)
 
     const setModeCallback = (type) => {
         device.selectedCategory(type)
@@ -90,7 +92,8 @@ const TypeBar = observer(({collapse}) => {
 
                         if (type.categoryId === device.selectedCategory.id) {
                             return <div
-
+                                onMouseOver={() => {setGear(true)}}
+                                onMouseLeave={() => {setGear(false)}}
                                 className={classes.DropItem}
                                 onClick={() => {
                                     device.setValue("")
@@ -103,7 +106,7 @@ const TypeBar = observer(({collapse}) => {
 
                                 {type.name}
 
-
+                                {gear ? <span className={classes.gear}><Logo/></span>: ""}
                             </div>
                         }
                     })}
