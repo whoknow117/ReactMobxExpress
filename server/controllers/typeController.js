@@ -11,19 +11,19 @@ class TypeController {
 
             let {img} = req.files
 
+            let fileName = uuid.v4() + '.jpg'
+            await img.mv(path.resolve(__dirname, '..', 'static', fileName))
+            // let promises = []
+            // let fileName = '';
+            // let newArray = []
+            // img.forEach(file => {
+            //     fileName = uuid.v4() + '.jpg'
+            //     promises.push(file.mv(path.resolve(__dirname, '..', 'static', fileName)))
+            //     newArray.push(fileName)
+            // })
+            // await Promise.all(promises)
 
-
-            let promises = []
-            let fileName = '';
-            let newArray = []
-            img.forEach(file => {
-                fileName = uuid.v4() + '.jpg'
-                promises.push(file.mv(path.resolve(__dirname, '..', 'static', fileName)))
-                newArray.push(fileName)
-            })
-            await Promise.all(promises)
-
-            const type = await Type.create({name, categoryId, img: JSON.stringify(newArray),})
+            const type = await Type.create({name, categoryId, img: fileName,})
 
             return res.json(type)
         } catch (e) {

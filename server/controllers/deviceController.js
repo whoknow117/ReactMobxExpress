@@ -96,33 +96,35 @@ class DeviceController {
             ApiError.badRequest(e.message)
         }
     }
-    // async updateAll(req, res, next) {
-    //     try {
-    //         let {array} = req.body
-    //
-    //         if(array) {
-    //
-    //             array = JSON.parse(array)
-    //
-    //             array.forEach( el => {
-    //                 Device.update({
-    //                     price: el.price,
-    //                     quantity: el.quantity
-    //                 },{
-    //                     where: {
-    //                         article: el.article
-    //                     }
-    //                 })
-    //             })
-    //
-    //         }
-    //
-    //     }
-    //     catch (e) {
-    //         ApiError.badRequest(e.message)
-    //     }
-    //
-    // }
+    async updateAll(req, res, next) {
+        try {
+            let {device} = req.body
+            console.log(device)
+            if(device) {
+
+                device = JSON.parse(device)
+
+                device.forEach( el => {
+                    Device.update({
+                        price: el.price,
+                        quantity: el.quantity
+                    },{
+                        where: {
+                            article: {
+                                [Op.or]: el.article
+                            }
+                        }
+                    })
+                })
+
+            }
+
+        }
+        catch (e) {
+            ApiError.badRequest(e.message)
+        }
+
+    }
 
 
     async getAll(req, res, next) {
