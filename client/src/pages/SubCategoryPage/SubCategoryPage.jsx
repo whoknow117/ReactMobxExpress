@@ -93,26 +93,28 @@ const SubCategoryPage = observer(() => {
                     </div>
                 </Col>
 
-                <Col md={3}>
+                <Col className={classes.filterWrapper} md={3}>
+                        <h2>Фильтр</h2>
+                   <div className={classes.filter}>
+                       {device.info.map(i => {
+                           return <div className={classes.wrapp}>
+                               <div className={classes.title}>
+                                   {i.title}
+                               </div>
+                               <div className={classes.description}>
+                                   {newArr.map(el => el.deviceInfoId === i.id ?
+                                       <div
+                                           key={el.id}
+                                           onClick={() => device.setValue(el.title)}
+                                       >{el.title}
 
-                    {device.info.map(i => {
-                        return <div className={classes.wrapp}>
-                            <div className={classes.title}>
-                                {i.title}
-                            </div>
-                            <div className={classes.description}>
-                                {newArr.map(el => el.deviceInfoId === i.id ?
-                                    <div
-                                        key={el.id}
-                                        onClick={() => device.setValue(el.title)}
-                                    >{el.title}
 
+                                       </div> : "")}
+                               </div>
 
-                                    </div> : "")}
-                            </div>
-
-                        </div>
-                    })}
+                           </div>
+                       })}
+                   </div>
                 </Col>
 
             </Row>

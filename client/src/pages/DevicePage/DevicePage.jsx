@@ -5,8 +5,9 @@ import {useParams} from 'react-router-dom'
 import {fetchDevice, fetchDevices} from "../../http/deviceApi";
 import TypeBar from "../../components/TypeBar/TypeBar";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
-const DevicePage  = () => {
+const DevicePage  = observer(() => {
 
     const [device, setDevice] = useState([])
 
@@ -23,9 +24,9 @@ const DevicePage  = () => {
     //     fetchDevice(id).then(data => device.setDevice(data))
     // },[device.searchDevice,    ])
 
-
-    let img = JSON.parse(device.img)
-
+    let images = device.img
+    let img = JSON.parse(images)
+    console.log(img)
     return (
         <Container className="mt-3  ">
 
@@ -55,6 +56,6 @@ const DevicePage  = () => {
             </Row>
         </Container>
     );
-};
+});
 
 export default DevicePage;

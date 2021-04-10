@@ -33,16 +33,7 @@
       }
     }
 
-    .filter {
-      margin-top: 20px;
 
-
-
-      position: relative;
-      .filterBlock {
-        display: flex;
-      }
-    }
 
     .description {
       display: flex;
@@ -53,17 +44,34 @@
   }
 
 }
-.wrapp {
-  display: flex;
-  .title {
-
-
+.filterWrapper {
+  h2 {
+    margin-left: 20px;
   }
-  .description {
-    margin-left: 10px;
-    border: none;
-    color: darkgray;
+  .filter {
+    background: #fffeeb;
+    padding: 20px;
+    .wrapp {
+      display: flex;
+
+      .title {
+
+
+      }
+      .description {
+        margin-left: 10px;
+        border: 1px solid silver;
+        padding: 4px 10px;
+        border-radius: 20px;
+        color: darkgray;
+        &:hover {
+          cursor: pointer;
+          background: #fff;
+        }
+      }
+    }
   }
 }
+
 
 
